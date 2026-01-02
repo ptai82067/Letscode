@@ -82,6 +82,13 @@ func Load() (*Config, error) {
 
 func parseDatabase() DatabaseConfig {
 	databaseURL := os.Getenv("DATABASE_URL")
+	
+	// DEBUG: Log EVERYTHING to understand what's happening
+	log.Printf("🔍 DEBUG parseDatabase():\n")
+	log.Printf("  DATABASE_URL = %q\n", databaseURL)
+	log.Printf("  DB_HOST = %q\n", os.Getenv("DB_HOST"))
+	log.Printf("  DB_PORT = %q\n", os.Getenv("DB_PORT"))
+	log.Printf("  DB_NAME = %q\n", os.Getenv("DB_NAME"))
 
 	log.Printf("Using DATABASE_URL: %v\n", databaseURL != "")
 
