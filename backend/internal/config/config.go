@@ -37,30 +37,38 @@ type ServerConfig struct {
 func Load() (*Config, error) {
 	// CRITICAL: Check DATABASE_URL first
 	databaseURL := os.Getenv("DATABASE_URL")
-	
-	// Log env var state for debugging
-	log.Printf("Environment check: DATABASE_URL=%v\n", databaseURL != "")
 
-	// If DATABASE_URL is set, use it and skip .env
+	// Log env var state for debugging - ABSOLUTE DIAGNOSTIC
+	log.Println("════════════════════════════════════════════════════════════════")
+	log.Printf("🔍 DIAGNOSTIC: DATABASE_URL exists: %v\n", databaseURL != "")
 	if databaseURL != "" {
-		log.Println("✓ DATABASE_URL found - skipping .env")
+		log.Printf("   DATABASE_URL length: %d chars\n", len(databaseURL))
+		log.Printf("   DATABASE_URL starts with: %.30s...\n", databaseURL)
+	} else {
+		log.Println("   ⚠️  DATABASE_URL is EMPTY or NOT SET")
+	}
+	log.Println("════════════════════════════════════════════════════════════════")
 	} else {
 		// No DATABASE_URL - try to load .env (local dev mode)
+		log.Println("\n⚠️  DATABASE_URL not found - attempting godotenv.Load()...")
 		err := godotenv.Load()
 		if err != nil {
-			// .env not found - we're likely in production without DATABASE_URL
-			log.Println("⚠️  .env file not found - checking if DATABASE_URL is set...")
-			
-			// If .env fails to load AND DATABASE_URL not set, we MUST fail
-			// This prevents silent fallback to localhost
-			log.Fatal("❌ FATAL ERROR: DATABASE_URL is not set!\n" +
-				"This app requires DATABASE_URL environment variable.\n" +
-				"Set it in your Render environment variables:\n" +
-				"DATABASE_URL=postgresql://user:password@host:port/db?sslmode=require")
+			// .env not found - we're in production without DATABASE_URL
+			log.Println("════════════════════════════════════════════════════════════════")
+			log.Println("❌ FATAL ERROR: CONFIGURATION MISSING")
+			log.Println("════════════════════════════════════════════════════════════════")
+			log.Println("Database Configuration Error:")
+			log.Println("  • .env file not found (godotenv.Load() failed)")
+			log.Println("  • DATABASE_URL environment variable not set")
+			log.Println("  • Cannot proceed without database configuration")
+			log.Println("════════════════════════════════════════════════════════════════")
+			log.Println("FIX: Set DATABASE_URL in your environment:")
+			log.Println("  On Render: Dashboard → Environment → Add DATABASE_URL variable")
+			log.Println("  Format: DATABASE_URL=postgresql://user:password@host/db?sslmode=require")
+			log.Println("════════════════════════════════════════════════════════════════")
+			log.Fatal("Exit due to missing database configuration")
 		}
-		log.Println("✓ .env file loaded (development mode)")
-	}
-
+		log.Println("✓ .env file loaded successfully (development mode)")
 	expireHours, _ := strconv.Atoi(getEnv("JWT_EXPIRE_HOURS", "24"))
 
 	// Try to use DATABASE_URL if available (Neon, Render, etc.)
@@ -82,18 +90,25 @@ func Load() (*Config, error) {
 
 func parseDatabase() DatabaseConfig {
 	databaseURL := os.Getenv("DATABASE_URL")
+
+	log.Println("\n════════════════════════════════════════════════════════════════")
+	log.Println("🔍 DATABASE CONFIGURATION ANALYSIS")
+	log.Println("════════════════════════════════════════════════════════════════")
+	log.Printf("  DATABASE_URL value: %q\n", databaseURL)
+	log.Printf("  DATABASE_URL is empty: %v\n", databaseURL == "")
+	log.Printf("  DATABASE_URL length: %d\n", len(databaseURL))
 	
-	// DEBUG: Log EVERYTHING to understand what's happening
-	log.Printf("🔍 DEBUG parseDatabase():\n")
-	log.Printf("  DATABASE_URL = %q\n", databaseURL)
-	log.Printf("  DB_HOST = %q\n", os.Getenv("DB_HOST"))
-	log.Printf("  DB_PORT = %q\n", os.Getenv("DB_PORT"))
-	log.Printf("  DB_NAME = %q\n", os.Getenv("DB_NAME"))
-
-	log.Printf("Using DATABASE_URL: %v\n", databaseURL != "")
-
-	// If DATABASE_URL is set, use it directly
-	if databaseURL != "" {
+	// Also check individual vars
+	dbHost := os.Getenv("DB_HOST")
+	dbPort := os.Getenv("DB_PORT")
+	dbName := os.Getenv("DB_NAME")
+	dbUser := os.Getenv("DB_USER")
+	
+	log.Printf("  DB_HOST: %q\n", dbHost)
+	log.Printf("  DB_PORT: %q\n", dbPort)
+	log.Printf("  DB_NAME: %q\n", dbName)
+	log.Printf("  DB_USER: %q\n", dbUser)
+	log.Println("════════════════════════════════════════════════════════════════\n")
 		log.Println("✓ DATABASE_URL found - connecting to managed database")
 		return DatabaseConfig{
 			Host:    databaseURL,
