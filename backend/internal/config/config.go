@@ -91,6 +91,13 @@ func Load() (*Config, error) {
 	// Otherwise fall back to individual DB_* environment variables
 	dbConfig := parseDatabase()
 
+	// CORS: Support both local dev and Vercel production URLs
+	frontendURL := getEnv("FRONTEND_URL", "http://localhost:5173")
+	if vercelURL := os.Getenv("VERCEL_URL"); vercelURL != "" {
+		// Vercel automatically sets VERCEL_URL to the preview/production domain
+		frontendURL = "https://" + vercelURL
+	}
+
 	return &Config{
 		Database: dbConfig,
 		JWT: JWTConfig{
@@ -99,7 +106,7 @@ func Load() (*Config, error) {
 		},
 		Server: ServerConfig{
 			Port:        getEnv("PORT", "8080"),
-			FrontendURL: getEnv("FRONTEND_URL", "http://localhost:5173"),
+			FrontendURL: frontendURL,
 		},
 	}, nil
 }

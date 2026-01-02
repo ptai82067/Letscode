@@ -77,18 +77,14 @@ func main() {
 	app.Use(recover.New())
 	app.Use(logger.New())
 
-	// Configure CORS with support for multiple frontend URLs (dev and production)
-	corsAllowOrigins := cfg.Server.FrontendURL
-	// In production, also allow requests from Vercel domains if VERCEL_URL is set
-	if vercelURL := os.Getenv("VERCEL_URL"); vercelURL != "" {
-		corsAllowOrigins = corsAllowOrigins + ", https://" + vercelURL + ", https://*.vercel.app"
-	}
-
+	// Configure CORS - allow frontend to call this backend
 	app.Use(cors.New(cors.Config{
-		AllowOrigins: corsAllowOrigins,
-		// Include Cache-Control and Pragma so browser preflight allows axios default headers
+		AllowOrigins: cfg.Server.FrontendURL,
+		// Include all headers that axios uses by default
 		AllowHeaders: "Origin, Content-Type, Accept, Authorization, Cache-Control, Pragma, X-Requested-With",
 		AllowMethods: "GET, POST, PUT, DELETE, OPTIONS",
+		AllowCredentials: true,
+		ExposeHeaders:   "Authorization",
 	}))
 
 	// Initialize handlers
