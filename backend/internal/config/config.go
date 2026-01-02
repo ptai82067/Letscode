@@ -35,27 +35,24 @@ type ServerConfig struct {
 }
 
 func Load() (*Config, error) {
-	// CRITICAL: Check DATABASE_URL FIRST, before loading anything else
-	// This prevents .env from overriding production config
+	// CRITICAL: Environment variables ALWAYS take precedence
+	// Load .env ONLY if DATABASE_URL not already set by environment
 	if os.Getenv("DATABASE_URL") == "" {
-		// No DATABASE_URL set - check if we're in production
-		// Production indicators: missing .env, PORT env var set, or running in container
-		hostPortSet := os.Getenv("PORT") != ""
-		
-		if hostPortSet || os.Getenv("ENV") == "production" {
-			// We're in production/Render but no DATABASE_URL
-			log.Fatal("❌ FATAL ERROR: DATABASE_URL is not set!\n" +
-				"On Render, you MUST set DATABASE_URL in Environment Variables.\n" +
-				"Example: postgresql://user:password@host:port/dbname?sslmode=require")
+		// No DATABASE_URL in environment - try to load from .env (dev mode)
+		if err := godotenv.Load(); err != nil {
+			log.Println("⚠️  .env file not found (expected in development)")
 		}
+	} else {
+		// DATABASE_URL is set in environment - skip .env to prevent override
+		log.Println("✓ DATABASE_URL found in environment - skipping .env file")
 	}
 
-	// Load .env file only in local development
-	// Skip if DATABASE_URL is already set (prefer env vars over .env)
-	if os.Getenv("DATABASE_URL") == "" {
-		if err := godotenv.Load(); err != nil {
-			log.Println("⚠️  .env file not found")
-		}
+	// After .env check: If still no DATABASE_URL and PORT is set, we're on a managed platform
+	if os.Getenv("DATABASE_URL") == "" && os.Getenv("PORT") != "" {
+		// We're on Render/managed platform with PORT env var but no DATABASE_URL
+		log.Fatal("❌ FATAL ERROR: DATABASE_URL is not set!\n" +
+			"On Render, you MUST set DATABASE_URL in Environment Variables.\n" +
+			"Example: postgresql://user:password@host:port/dbname?sslmode=require")
 	}
 
 	expireHours, _ := strconv.Atoi(getEnv("JWT_EXPIRE_HOURS", "24"))

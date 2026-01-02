@@ -29,7 +29,7 @@ func main() {
 	log.Println("═══════════════════════════════════════════════════════════════")
 	log.Printf("DATABASE_URL set: %v\n", os.Getenv("DATABASE_URL") != "")
 	log.Println("═══════════════════════════════════════════════════════════════")
-	
+
 	// Load configuration
 	cfg, err := config.Load()
 	if err != nil {
