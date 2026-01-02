@@ -124,7 +124,7 @@ func parseDatabase() DatabaseConfig {
 	log.Printf("  DB_PORT: %q\n", dbPort)
 	log.Printf("  DB_NAME: %q\n", dbName)
 	log.Printf("  DB_USER: %q\n", dbUser)
-	log.Println("════════════════════════════════════════════════════════════════\n")
+	log.Println("════════════════════════════════════════════════════════════════")
 
 	// If DATABASE_URL is set, use it directly
 	if databaseURL != "" {

@@ -55,6 +55,7 @@ func AutoMigrate() error {
 	// Clean up old tables with schema issues to ensure fresh migration
 	// This is necessary when model definitions change and old schema conflicts
 	tablesToClean := []interface{}{
+		&models.Program{},
 		&models.Subcourse{},
 		&models.Lesson{},
 		&models.LessonObjective{},
@@ -66,6 +67,9 @@ func AutoMigrate() error {
 		&models.LessonChallenge{},
 		&models.LessonQuiz{},
 		&models.LessonQuizOption{},
+		&models.Media{},
+		&models.TeacherAssignment{},
+		&models.TeacherAssignmentLog{},
 	}
 
 	for _, m := range tablesToClean {
