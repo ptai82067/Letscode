@@ -104,8 +104,19 @@ func AutoMigrate() error {
 	}
 
 	for _, m := range modelsToMigrate {
-		// If the table already exists, skip AutoMigrate to avoid GORM's
-		// introspection queries which can fail in some environments.
+		// Special handling for Subcourse: if it exists but has issues, drop and recreate
+		// This handles cases where old schema conflicts with new field definitions
+		if m == &models.Subcourse{} || m == (*models.Subcourse)(nil) {
+			if DB.Migrator().HasTable(m) {
+				// Try to drop and recreate to avoid migration conflicts
+				log.Println("Dropping Subcourse table to ensure clean migration...")
+				if err := DB.Migrator().DropTable(m); err != nil {
+					log.Printf("Warning: could not drop Subcourse table: %v\n", err)
+				}
+			}
+		}
+		
+		// Skip AutoMigrate for existing tables to avoid GORM introspection issues
 		if DB.Migrator().HasTable(m) {
 			log.Printf("Skipping AutoMigrate for existing table %T", m)
 			continue
