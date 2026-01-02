@@ -35,24 +35,30 @@ type ServerConfig struct {
 }
 
 func Load() (*Config, error) {
-	// CRITICAL: Environment variables ALWAYS take precedence
-	// Load .env ONLY if DATABASE_URL not already set by environment
-	if os.Getenv("DATABASE_URL") == "" {
-		// No DATABASE_URL in environment - try to load from .env (dev mode)
-		if err := godotenv.Load(); err != nil {
-			log.Println("⚠️  .env file not found (expected in development)")
-		}
-	} else {
-		// DATABASE_URL is set in environment - skip .env to prevent override
-		log.Println("✓ DATABASE_URL found in environment - skipping .env file")
-	}
+	// CRITICAL: Check DATABASE_URL first
+	databaseURL := os.Getenv("DATABASE_URL")
+	
+	// Log env var state for debugging
+	log.Printf("Environment check: DATABASE_URL=%v\n", databaseURL != "")
 
-	// After .env check: If still no DATABASE_URL and PORT is set, we're on a managed platform
-	if os.Getenv("DATABASE_URL") == "" && os.Getenv("PORT") != "" {
-		// We're on Render/managed platform with PORT env var but no DATABASE_URL
-		log.Fatal("❌ FATAL ERROR: DATABASE_URL is not set!\n" +
-			"On Render, you MUST set DATABASE_URL in Environment Variables.\n" +
-			"Example: postgresql://user:password@host:port/dbname?sslmode=require")
+	// If DATABASE_URL is set, use it and skip .env
+	if databaseURL != "" {
+		log.Println("✓ DATABASE_URL found - skipping .env")
+	} else {
+		// No DATABASE_URL - try to load .env (local dev mode)
+		err := godotenv.Load()
+		if err != nil {
+			// .env not found - we're likely in production without DATABASE_URL
+			log.Println("⚠️  .env file not found - checking if DATABASE_URL is set...")
+			
+			// If .env fails to load AND DATABASE_URL not set, we MUST fail
+			// This prevents silent fallback to localhost
+			log.Fatal("❌ FATAL ERROR: DATABASE_URL is not set!\n" +
+				"This app requires DATABASE_URL environment variable.\n" +
+				"Set it in your Render environment variables:\n" +
+				"DATABASE_URL=postgresql://user:password@host:port/db?sslmode=require")
+		}
+		log.Println("✓ .env file loaded (development mode)")
 	}
 
 	expireHours, _ := strconv.Atoi(getEnv("JWT_EXPIRE_HOURS", "24"))
