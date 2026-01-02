@@ -62,18 +62,20 @@ func Load() (*Config, error) {
 func parseDatabase() DatabaseConfig {
 	// If DATABASE_URL is set, parse it (for Neon, Render, and other managed services)
 	if databaseURL := os.Getenv("DATABASE_URL"); databaseURL != "" {
-		dbConfig := DatabaseConfig{
-			SSLMode: "require", // Default to require for managed DB services
-		}
-		// Parse PostgreSQL connection string: postgres://user:password@host:port/dbname?sslmode=require
-		// For simplicity, GORM will accept the DSN as-is, so we just store the URL and use it in DSN()
+		log.Println("Using DATABASE_URL for database connection (managed service)")
 		return DatabaseConfig{
 			Host:     databaseURL, // Store the full URL to signal we're using DATABASE_URL
 			SSLMode:  "url",       // Marker to use full URL mode
 		}
 	}
 
+	// In production, DATABASE_URL is required
+	if os.Getenv("ENV") == "production" {
+		log.Fatal("DATABASE_URL environment variable must be set in production. Please set DATABASE_URL to your PostgreSQL connection string (e.g., from Neon or Render).")
+	}
+
 	// Fall back to individual environment variables (development/local setup)
+	log.Println("DATABASE_URL not found, using individual DB_* environment variables (development mode)")
 	return DatabaseConfig{
 		Host:     getEnv("DB_HOST", "localhost"),
 		Port:     getEnv("DB_PORT", "5432"),

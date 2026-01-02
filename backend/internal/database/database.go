@@ -14,23 +14,39 @@ var DB *gorm.DB
 
 func Connect(dsn string) error {
 	var err error
+	
+	// Log connection attempt (mask password in logs if using DSN with individual components)
+	if len(dsn) > 100 || dsn[:10] == "postgres:/" {
+		log.Println("Connecting to PostgreSQL database (DATABASE_URL)...")
+	} else {
+		log.Printf("Connecting to PostgreSQL database: host=%s\n", extractHostFromDSN(dsn))
+	}
+	
 	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Info),
 	})
 	if err != nil {
-		return fmt.Errorf("failed to connect to database: %w", err)
+		return fmt.Errorf("failed to connect to database: %w\nEnsure DATABASE_URL is set correctly or local PostgreSQL is running", err)
 	}
 
-	log.Println("Database connected successfully")
+	log.Println("✓ Database connected successfully")
 
 	// Attempt to create pgcrypto extension (provides gen_random_uuid()) if available.
 	// Do not fail connect if this is not permitted; migrations will handle errors in dev.
 	if err := DB.Exec("CREATE EXTENSION IF NOT EXISTS pgcrypto;").Error; err != nil {
-		log.Println("Warning: could not create pgcrypto extension:", err)
+		log.Println("⚠ Warning: could not create pgcrypto extension:", err)
 	} else {
-		log.Println("pgcrypto extension ensured")
+		log.Println("✓ pgcrypto extension ensured")
 	}
 	return nil
+}
+
+func extractHostFromDSN(dsn string) string {
+	// Simple extraction for logging purposes
+	if len(dsn) > 50 {
+		return dsn[:50] + "..."
+	}
+	return dsn
 }
 
 func AutoMigrate() error {
