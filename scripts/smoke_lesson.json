@@ -1,0 +1,14 @@
+{
+  "subcourse_id": "ae99abc0-fae8-44d7-905d-b22d92bbb880",
+  "title": "Smoke Test Lesson",
+  "slug": "smoke-test-lesson-20251224",
+  "status": "published",
+  "objectives": { "knowledge": "Know X","thinking": "Think Y","skills": "Skill Z","attitude": "Attitude A" },
+  "models": [ { "title": "Model A", "description": "Desc A", "media": [ { "url": "/uploads/fake-model-a.jpg" } ] } ],
+  "preparation": { "notes": "Prep notes", "media": [ { "url": "/uploads/fake-prep.jpg" } ] },
+  "builds": [ { "build_type": "images", "title": "Build A", "description": "Build desc", "media": [ { "url": "/uploads/fake-build.jpg" } ] } ],
+  "content_blocks": [ { "title": "Block A", "subtitle": "Sub A", "description": "Block desc", "usage_text": "use", "example_text": "example", "sort_order": 0, "media": [ { "url": "/uploads/fake-block.jpg" } ] } ],
+  "attachments": [ { "title": "Attach A", "description": "Attach desc", "file_type": "pdf", "media": [ { "url": "/uploads/fake-attach.pdf" } ] } ],
+  "challenges": [ { "title": "Challenge A", "description": "Chal desc", "media": [ { "url": "/uploads/fake-chal.jpg" } ] } ],
+  "quizzes": [ { "title": "Quiz A", "description": "Quiz desc", "quiz_type": "single", "options": [ { "text": "Option 1", "is_correct": false }, { "text": "Option 2", "is_correct": true } ] } ]
+}

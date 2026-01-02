@@ -1,0 +1,25 @@
+2026/01/02 15:09:19 Database connected successfully
+2026/01/02 15:09:19 pgcrypto extension ensured
+2026/01/02 15:09:19 Running auto migrations...
+2026/01/02 15:09:19 Skipping AutoMigrate for existing table *models.Program
+2026/01/02 15:09:19 Skipping AutoMigrate for existing table *models.Subcourse
+2026/01/02 15:09:19 Skipping AutoMigrate for existing table *models.Lesson
+2026/01/02 15:09:19 Skipping AutoMigrate for existing table *models.LessonObjective
+2026/01/02 15:09:19 Skipping AutoMigrate for existing table *models.LessonModel
+2026/01/02 15:09:19 Skipping AutoMigrate for existing table *models.LessonPreparation
+2026/01/02 15:09:19 Skipping AutoMigrate for existing table *models.LessonBuild
+2026/01/02 15:09:19 Skipping AutoMigrate for existing table *models.LessonContentBlock
+2026/01/02 15:09:19 Skipping AutoMigrate for existing table *models.LessonAttachment
+2026/01/02 15:09:19 Skipping AutoMigrate for existing table *models.LessonChallenge
+2026/01/02 15:09:19 Skipping AutoMigrate for existing table *models.LessonQuiz
+2026/01/02 15:09:19 Skipping AutoMigrate for existing table *models.LessonQuizOption
+2026/01/02 15:09:19 Skipping AutoMigrate for existing table *models.Media
+2026/01/02 15:09:19 Skipping AutoMigrate for existing table *models.TeacherAssignment
+2026/01/02 15:09:19 Skipping AutoMigrate for existing table *models.TeacherAssignmentLog
+2026/01/02 15:09:19 Migrations completed successfully
+2026/01/02 15:09:19 Starting data seeding...
+2026/01/02 15:09:19 Admin user already exists, skipping seed
+2026/01/02 15:09:19 🚀 Server starting on http://localhost:8080
+2026/01/02 15:09:19 📚 Admin credentials: admin123 / admin123
+2026/01/02 15:10:11 Incoming lesson payload: {ID:00000000-0000-0000-0000-000000000000 SubcourseID:b2215c7b-c30d-45d6-8581-b8b4afa7f612 Title:,xcfef; Subtitle: Overview:sdklfje BlockTypes: Status:archived SortOrder:0 DurationMinutes:0 Difficulty: EstimatedTime: CoverMediaID:<nil> AuthorID:<nil> IsFeatured:false PublishedAt:<nil> Slug:ssdkdlj CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC Subcourse:<nil> Objectives:0xc000279560 Models:[{ID:00000000-0000-0000-0000-000000000000 LessonID:00000000-0000-0000-0000-000000000000 Title:Auto model 1 Description: CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC Media:[]}] Preparation:0xc00033b400 Builds:[{ID:00000000-0000-0000-0000-000000000000 LessonID:00000000-0000-0000-0000-000000000000 BuildType:pdf Title:Auto build 1 Description: CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC Media:[]}] ContentBlocks:[{ID:00000000-0000-0000-0000-000000000000 LessonID:00000000-0000-0000-0000-000000000000 Title:Auto content 1 Subtitle: Description: UsageText: ExampleText: SortOrder:0 CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC Media:[]}] Attachments:[{ID:00000000-0000-0000-0000-000000000000 LessonID:00000000-0000-0000-0000-000000000000 Title:Auto attachment 1 Description: FileType: SortOrder:0 CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC Media:[]}] Challenges:[{ID:00000000-0000-0000-0000-000000000000 LessonID:00000000-0000-0000-0000-000000000000 Title:Auto challenge 1 Subtitle: Description: Instructions: SortOrder:0 CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC Media:[]}] Quizzes:[{ID:00000000-0000-0000-0000-000000000000 LessonID:00000000-0000-0000-0000-000000000000 Title:Auto quiz 1 Description: QuizType:single CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC Options:[]}] Media:[]}
+exit status 1

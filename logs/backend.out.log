@@ -1,0 +1,1131 @@
+
+2026/01/02 15:09:19 [32mD:/CousreAI/backend/internal/database/database.go:28
+[0m[33m[1.724ms] [34;1m[rows:0][0m CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+2026/01/02 15:09:19 [32mD:/CousreAI/backend/internal/database/database.go:47
+[0m[33m[22.698ms] [34;1m[rows:1][0m SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'users' AND table_type = 'BASE TABLE'
+
+2026/01/02 15:09:19 [32mD:/CousreAI/backend/internal/database/database.go:93
+[0m[33m[1.811ms] [34;1m[rows:1][0m SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'programs' AND table_type = 'BASE TABLE'
+
+2026/01/02 15:09:19 [32mD:/CousreAI/backend/internal/database/database.go:93
+[0m[33m[1.774ms] [34;1m[rows:1][0m SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'subcourses' AND table_type = 'BASE TABLE'
+
+2026/01/02 15:09:19 [32mD:/CousreAI/backend/internal/database/database.go:93
+[0m[33m[1.782ms] [34;1m[rows:1][0m SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'lessons' AND table_type = 'BASE TABLE'
+
+2026/01/02 15:09:19 [32mD:/CousreAI/backend/internal/database/database.go:93
+[0m[33m[1.088ms] [34;1m[rows:1][0m SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'lesson_objectives' AND table_type = 'BASE TABLE'
+
+2026/01/02 15:09:19 [32mD:/CousreAI/backend/internal/database/database.go:93
+[0m[33m[1.214ms] [34;1m[rows:1][0m SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'lesson_models' AND table_type = 'BASE TABLE'
+
+2026/01/02 15:09:19 [32mD:/CousreAI/backend/internal/database/database.go:93
+[0m[33m[1.193ms] [34;1m[rows:1][0m SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'lesson_preparations' AND table_type = 'BASE TABLE'
+
+2026/01/02 15:09:19 [32mD:/CousreAI/backend/internal/database/database.go:93
+[0m[33m[0.513ms] [34;1m[rows:1][0m SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'lesson_builds' AND table_type = 'BASE TABLE'
+
+2026/01/02 15:09:19 [32mD:/CousreAI/backend/internal/database/database.go:93
+[0m[33m[1.114ms] [34;1m[rows:1][0m SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'lesson_content_blocks' AND table_type = 'BASE TABLE'
+
+2026/01/02 15:09:19 [32mD:/CousreAI/backend/internal/database/database.go:93
+[0m[33m[0.506ms] [34;1m[rows:1][0m SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'lesson_attachments' AND table_type = 'BASE TABLE'
+
+2026/01/02 15:09:19 [32mD:/CousreAI/backend/internal/database/database.go:93
+[0m[33m[1.198ms] [34;1m[rows:1][0m SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'lesson_challenges' AND table_type = 'BASE TABLE'
+
+2026/01/02 15:09:19 [32mD:/CousreAI/backend/internal/database/database.go:93
+[0m[33m[0.559ms] [34;1m[rows:1][0m SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'lesson_quizzes' AND table_type = 'BASE TABLE'
+
+2026/01/02 15:09:19 [32mD:/CousreAI/backend/internal/database/database.go:93
+[0m[33m[0.622ms] [34;1m[rows:1][0m SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'lesson_quiz_options' AND table_type = 'BASE TABLE'
+
+2026/01/02 15:09:19 [32mD:/CousreAI/backend/internal/database/database.go:93
+[0m[33m[1.059ms] [34;1m[rows:1][0m SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'media' AND table_type = 'BASE TABLE'
+
+2026/01/02 15:09:19 [32mD:/CousreAI/backend/internal/database/database.go:93
+[0m[33m[0.628ms] [34;1m[rows:1][0m SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'teacher_assignments' AND table_type = 'BASE TABLE'
+
+2026/01/02 15:09:19 [32mD:/CousreAI/backend/internal/database/database.go:93
+[0m[33m[0.524ms] [34;1m[rows:1][0m SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'teacher_assignment_logs' AND table_type = 'BASE TABLE'
+
+2026/01/02 15:09:19 [32mD:/CousreAI/backend/internal/database/database.go:114
+[0m[33m[4.536ms] [34;1m[rows:0][0m ALTER TABLE lessons ADD COLUMN IF NOT EXISTS duration_minutes integer DEFAULT 0;
+
+2026/01/02 15:09:19 [32mD:/CousreAI/backend/internal/database/database.go:114
+[0m[33m[1.053ms] [34;1m[rows:0][0m ALTER TABLE lessons ADD COLUMN IF NOT EXISTS difficulty varchar(50);
+
+2026/01/02 15:09:19 [32mD:/CousreAI/backend/internal/database/database.go:114
+[0m[33m[1.087ms] [34;1m[rows:0][0m ALTER TABLE lessons ADD COLUMN IF NOT EXISTS estimated_time varchar(50);
+
+2026/01/02 15:09:19 [32mD:/CousreAI/backend/internal/database/database.go:114
+[0m[33m[1.045ms] [34;1m[rows:0][0m ALTER TABLE lessons ADD COLUMN IF NOT EXISTS cover_media_id uuid;
+
+2026/01/02 15:09:19 [32mD:/CousreAI/backend/internal/database/database.go:114
+[0m[33m[1.044ms] [34;1m[rows:0][0m ALTER TABLE lessons ADD COLUMN IF NOT EXISTS author_id uuid;
+
+2026/01/02 15:09:19 [32mD:/CousreAI/backend/internal/database/database.go:114
+[0m[33m[1.073ms] [34;1m[rows:0][0m ALTER TABLE lessons ADD COLUMN IF NOT EXISTS is_featured boolean DEFAULT false;
+
+2026/01/02 15:09:19 [32mD:/CousreAI/backend/internal/database/database.go:114
+[0m[33m[1.042ms] [34;1m[rows:0][0m ALTER TABLE lessons ADD COLUMN IF NOT EXISTS published_at timestamp with time zone;
+
+2026/01/02 15:09:19 [32mD:/CousreAI/backend/internal/database/seed.go:20
+[0m[33m[0.935ms] [34;1m[rows:1][0m SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'users' AND table_type = 'BASE TABLE'
+
+2026/01/02 15:09:19 [32mD:/CousreAI/backend/internal/database/seed.go:25
+[0m[33m[3.762ms] [34;1m[rows:1][0m SELECT count(*) FROM "users" WHERE username = 'admin123'
+
+ ┌───────────────────────────────────────────────────┐ 
+ │                   Fiber v2.52.0                   │ 
+ │                 http://[::]:8080                  │ 
+ │                                                   │ 
+ │ Handlers ............ 73  Processes ........... 1 │ 
+ │ Prefork ....... Disabled  PID ............. 19444 │ 
+ └───────────────────────────────────────────────────┘ 
+
+15:09:37 | 204 |            0s | ::1 | OPTIONS | /api/admin/teachers/history | -
+
+2026/01/02 15:09:37 [32mD:/CousreAI/backend/internal/middleware/auth.go:99
+[0m[33m[7.434ms] [34;1m[rows:1][0m SELECT * FROM "teacher_assignments" WHERE teacher_id = '05507748-0a57-4e3f-91c0-7627edf931c3' AND status = 'active' AND (start_at IS NULL OR start_at <= '2026-01-02 08:09:37.453') AND (end_at IS NULL OR end_at >= '2026-01-02 08:09:37.453')
+
+2026/01/02 15:09:37 [32mD:/CousreAI/backend/internal/handlers/teacher.go:316
+[0m[33m[5.403ms] [34;1m[rows:0][0m 
+		SELECT 
+			COALESCE(u.id, '00000000-0000-0000-0000-000000000000'::uuid) as teacher_id,
+			COALESCE(u.username, 'Unknown') as teacher_name,
+			l.id as lesson_id,
+			l.title as lesson_title,
+			l.slug as lesson_slug,
+			l.created_at,
+			l.updated_at,
+			l.status
+		FROM lessons l
+		LEFT JOIN users u ON l.author_id = u.id
+		WHERE l.author_id IS NOT NULL
+		ORDER BY l.updated_at DESC
+	
+15:09:37 | 200 |      13.362ms | ::1 | GET | /api/admin/teachers/history | -
+15:09:37 | 204 |            0s | ::1 | OPTIONS | /api/auth/me | -
+15:09:37 | 204 |            0s | ::1 | OPTIONS | /api/auth/me | -
+
+2026/01/02 15:09:37 [32mD:/CousreAI/backend/internal/middleware/auth.go:99
+[0m[33m[1.496ms] [34;1m[rows:1][0m SELECT * FROM "teacher_assignments" WHERE teacher_id = '05507748-0a57-4e3f-91c0-7627edf931c3' AND status = 'active' AND (start_at IS NULL OR start_at <= '2026-01-02 08:09:37.474') AND (end_at IS NULL OR end_at >= '2026-01-02 08:09:37.474')
+
+2026/01/02 15:09:37 [32mD:/CousreAI/backend/internal/handlers/auth.go:114
+[0m[33m[2.131ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE id = '05507748-0a57-4e3f-91c0-7627edf931c3' ORDER BY "users"."id" LIMIT 1
+
+2026/01/02 15:09:37 [32mD:/CousreAI/backend/internal/handlers/auth.go:123
+[0m[33m[2.157ms] [34;1m[rows:1][0m SELECT * FROM "teacher_assignments" WHERE teacher_id = '05507748-0a57-4e3f-91c0-7627edf931c3' AND status = 'active'
+15:09:37 | 200 |      7.3346ms | ::1 | GET | /api/auth/me | -
+15:09:37 | 204 |            0s | ::1 | OPTIONS | /api/admin/subcourses | -
+15:09:37 | 204 |            0s | ::1 | OPTIONS | /api/admin/lessons | -
+15:09:37 | 204 |            0s | ::1 | OPTIONS | /api/admin/subcourses | -
+
+2026/01/02 15:09:37 [32mD:/CousreAI/backend/internal/middleware/auth.go:99
+[0m[33m[1.224ms] [34;1m[rows:1][0m SELECT * FROM "teacher_assignments" WHERE teacher_id = '05507748-0a57-4e3f-91c0-7627edf931c3' AND status = 'active' AND (start_at IS NULL OR start_at <= '2026-01-02 08:09:37.49') AND (end_at IS NULL OR end_at >= '2026-01-02 08:09:37.49')
+15:09:37 | 204 |            0s | ::1 | OPTIONS | /api/admin/lessons | -
+
+2026/01/02 15:09:37 [32mD:/CousreAI/backend/internal/middleware/auth.go:99
+[0m[33m[17.607ms] [34;1m[rows:1][0m SELECT * FROM "teacher_assignments" WHERE teacher_id = '05507748-0a57-4e3f-91c0-7627edf931c3' AND status = 'active' AND (start_at IS NULL OR start_at <= '2026-01-02 08:09:37.475') AND (end_at IS NULL OR end_at >= '2026-01-02 08:09:37.475')
+
+2026/01/02 15:09:37 [32mD:/CousreAI/backend/internal/handlers/auth.go:114
+[0m[33m[4.220ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE id = '05507748-0a57-4e3f-91c0-7627edf931c3' ORDER BY "users"."id" LIMIT 1
+
+2026/01/02 15:09:37 [32mD:/CousreAI/backend/internal/handlers/subcourse.go:65
+[0m[33m[3.486ms] [34;1m[rows:1][0m SELECT * FROM "media" WHERE "owner_type" = 'subcourse' AND "media"."owner_id" = 'b2215c7b-c30d-45d6-8581-b8b4afa7f612'
+
+2026/01/02 15:09:37 [32mD:/CousreAI/backend/internal/handlers/auth.go:123
+[0m[33m[2.107ms] [34;1m[rows:1][0m SELECT * FROM "teacher_assignments" WHERE teacher_id = '05507748-0a57-4e3f-91c0-7627edf931c3' AND status = 'active'
+15:09:37 | 200 |      25.628ms | ::1 | GET | /api/auth/me | -
+
+2026/01/02 15:09:37 [32mD:/CousreAI/backend/internal/handlers/subcourse.go:65
+[0m[33m[3.742ms] [34;1m[rows:1][0m SELECT * FROM "programs" WHERE "programs"."id" = '3a111003-1bd3-4e07-af47-d1269c796356'
+
+2026/01/02 15:09:37 [32mD:/CousreAI/backend/internal/middleware/auth.go:99
+[0m[33m[12.886ms] [34;1m[rows:1][0m SELECT * FROM "teacher_assignments" WHERE teacher_id = '05507748-0a57-4e3f-91c0-7627edf931c3' AND status = 'active' AND (start_at IS NULL OR start_at <= '2026-01-02 08:09:37.491') AND (end_at IS NULL OR end_at >= '2026-01-02 08:09:37.491')
+
+2026/01/02 15:09:37 [32mD:/CousreAI/backend/internal/handlers/subcourse.go:65
+[0m[33m[12.364ms] [34;1m[rows:1][0m SELECT * FROM "subcourses" WHERE subcourses.id IN ('b2215c7b-c30d-45d6-8581-b8b4afa7f612') ORDER BY sort_order ASC, created_at DESC
+
+2026/01/02 15:09:37 [32mD:/CousreAI/backend/internal/middleware/auth.go:99
+[0m[33m[12.948ms] [34;1m[rows:1][0m SELECT * FROM "teacher_assignments" WHERE teacher_id = '05507748-0a57-4e3f-91c0-7627edf931c3' AND status = 'active' AND (start_at IS NULL OR start_at <= '2026-01-02 08:09:37.491') AND (end_at IS NULL OR end_at >= '2026-01-02 08:09:37.491')
+15:09:37 | 200 |     15.2321ms | ::1 | GET | /api/admin/subcourses | -
+
+2026/01/02 15:09:37 [32mD:/CousreAI/backend/internal/middleware/auth.go:99
+[0m[33m[13.473ms] [34;1m[rows:1][0m SELECT * FROM "teacher_assignments" WHERE teacher_id = '05507748-0a57-4e3f-91c0-7627edf931c3' AND status = 'active' AND (start_at IS NULL OR start_at <= '2026-01-02 08:09:37.492') AND (end_at IS NULL OR end_at >= '2026-01-02 08:09:37.492')
+
+2026/01/02 15:09:37 [32mD:/CousreAI/backend/internal/handlers/lesson.go:159
+[0m[33m[3.409ms] [34;1m[rows:1][0m SELECT * FROM "media" WHERE "owner_type" = 'lesson' AND "media"."owner_id" IN ('5186f1fb-efc2-46c7-be51-31fee2b758cd','5ec6de35-5929-4355-a99d-876da94ea1d1','a7925871-8147-4066-bd81-c3b9bc259f82')
+
+2026/01/02 15:09:37 [32mD:/CousreAI/backend/internal/handlers/lesson.go:159
+[0m[33m[0.506ms] [34;1m[rows:1][0m SELECT * FROM "media" WHERE "owner_type" = 'lesson' AND "media"."owner_id" IN ('5186f1fb-efc2-46c7-be51-31fee2b758cd','5ec6de35-5929-4355-a99d-876da94ea1d1','a7925871-8147-4066-bd81-c3b9bc259f82')
+
+2026/01/02 15:09:37 [32mD:/CousreAI/backend/internal/handlers/subcourse.go:65
+[0m[33m[1.553ms] [34;1m[rows:1][0m SELECT * FROM "media" WHERE "owner_type" = 'subcourse' AND "media"."owner_id" = 'b2215c7b-c30d-45d6-8581-b8b4afa7f612'
+
+2026/01/02 15:09:37 [32mD:/CousreAI/backend/internal/handlers/lesson.go:159
+[0m[33m[2.049ms] [34;1m[rows:1][0m SELECT * FROM "programs" WHERE "programs"."id" = '3a111003-1bd3-4e07-af47-d1269c796356'
+
+2026/01/02 15:09:37 [32mD:/CousreAI/backend/internal/handlers/lesson.go:159
+[0m[33m[3.613ms] [34;1m[rows:1][0m SELECT * FROM "subcourses" WHERE "subcourses"."id" = 'b2215c7b-c30d-45d6-8581-b8b4afa7f612'
+
+2026/01/02 15:09:37 [32mD:/CousreAI/backend/internal/handlers/lesson.go:159
+[0m[33m[10.226ms] [34;1m[rows:3][0m SELECT * FROM "lessons" WHERE subcourse_id IN ('b2215c7b-c30d-45d6-8581-b8b4afa7f612') ORDER BY sort_order ASC, created_at DESC
+15:09:37 | 200 |     23.1125ms | ::1 | GET | /api/admin/lessons | -
+
+2026/01/02 15:09:37 [32mD:/CousreAI/backend/internal/handlers/lesson.go:159
+[0m[33m[3.090ms] [34;1m[rows:1][0m SELECT * FROM "programs" WHERE "programs"."id" = '3a111003-1bd3-4e07-af47-d1269c796356'
+
+2026/01/02 15:09:37 [32mD:/CousreAI/backend/internal/handlers/subcourse.go:65
+[0m[33m[4.130ms] [34;1m[rows:1][0m SELECT * FROM "programs" WHERE "programs"."id" = '3a111003-1bd3-4e07-af47-d1269c796356'
+
+2026/01/02 15:09:37 [32mD:/CousreAI/backend/internal/handlers/lesson.go:159
+[0m[33m[4.645ms] [34;1m[rows:1][0m SELECT * FROM "subcourses" WHERE "subcourses"."id" = 'b2215c7b-c30d-45d6-8581-b8b4afa7f612'
+
+2026/01/02 15:09:37 [32mD:/CousreAI/backend/internal/handlers/subcourse.go:65
+[0m[33m[10.690ms] [34;1m[rows:1][0m SELECT * FROM "subcourses" WHERE subcourses.id IN ('b2215c7b-c30d-45d6-8581-b8b4afa7f612') ORDER BY sort_order ASC, created_at DESC
+
+2026/01/02 15:09:37 [32mD:/CousreAI/backend/internal/handlers/lesson.go:159
+[0m[33m[9.621ms] [34;1m[rows:3][0m SELECT * FROM "lessons" WHERE subcourse_id IN ('b2215c7b-c30d-45d6-8581-b8b4afa7f612') ORDER BY sort_order ASC, created_at DESC
+15:09:37 | 200 |     24.7099ms | ::1 | GET | /api/admin/subcourses | -
+15:09:37 | 200 |     23.6268ms | ::1 | GET | /api/admin/lessons | -
+15:09:37 | 304 |     97.6856ms | ::1 | GET | /uploads/lesson/4c03925b-3bb5-43c3-87d2-a6098c4c0eae_1767341250451258000.png | -
+
+2026/01/02 15:09:40 [32mD:/CousreAI/backend/internal/middleware/auth.go:99
+[0m[33m[4.641ms] [34;1m[rows:1][0m SELECT * FROM "teacher_assignments" WHERE teacher_id = '05507748-0a57-4e3f-91c0-7627edf931c3' AND status = 'active' AND (start_at IS NULL OR start_at <= '2026-01-02 08:09:40.193') AND (end_at IS NULL OR end_at >= '2026-01-02 08:09:40.193')
+
+2026/01/02 15:09:40 [32mD:/CousreAI/backend/internal/middleware/auth.go:99
+[0m[33m[5.928ms] [34;1m[rows:1][0m SELECT * FROM "teacher_assignments" WHERE teacher_id = '05507748-0a57-4e3f-91c0-7627edf931c3' AND status = 'active' AND (start_at IS NULL OR start_at <= '2026-01-02 08:09:40.195') AND (end_at IS NULL OR end_at >= '2026-01-02 08:09:40.195')
+
+2026/01/02 15:09:40 [32mD:/CousreAI/backend/internal/handlers/subcourse.go:65
+[0m[33m[2.182ms] [34;1m[rows:1][0m SELECT * FROM "media" WHERE "owner_type" = 'subcourse' AND "media"."owner_id" = 'b2215c7b-c30d-45d6-8581-b8b4afa7f612'
+
+2026/01/02 15:09:40 [32mD:/CousreAI/backend/internal/handlers/subcourse.go:65
+[0m[33m[2.212ms] [34;1m[rows:1][0m SELECT * FROM "media" WHERE "owner_type" = 'subcourse' AND "media"."owner_id" = 'b2215c7b-c30d-45d6-8581-b8b4afa7f612'
+
+2026/01/02 15:09:40 [32mD:/CousreAI/backend/internal/handlers/subcourse.go:65
+[0m[33m[1.578ms] [34;1m[rows:1][0m SELECT * FROM "programs" WHERE "programs"."id" = '3a111003-1bd3-4e07-af47-d1269c796356'
+
+2026/01/02 15:09:40 [32mD:/CousreAI/backend/internal/handlers/subcourse.go:65
+[0m[33m[9.408ms] [34;1m[rows:1][0m SELECT * FROM "subcourses" WHERE subcourses.id IN ('b2215c7b-c30d-45d6-8581-b8b4afa7f612') ORDER BY sort_order ASC, created_at DESC
+15:09:39 | 200 |     16.0584ms | ::1 | GET | /api/admin/subcourses | -
+
+2026/01/02 15:09:40 [32mD:/CousreAI/backend/internal/handlers/subcourse.go:65
+[0m[33m[1.046ms] [34;1m[rows:1][0m SELECT * FROM "programs" WHERE "programs"."id" = '3a111003-1bd3-4e07-af47-d1269c796356'
+
+2026/01/02 15:09:40 [32mD:/CousreAI/backend/internal/handlers/subcourse.go:65
+[0m[33m[6.999ms] [34;1m[rows:1][0m SELECT * FROM "subcourses" WHERE subcourses.id IN ('b2215c7b-c30d-45d6-8581-b8b4afa7f612') ORDER BY sort_order ASC, created_at DESC
+15:09:39 | 200 |     16.1264ms | ::1 | GET | /api/admin/subcourses | -
+15:09:45 | 204 |            0s | ::1 | OPTIONS | /api/admin/lessons/5186f1fb-efc2-46c7-be51-31fee2b758cd | -
+
+2026/01/02 15:09:45 [32mD:/CousreAI/backend/internal/middleware/auth.go:99
+[0m[33m[3.077ms] [34;1m[rows:1][0m SELECT * FROM "teacher_assignments" WHERE teacher_id = '05507748-0a57-4e3f-91c0-7627edf931c3' AND status = 'active' AND (start_at IS NULL OR start_at <= '2026-01-02 08:09:45.935') AND (end_at IS NULL OR end_at >= '2026-01-02 08:09:45.935')
+
+2026/01/02 15:09:45 [32mD:/CousreAI/backend/internal/middleware/authz.go:123
+[0m[33m[1.157ms] [34;1m[rows:1][0m SELECT * FROM "subcourses" WHERE "subcourses"."id" = 'b2215c7b-c30d-45d6-8581-b8b4afa7f612'
+
+2026/01/02 15:09:45 [32mD:/CousreAI/backend/internal/middleware/authz.go:123
+[0m[33m[3.407ms] [34;1m[rows:1][0m SELECT * FROM "lessons" WHERE id = '5186f1fb-efc2-46c7-be51-31fee2b758cd' ORDER BY "lessons"."id" LIMIT 1
+
+2026/01/02 15:09:45 [32mD:/CousreAI/backend/internal/middleware/authz.go:18
+[0m[33m[1.598ms] [34;1m[rows:0][0m SELECT * FROM "teacher_assignments" WHERE teacher_id = '05507748-0a57-4e3f-91c0-7627edf931c3' AND status = 'active' AND scope_level = 'program' AND (start_at IS NULL OR start_at <= '2026-01-02 08:09:45.942') AND (end_at IS NULL OR end_at >= '2026-01-02 08:09:45.942')
+
+2026/01/02 15:09:45 [32mD:/CousreAI/backend/internal/middleware/authz.go:44
+[0m[33m[0.919ms] [34;1m[rows:1][0m SELECT * FROM "teacher_assignments" WHERE teacher_id = '05507748-0a57-4e3f-91c0-7627edf931c3' AND status = 'active' AND scope_level = 'subcourse' AND (start_at IS NULL OR start_at <= '2026-01-02 08:09:45.944') AND (end_at IS NULL OR end_at >= '2026-01-02 08:09:45.944')
+
+2026/01/02 15:09:45 [32mD:/CousreAI/backend/internal/handlers/lesson.go:640
+[0m[33m[1.288ms] [34;1m[rows:1][0m SELECT * FROM "lessons" WHERE id = '5186f1fb-efc2-46c7-be51-31fee2b758cd' ORDER BY "lessons"."id" LIMIT 1
+
+2026/01/02 15:09:45 [32mD:/CousreAI/backend/internal/handlers/lesson.go:670
+[0m[33m[4.990ms] [34;1m[rows:1][0m UPDATE "lessons" SET "id"='5186f1fb-efc2-46c7-be51-31fee2b758cd',"subcourse_id"='b2215c7b-c30d-45d6-8581-b8b4afa7f612',"title"='sdfdasl;k;,.zfse;',"overview"='sdjdfle',"status"='draft',"author_id"='05507748-0a57-4e3f-91c0-7627edf931c3',"slug"='ksdlfjfsklej',"updated_at"='2026-01-02 15:09:45.948' WHERE "id" = '5186f1fb-efc2-46c7-be51-31fee2b758cd'
+
+2026/01/02 15:09:45 [32mD:/CousreAI/backend/internal/handlers/lesson.go:678
+[0m[33m[1.080ms] [34;1m[rows:1][0m DELETE FROM "media" WHERE owner_type = 'lesson' AND owner_id = '5186f1fb-efc2-46c7-be51-31fee2b758cd'
+
+2026/01/02 15:09:45 [32mD:/CousreAI/backend/internal/handlers/lesson.go:679
+[0m[33m[2.162ms] [34;1m[rows:1][0m DELETE FROM "lesson_objectives" WHERE lesson_id = '5186f1fb-efc2-46c7-be51-31fee2b758cd'
+
+2026/01/02 15:09:45 [32mD:/CousreAI/backend/internal/handlers/lesson.go:683
+[0m[33m[2.159ms] [34;1m[rows:1][0m SELECT * FROM "lesson_models" WHERE lesson_id = '5186f1fb-efc2-46c7-be51-31fee2b758cd'
+
+2026/01/02 15:09:45 [32mD:/CousreAI/backend/internal/handlers/lesson.go:685
+[0m[33m[1.277ms] [34;1m[rows:0][0m DELETE FROM "media" WHERE owner_type = 'lesson_model' AND owner_id = 'bb6e6996-53dd-43f3-aeee-c9cb23e4f6ff'
+
+2026/01/02 15:09:45 [32mD:/CousreAI/backend/internal/handlers/lesson.go:687
+[0m[33m[1.759ms] [34;1m[rows:1][0m DELETE FROM "lesson_models" WHERE lesson_id = '5186f1fb-efc2-46c7-be51-31fee2b758cd'
+
+2026/01/02 15:09:45 [32mD:/CousreAI/backend/internal/handlers/lesson.go:691
+[0m[33m[3.324ms] [34;1m[rows:1][0m SELECT * FROM "lesson_preparations" WHERE lesson_id = '5186f1fb-efc2-46c7-be51-31fee2b758cd' ORDER BY "lesson_preparations"."id" LIMIT 1
+
+2026/01/02 15:09:45 [32mD:/CousreAI/backend/internal/handlers/lesson.go:692
+[0m[33m[1.218ms] [34;1m[rows:0][0m DELETE FROM "media" WHERE owner_type = 'lesson_preparation' AND owner_id = 'b9a77305-4ef8-4cc4-80f5-438ce29d146a'
+
+2026/01/02 15:09:45 [32mD:/CousreAI/backend/internal/handlers/lesson.go:694
+[0m[33m[1.302ms] [34;1m[rows:1][0m DELETE FROM "lesson_preparations" WHERE lesson_id = '5186f1fb-efc2-46c7-be51-31fee2b758cd'
+
+2026/01/02 15:09:45 [32mD:/CousreAI/backend/internal/handlers/lesson.go:698
+[0m[33m[2.454ms] [34;1m[rows:1][0m SELECT * FROM "lesson_builds" WHERE lesson_id = '5186f1fb-efc2-46c7-be51-31fee2b758cd'
+
+2026/01/02 15:09:45 [32mD:/CousreAI/backend/internal/handlers/lesson.go:700
+[0m[33m[0.503ms] [34;1m[rows:0][0m DELETE FROM "media" WHERE owner_type = 'lesson_build' AND owner_id = '49c8af40-3729-4a5c-ba29-6b831d5afc39'
+
+2026/01/02 15:09:45 [32mD:/CousreAI/backend/internal/handlers/lesson.go:702
+[0m[33m[1.308ms] [34;1m[rows:1][0m DELETE FROM "lesson_builds" WHERE lesson_id = '5186f1fb-efc2-46c7-be51-31fee2b758cd'
+
+2026/01/02 15:09:45 [32mD:/CousreAI/backend/internal/handlers/lesson.go:706
+[0m[33m[2.756ms] [34;1m[rows:1][0m SELECT * FROM "lesson_content_blocks" WHERE lesson_id = '5186f1fb-efc2-46c7-be51-31fee2b758cd'
+
+2026/01/02 15:09:45 [32mD:/CousreAI/backend/internal/handlers/lesson.go:708
+[0m[33m[0.465ms] [34;1m[rows:0][0m DELETE FROM "media" WHERE owner_type = 'lesson_content_block' AND owner_id = '9d6dec18-0b4f-4da3-8ffd-2baa3de4a665'
+
+2026/01/02 15:09:45 [32mD:/CousreAI/backend/internal/handlers/lesson.go:710
+[0m[33m[2.553ms] [34;1m[rows:1][0m DELETE FROM "lesson_content_blocks" WHERE lesson_id = '5186f1fb-efc2-46c7-be51-31fee2b758cd'
+
+2026/01/02 15:09:45 [32mD:/CousreAI/backend/internal/handlers/lesson.go:714
+[0m[33m[3.747ms] [34;1m[rows:1][0m SELECT * FROM "lesson_attachments" WHERE lesson_id = '5186f1fb-efc2-46c7-be51-31fee2b758cd'
+
+2026/01/02 15:09:45 [32mD:/CousreAI/backend/internal/handlers/lesson.go:716
+[0m[33m[1.023ms] [34;1m[rows:0][0m DELETE FROM "media" WHERE owner_type = 'lesson_attachment' AND owner_id = '1f947ee6-a8e0-4ca0-acce-f938781ab1c4'
+
+2026/01/02 15:09:45 [32mD:/CousreAI/backend/internal/handlers/lesson.go:718
+[0m[33m[0.747ms] [34;1m[rows:1][0m DELETE FROM "lesson_attachments" WHERE lesson_id = '5186f1fb-efc2-46c7-be51-31fee2b758cd'
+
+2026/01/02 15:09:45 [32mD:/CousreAI/backend/internal/handlers/lesson.go:722
+[0m[33m[2.540ms] [34;1m[rows:1][0m SELECT * FROM "lesson_challenges" WHERE lesson_id = '5186f1fb-efc2-46c7-be51-31fee2b758cd'
+
+2026/01/02 15:09:45 [32mD:/CousreAI/backend/internal/handlers/lesson.go:724
+[0m[33m[0.554ms] [34;1m[rows:0][0m DELETE FROM "media" WHERE owner_type = 'lesson_challenge' AND owner_id = 'bb25c2b8-a8ea-47f2-8df4-5facdfa194fe'
+
+2026/01/02 15:09:45 [32mD:/CousreAI/backend/internal/handlers/lesson.go:726
+[0m[33m[1.034ms] [34;1m[rows:1][0m DELETE FROM "lesson_challenges" WHERE lesson_id = '5186f1fb-efc2-46c7-be51-31fee2b758cd'
+
+2026/01/02 15:09:45 [32mD:/CousreAI/backend/internal/handlers/lesson.go:730
+[0m[33m[2.484ms] [34;1m[rows:1][0m SELECT * FROM "lesson_quizzes" WHERE lesson_id = '5186f1fb-efc2-46c7-be51-31fee2b758cd'
+
+2026/01/02 15:09:45 [32mD:/CousreAI/backend/internal/handlers/lesson.go:732
+[0m[33m[2.923ms] [34;1m[rows:0][0m DELETE FROM "lesson_quiz_options" WHERE quiz_id = 'f69be503-2907-44ff-8b1f-4c5caf690e41'
+
+2026/01/02 15:09:45 [32mD:/CousreAI/backend/internal/handlers/lesson.go:734
+[0m[33m[1.634ms] [34;1m[rows:1][0m DELETE FROM "lesson_quizzes" WHERE lesson_id = '5186f1fb-efc2-46c7-be51-31fee2b758cd'
+
+2026/01/02 15:09:46 [32mD:/CousreAI/backend/internal/handlers/lesson.go:750
+[0m[33m[2.137ms] [34;1m[rows:1][0m INSERT INTO "lesson_objectives" ("id","lesson_id","knowledge","thinking","skills","attitude","created_at","updated_at") VALUES ('65fce709-cdc7-481b-b519-132f554395f1','5186f1fb-efc2-46c7-be51-31fee2b758cd','','','','','2026-01-02 15:09:46.001','2026-01-02 15:09:46.001')
+
+2026/01/02 15:09:46 [32mD:/CousreAI/backend/internal/handlers/lesson.go:772
+[0m[33m[1.039ms] [34;1m[rows:1][0m INSERT INTO "lesson_preparations" ("id","lesson_id","notes","created_at","updated_at") VALUES ('82bfa2a8-bc79-4f06-a957-bf22e72d1a12','5186f1fb-efc2-46c7-be51-31fee2b758cd','','2026-01-02 15:09:46.003','2026-01-02 15:09:46.003')
+
+2026/01/02 15:09:46 [32mD:/CousreAI/backend/internal/middleware/authz.go:123
+[0m[33m[0.522ms] [34;1m[rows:1][0m SELECT * FROM "subcourses" WHERE "subcourses"."id" = 'b2215c7b-c30d-45d6-8581-b8b4afa7f612'
+
+2026/01/02 15:09:46 [32mD:/CousreAI/backend/internal/middleware/authz.go:123
+[0m[33m[1.594ms] [34;1m[rows:1][0m SELECT * FROM "lessons" WHERE id = '5186f1fb-efc2-46c7-be51-31fee2b758cd' ORDER BY "lessons"."id" LIMIT 1
+
+2026/01/02 15:09:46 [32mD:/CousreAI/backend/internal/middleware/authz.go:18
+[0m[33m[0.881ms] [34;1m[rows:0][0m SELECT * FROM "teacher_assignments" WHERE teacher_id = '05507748-0a57-4e3f-91c0-7627edf931c3' AND status = 'active' AND scope_level = 'program' AND (start_at IS NULL OR start_at <= '2026-01-02 08:09:46.008') AND (end_at IS NULL OR end_at >= '2026-01-02 08:09:46.008')
+
+2026/01/02 15:09:46 [32mD:/CousreAI/backend/internal/middleware/authz.go:44
+[0m[33m[1.026ms] [34;1m[rows:1][0m SELECT * FROM "teacher_assignments" WHERE teacher_id = '05507748-0a57-4e3f-91c0-7627edf931c3' AND status = 'active' AND scope_level = 'subcourse' AND (start_at IS NULL OR start_at <= '2026-01-02 08:09:46.009') AND (end_at IS NULL OR end_at >= '2026-01-02 08:09:46.009')
+
+2026/01/02 15:09:46 [32mD:/CousreAI/backend/internal/handlers/lesson.go:230
+[0m[33m[1.267ms] [34;1m[rows:0][0m SELECT * FROM "lesson_attachments" WHERE "lesson_attachments"."lesson_id" = '5186f1fb-efc2-46c7-be51-31fee2b758cd'
+
+2026/01/02 15:09:46 [32mD:/CousreAI/backend/internal/handlers/lesson.go:230
+[0m[33m[2.170ms] [34;1m[rows:0][0m SELECT * FROM "lesson_builds" WHERE "lesson_builds"."lesson_id" = '5186f1fb-efc2-46c7-be51-31fee2b758cd'
+
+2026/01/02 15:09:46 [32mD:/CousreAI/backend/internal/handlers/lesson.go:230
+[0m[33m[2.135ms] [34;1m[rows:0][0m SELECT * FROM "lesson_challenges" WHERE "lesson_challenges"."lesson_id" = '5186f1fb-efc2-46c7-be51-31fee2b758cd'
+
+2026/01/02 15:09:46 [32mD:/CousreAI/backend/internal/handlers/lesson.go:230
+[0m[33m[1.671ms] [34;1m[rows:0][0m SELECT * FROM "lesson_content_blocks" WHERE "lesson_content_blocks"."lesson_id" = '5186f1fb-efc2-46c7-be51-31fee2b758cd'
+
+2026/01/02 15:09:46 [32mD:/CousreAI/backend/internal/handlers/lesson.go:230
+[0m[33m[0.558ms] [34;1m[rows:0][0m SELECT * FROM "media" WHERE "owner_type" = 'lesson' AND "media"."owner_id" = '5186f1fb-efc2-46c7-be51-31fee2b758cd'
+
+2026/01/02 15:09:46 [32mD:/CousreAI/backend/internal/handlers/lesson.go:230
+[0m[33m[1.030ms] [34;1m[rows:0][0m SELECT * FROM "lesson_models" WHERE "lesson_models"."lesson_id" = '5186f1fb-efc2-46c7-be51-31fee2b758cd'
+
+2026/01/02 15:09:46 [32mD:/CousreAI/backend/internal/handlers/lesson.go:230
+[0m[33m[1.379ms] [34;1m[rows:1][0m SELECT * FROM "lesson_objectives" WHERE "lesson_objectives"."lesson_id" = '5186f1fb-efc2-46c7-be51-31fee2b758cd'
+
+2026/01/02 15:09:46 [32mD:/CousreAI/backend/internal/handlers/lesson.go:230
+[0m[33m[0.523ms] [34;1m[rows:0][0m SELECT * FROM "media" WHERE "owner_type" = 'lesson_preparation' AND "media"."owner_id" = '82bfa2a8-bc79-4f06-a957-bf22e72d1a12'
+
+2026/01/02 15:09:46 [32mD:/CousreAI/backend/internal/handlers/lesson.go:230
+[0m[33m[2.093ms] [34;1m[rows:1][0m SELECT * FROM "lesson_preparations" WHERE "lesson_preparations"."lesson_id" = '5186f1fb-efc2-46c7-be51-31fee2b758cd'
+
+2026/01/02 15:09:46 [32mD:/CousreAI/backend/internal/handlers/lesson.go:230
+[0m[33m[1.045ms] [34;1m[rows:0][0m SELECT * FROM "lesson_quizzes" WHERE "lesson_quizzes"."lesson_id" = '5186f1fb-efc2-46c7-be51-31fee2b758cd'
+
+2026/01/02 15:09:46 [32mD:/CousreAI/backend/internal/handlers/lesson.go:230
+[0m[33m[0.503ms] [34;1m[rows:1][0m SELECT * FROM "programs" WHERE "programs"."id" = '3a111003-1bd3-4e07-af47-d1269c796356'
+
+2026/01/02 15:09:46 [32mD:/CousreAI/backend/internal/handlers/lesson.go:230
+[0m[33m[2.278ms] [34;1m[rows:1][0m SELECT * FROM "subcourses" WHERE "subcourses"."id" = 'b2215c7b-c30d-45d6-8581-b8b4afa7f612'
+
+2026/01/02 15:09:46 [32mD:/CousreAI/backend/internal/handlers/lesson.go:230
+[0m[33m[17.736ms] [34;1m[rows:1][0m SELECT * FROM "lessons" WHERE id = '5186f1fb-efc2-46c7-be51-31fee2b758cd' ORDER BY "lessons"."id" LIMIT 1
+15:09:45 | 200 |     93.4125ms | ::1 | PUT | /api/admin/lessons/5186f1fb-efc2-46c7-be51-31fee2b758cd | -
+15:09:46 | 204 |            0s | ::1 | OPTIONS | /api/admin/subcourses | -
+15:09:46 | 204 |            0s | ::1 | OPTIONS | /api/admin/subcourses | -
+
+2026/01/02 15:09:47 [32mD:/CousreAI/backend/internal/middleware/auth.go:99
+[0m[33m[1.218ms] [34;1m[rows:1][0m SELECT * FROM "teacher_assignments" WHERE teacher_id = '05507748-0a57-4e3f-91c0-7627edf931c3' AND status = 'active' AND (start_at IS NULL OR start_at <= '2026-01-02 08:09:47.023') AND (end_at IS NULL OR end_at >= '2026-01-02 08:09:47.023')
+
+2026/01/02 15:09:47 [32mD:/CousreAI/backend/internal/middleware/auth.go:99
+[0m[33m[2.619ms] [34;1m[rows:1][0m SELECT * FROM "teacher_assignments" WHERE teacher_id = '05507748-0a57-4e3f-91c0-7627edf931c3' AND status = 'active' AND (start_at IS NULL OR start_at <= '2026-01-02 08:09:47.024') AND (end_at IS NULL OR end_at >= '2026-01-02 08:09:47.024')
+
+2026/01/02 15:09:47 [32mD:/CousreAI/backend/internal/handlers/subcourse.go:65
+[0m[33m[0.909ms] [34;1m[rows:1][0m SELECT * FROM "media" WHERE "owner_type" = 'subcourse' AND "media"."owner_id" = 'b2215c7b-c30d-45d6-8581-b8b4afa7f612'
+
+2026/01/02 15:09:47 [32mD:/CousreAI/backend/internal/handlers/subcourse.go:65
+[0m[33m[1.034ms] [34;1m[rows:1][0m SELECT * FROM "media" WHERE "owner_type" = 'subcourse' AND "media"."owner_id" = 'b2215c7b-c30d-45d6-8581-b8b4afa7f612'
+
+2026/01/02 15:09:47 [32mD:/CousreAI/backend/internal/handlers/subcourse.go:65
+[0m[33m[1.047ms] [34;1m[rows:1][0m SELECT * FROM "programs" WHERE "programs"."id" = '3a111003-1bd3-4e07-af47-d1269c796356'
+
+2026/01/02 15:09:47 [32mD:/CousreAI/backend/internal/handlers/subcourse.go:65
+[0m[33m[4.154ms] [34;1m[rows:1][0m SELECT * FROM "subcourses" WHERE subcourses.id IN ('b2215c7b-c30d-45d6-8581-b8b4afa7f612') ORDER BY sort_order ASC, created_at DESC
+15:09:46 | 200 |      6.6836ms | ::1 | GET | /api/admin/subcourses | -
+
+2026/01/02 15:09:47 [32mD:/CousreAI/backend/internal/handlers/subcourse.go:65
+[0m[33m[0.538ms] [34;1m[rows:1][0m SELECT * FROM "programs" WHERE "programs"."id" = '3a111003-1bd3-4e07-af47-d1269c796356'
+
+2026/01/02 15:09:47 [32mD:/CousreAI/backend/internal/handlers/subcourse.go:65
+[0m[33m[4.990ms] [34;1m[rows:1][0m SELECT * FROM "subcourses" WHERE subcourses.id IN ('b2215c7b-c30d-45d6-8581-b8b4afa7f612') ORDER BY sort_order ASC, created_at DESC
+15:09:46 | 200 |       7.609ms | ::1 | GET | /api/admin/subcourses | -
+15:10:10 | 204 |            0s | ::1 | OPTIONS | /api/admin/lessons | -
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/middleware/auth.go:99
+[0m[33m[2.170ms] [34;1m[rows:1][0m SELECT * FROM "teacher_assignments" WHERE teacher_id = '05507748-0a57-4e3f-91c0-7627edf931c3' AND status = 'active' AND (start_at IS NULL OR start_at <= '2026-01-02 08:10:11.118') AND (end_at IS NULL OR end_at >= '2026-01-02 08:10:11.118')
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:263
+[0m[33m[2.799ms] [34;1m[rows:1][0m SELECT * FROM "subcourses" WHERE id = 'b2215c7b-c30d-45d6-8581-b8b4afa7f612' ORDER BY "subcourses"."id" LIMIT 1
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/middleware/authz.go:18
+[0m[33m[2.781ms] [34;1m[rows:0][0m SELECT * FROM "teacher_assignments" WHERE teacher_id = '05507748-0a57-4e3f-91c0-7627edf931c3' AND status = 'active' AND scope_level = 'program' AND (start_at IS NULL OR start_at <= '2026-01-02 08:10:11.124') AND (end_at IS NULL OR end_at >= '2026-01-02 08:10:11.124')
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/middleware/authz.go:18
+[0m[33m[1.112ms] [34;1m[rows:0][0m SELECT * FROM "teacher_assignments" WHERE teacher_id = '05507748-0a57-4e3f-91c0-7627edf931c3' AND status = 'active' AND scope_level = 'program' AND (start_at IS NULL OR start_at <= '2026-01-02 08:10:11.128') AND (end_at IS NULL OR end_at >= '2026-01-02 08:10:11.128')
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/middleware/authz.go:44
+[0m[33m[1.071ms] [34;1m[rows:1][0m SELECT * FROM "teacher_assignments" WHERE teacher_id = '05507748-0a57-4e3f-91c0-7627edf931c3' AND status = 'active' AND scope_level = 'subcourse' AND (start_at IS NULL OR start_at <= '2026-01-02 08:10:11.129') AND (end_at IS NULL OR end_at >= '2026-01-02 08:10:11.129')
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:299
+[0m[33m[1.603ms] [34;1m[rows:1][0m SELECT * FROM "subcourses" WHERE id = 'b2215c7b-c30d-45d6-8581-b8b4afa7f612' AND "subcourses"."id" = 'b2215c7b-c30d-45d6-8581-b8b4afa7f612' ORDER BY "subcourses"."id" LIMIT 1
+
+2026/01/02 15:10:11 [31;1mD:/CousreAI/backend/internal/handlers/lesson.go:394 [35;1mrecord not found
+[0m[33m[2.167ms] [34;1m[rows:0][0m SELECT * FROM "lessons" WHERE slug = 'ssdkdlj' ORDER BY "lessons"."id" LIMIT 1
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:415
+[0m[33m[2.680ms] [34;1m[rows:1][0m INSERT INTO "lessons" ("id","subcourse_id","title","subtitle","overview","block_types","status","sort_order","duration_minutes","difficulty","estimated_time","cover_media_id","author_id","is_featured","published_at","slug","created_at","updated_at") VALUES ('b0a82b6b-78c0-4d7d-b0c6-37be764aa3aa','b2215c7b-c30d-45d6-8581-b8b4afa7f612',',xcfef;','','sdklfje',NULL,'archived',0,0,'','',NULL,'05507748-0a57-4e3f-91c0-7627edf931c3',false,NULL,'ssdkdlj','2026-01-02 15:10:11.138','2026-01-02 15:10:11.138')
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:437
+[0m[33m[2.622ms] [34;1m[rows:1][0m INSERT INTO "lesson_objectives" ("id","lesson_id","knowledge","thinking","skills","attitude","created_at","updated_at") VALUES ('96ab785a-0b26-4165-9d56-f9138474e1b9','b0a82b6b-78c0-4d7d-b0c6-37be764aa3aa','','','','','2026-01-02 15:10:11.14','2026-01-02 15:10:11.14')
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:452
+[0m[33m[3.150ms] [34;1m[rows:1][0m INSERT INTO "lesson_models" ("id","lesson_id","title","description","created_at","updated_at") VALUES ('a17dbf78-c3b8-4e3e-acce-e5d86ed76f62','b0a82b6b-78c0-4d7d-b0c6-37be764aa3aa','Auto model 1','','2026-01-02 15:10:11.143','2026-01-02 15:10:11.143')
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:471
+[0m[33m[1.686ms] [34;1m[rows:1][0m INSERT INTO "lesson_preparations" ("id","lesson_id","notes","created_at","updated_at") VALUES ('296aba78-3128-4c9c-aee1-f353bed2d502','b0a82b6b-78c0-4d7d-b0c6-37be764aa3aa','','2026-01-02 15:10:11.148','2026-01-02 15:10:11.148')
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:489
+[0m[33m[1.944ms] [34;1m[rows:1][0m INSERT INTO "lesson_builds" ("id","lesson_id","build_type","title","description","created_at","updated_at") VALUES ('c906bf53-3027-44b8-9e9c-a6b4fdcbafd3','b0a82b6b-78c0-4d7d-b0c6-37be764aa3aa','pdf','Auto build 1','','2026-01-02 15:10:11.149','2026-01-02 15:10:11.149')
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:507
+[0m[33m[2.097ms] [34;1m[rows:1][0m INSERT INTO "lesson_content_blocks" ("id","lesson_id","title","subtitle","description","usage_text","example_text","sort_order","created_at","updated_at") VALUES ('5a945e97-b985-4fbd-98c9-aea0a21a43bb','b0a82b6b-78c0-4d7d-b0c6-37be764aa3aa','Auto content 1','','','','',0,'2026-01-02 15:10:11.152','2026-01-02 15:10:11.152')
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:525
+[0m[33m[2.982ms] [34;1m[rows:1][0m INSERT INTO "lesson_attachments" ("id","lesson_id","title","description","file_type","sort_order","created_at","updated_at") VALUES ('5e2e3d8b-f071-43da-ad50-ea6ac44c89f9','b0a82b6b-78c0-4d7d-b0c6-37be764aa3aa','Auto attachment 1','','',0,'2026-01-02 15:10:11.154','2026-01-02 15:10:11.154')
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:543
+[0m[33m[2.670ms] [34;1m[rows:1][0m INSERT INTO "lesson_challenges" ("id","lesson_id","title","subtitle","description","instructions","sort_order","created_at","updated_at") VALUES ('c5213e5a-b9d0-4431-90cf-79569fc3d20e','b0a82b6b-78c0-4d7d-b0c6-37be764aa3aa','Auto challenge 1','','','',0,'2026-01-02 15:10:11.158','2026-01-02 15:10:11.158')
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:575
+[0m[33m[2.628ms] [34;1m[rows:1][0m INSERT INTO "lesson_quizzes" ("id","lesson_id","title","description","quiz_type","created_at","updated_at") VALUES ('e4d47215-313d-40a3-9b8c-63ed78124287','b0a82b6b-78c0-4d7d-b0c6-37be764aa3aa','Auto quiz 1','','single','2026-01-02 15:10:11.161','2026-01-02 15:10:11.161')
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:613
+[0m[33m[1.054ms] [34;1m[rows:0][0m SELECT * FROM "media" WHERE "owner_type" = 'lesson_attachment' AND "media"."owner_id" = '5e2e3d8b-f071-43da-ad50-ea6ac44c89f9'
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:613
+[0m[33m[1.566ms] [34;1m[rows:1][0m SELECT * FROM "lesson_attachments" WHERE "lesson_attachments"."lesson_id" = 'b0a82b6b-78c0-4d7d-b0c6-37be764aa3aa'
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:613
+[0m[33m[0.519ms] [34;1m[rows:0][0m SELECT * FROM "media" WHERE "owner_type" = 'lesson_build' AND "media"."owner_id" = 'c906bf53-3027-44b8-9e9c-a6b4fdcbafd3'
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:613
+[0m[33m[2.194ms] [34;1m[rows:1][0m SELECT * FROM "lesson_builds" WHERE "lesson_builds"."lesson_id" = 'b0a82b6b-78c0-4d7d-b0c6-37be764aa3aa'
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:613
+[0m[33m[1.025ms] [34;1m[rows:0][0m SELECT * FROM "media" WHERE "owner_type" = 'lesson_challenge' AND "media"."owner_id" = 'c5213e5a-b9d0-4431-90cf-79569fc3d20e'
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:613
+[0m[33m[1.923ms] [34;1m[rows:1][0m SELECT * FROM "lesson_challenges" WHERE "lesson_challenges"."lesson_id" = 'b0a82b6b-78c0-4d7d-b0c6-37be764aa3aa'
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:613
+[0m[33m[1.076ms] [34;1m[rows:0][0m SELECT * FROM "media" WHERE "owner_type" = 'lesson_content_block' AND "media"."owner_id" = '5a945e97-b985-4fbd-98c9-aea0a21a43bb'
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:613
+[0m[33m[2.133ms] [34;1m[rows:1][0m SELECT * FROM "lesson_content_blocks" WHERE "lesson_content_blocks"."lesson_id" = 'b0a82b6b-78c0-4d7d-b0c6-37be764aa3aa'
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:613
+[0m[33m[1.067ms] [34;1m[rows:0][0m SELECT * FROM "media" WHERE "owner_type" = 'lesson' AND "media"."owner_id" = 'b0a82b6b-78c0-4d7d-b0c6-37be764aa3aa'
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:613
+[0m[33m[1.052ms] [34;1m[rows:0][0m SELECT * FROM "media" WHERE "owner_type" = 'lesson_model' AND "media"."owner_id" = 'a17dbf78-c3b8-4e3e-acce-e5d86ed76f62'
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:613
+[0m[33m[2.646ms] [34;1m[rows:1][0m SELECT * FROM "lesson_models" WHERE "lesson_models"."lesson_id" = 'b0a82b6b-78c0-4d7d-b0c6-37be764aa3aa'
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:613
+[0m[33m[1.064ms] [34;1m[rows:1][0m SELECT * FROM "lesson_objectives" WHERE "lesson_objectives"."lesson_id" = 'b0a82b6b-78c0-4d7d-b0c6-37be764aa3aa'
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:613
+[0m[33m[0.607ms] [34;1m[rows:0][0m SELECT * FROM "media" WHERE "owner_type" = 'lesson_preparation' AND "media"."owner_id" = '296aba78-3128-4c9c-aee1-f353bed2d502'
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:613
+[0m[33m[2.179ms] [34;1m[rows:1][0m SELECT * FROM "lesson_preparations" WHERE "lesson_preparations"."lesson_id" = 'b0a82b6b-78c0-4d7d-b0c6-37be764aa3aa'
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:613
+[0m[33m[1.583ms] [34;1m[rows:0][0m SELECT * FROM "lesson_quiz_options" WHERE "lesson_quiz_options"."quiz_id" = 'e4d47215-313d-40a3-9b8c-63ed78124287'
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:613
+[0m[33m[2.113ms] [34;1m[rows:1][0m SELECT * FROM "lesson_quizzes" WHERE "lesson_quizzes"."lesson_id" = 'b0a82b6b-78c0-4d7d-b0c6-37be764aa3aa'
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:613
+[0m[33m[0.507ms] [34;1m[rows:1][0m SELECT * FROM "programs" WHERE "programs"."id" = '3a111003-1bd3-4e07-af47-d1269c796356'
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:613
+[0m[33m[2.001ms] [34;1m[rows:1][0m SELECT * FROM "subcourses" WHERE "subcourses"."id" = 'b2215c7b-c30d-45d6-8581-b8b4afa7f612'
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:613
+[0m[33m[22.544ms] [34;1m[rows:1][0m SELECT * FROM "lessons" WHERE id = 'b0a82b6b-78c0-4d7d-b0c6-37be764aa3aa' ORDER BY "lessons"."id" LIMIT 1
+15:10:10 | 201 |     70.8659ms | ::1 | POST | /api/admin/lessons | -
+15:10:10 | 204 |            0s | ::1 | OPTIONS | /api/admin/media/upload | -
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/middleware/auth.go:99
+[0m[33m[1.612ms] [34;1m[rows:1][0m SELECT * FROM "teacher_assignments" WHERE teacher_id = '05507748-0a57-4e3f-91c0-7627edf931c3' AND status = 'active' AND (start_at IS NULL OR start_at <= '2026-01-02 08:10:11.195') AND (end_at IS NULL OR end_at >= '2026-01-02 08:10:11.195')
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/media_handler.go:68
+[0m[33m[1.068ms] [34;1m[rows:1][0m SELECT * FROM "lessons" WHERE id = 'b0a82b6b-78c0-4d7d-b0c6-37be764aa3aa' ORDER BY "lessons"."id" LIMIT 1
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/media_handler.go:179
+[0m[33m[4.054ms] [34;1m[rows:1][0m INSERT INTO "media" ("id","owner_type","owner_id","url","mime_type","purpose","sort_order","meta","created_at","updated_at") VALUES ('ec4fc21f-975f-4a15-a4cf-aeaf33f8823b','lesson','b0a82b6b-78c0-4d7d-b0c6-37be764aa3aa','/uploads/lesson/2d2c7dfd-4f51-4c1a-aa19-f089be2f029a_1767341411198951400.png','image/png','',0,'{"original_name":"hinh6.png","size":214987}','2026-01-02 15:10:11.2','2026-01-02 15:10:11.2')
+15:10:10 | 201 |      9.3664ms | ::1 | POST | /api/admin/media/upload | -
+15:10:10 | 204 |            0s | ::1 | OPTIONS | /api/admin/lessons/b0a82b6b-78c0-4d7d-b0c6-37be764aa3aa | -
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/middleware/auth.go:99
+[0m[33m[1.610ms] [34;1m[rows:1][0m SELECT * FROM "teacher_assignments" WHERE teacher_id = '05507748-0a57-4e3f-91c0-7627edf931c3' AND status = 'active' AND (start_at IS NULL OR start_at <= '2026-01-02 08:10:11.209') AND (end_at IS NULL OR end_at >= '2026-01-02 08:10:11.209')
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/middleware/authz.go:123
+[0m[33m[1.618ms] [34;1m[rows:1][0m SELECT * FROM "subcourses" WHERE "subcourses"."id" = 'b2215c7b-c30d-45d6-8581-b8b4afa7f612'
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/middleware/authz.go:123
+[0m[33m[3.205ms] [34;1m[rows:1][0m SELECT * FROM "lessons" WHERE id = 'b0a82b6b-78c0-4d7d-b0c6-37be764aa3aa' ORDER BY "lessons"."id" LIMIT 1
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/middleware/authz.go:18
+[0m[33m[1.519ms] [34;1m[rows:0][0m SELECT * FROM "teacher_assignments" WHERE teacher_id = '05507748-0a57-4e3f-91c0-7627edf931c3' AND status = 'active' AND scope_level = 'program' AND (start_at IS NULL OR start_at <= '2026-01-02 08:10:11.214') AND (end_at IS NULL OR end_at >= '2026-01-02 08:10:11.214')
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/middleware/authz.go:44
+[0m[33m[1.516ms] [34;1m[rows:1][0m SELECT * FROM "teacher_assignments" WHERE teacher_id = '05507748-0a57-4e3f-91c0-7627edf931c3' AND status = 'active' AND scope_level = 'subcourse' AND (start_at IS NULL OR start_at <= '2026-01-02 08:10:11.215') AND (end_at IS NULL OR end_at >= '2026-01-02 08:10:11.215')
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:230
+[0m[33m[0.590ms] [34;1m[rows:0][0m SELECT * FROM "media" WHERE "owner_type" = 'lesson_attachment' AND "media"."owner_id" = '5e2e3d8b-f071-43da-ad50-ea6ac44c89f9'
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:230
+[0m[33m[1.627ms] [34;1m[rows:1][0m SELECT * FROM "lesson_attachments" WHERE "lesson_attachments"."lesson_id" = 'b0a82b6b-78c0-4d7d-b0c6-37be764aa3aa'
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:230
+[0m[33m[0.530ms] [34;1m[rows:0][0m SELECT * FROM "media" WHERE "owner_type" = 'lesson_build' AND "media"."owner_id" = 'c906bf53-3027-44b8-9e9c-a6b4fdcbafd3'
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:230
+[0m[33m[1.589ms] [34;1m[rows:1][0m SELECT * FROM "lesson_builds" WHERE "lesson_builds"."lesson_id" = 'b0a82b6b-78c0-4d7d-b0c6-37be764aa3aa'
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:230
+[0m[33m[0.529ms] [34;1m[rows:0][0m SELECT * FROM "media" WHERE "owner_type" = 'lesson_challenge' AND "media"."owner_id" = 'c5213e5a-b9d0-4431-90cf-79569fc3d20e'
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:230
+[0m[33m[1.592ms] [34;1m[rows:1][0m SELECT * FROM "lesson_challenges" WHERE "lesson_challenges"."lesson_id" = 'b0a82b6b-78c0-4d7d-b0c6-37be764aa3aa'
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:230
+[0m[33m[1.072ms] [34;1m[rows:0][0m SELECT * FROM "media" WHERE "owner_type" = 'lesson_content_block' AND "media"."owner_id" = '5a945e97-b985-4fbd-98c9-aea0a21a43bb'
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:230
+[0m[33m[3.206ms] [34;1m[rows:1][0m SELECT * FROM "lesson_content_blocks" WHERE "lesson_content_blocks"."lesson_id" = 'b0a82b6b-78c0-4d7d-b0c6-37be764aa3aa'
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:230
+[0m[33m[1.072ms] [34;1m[rows:1][0m SELECT * FROM "media" WHERE "owner_type" = 'lesson' AND "media"."owner_id" = 'b0a82b6b-78c0-4d7d-b0c6-37be764aa3aa'
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:230
+[0m[33m[0.523ms] [34;1m[rows:0][0m SELECT * FROM "media" WHERE "owner_type" = 'lesson_model' AND "media"."owner_id" = 'a17dbf78-c3b8-4e3e-acce-e5d86ed76f62'
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:230
+[0m[33m[2.130ms] [34;1m[rows:1][0m SELECT * FROM "lesson_models" WHERE "lesson_models"."lesson_id" = 'b0a82b6b-78c0-4d7d-b0c6-37be764aa3aa'
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:230
+[0m[33m[0.525ms] [34;1m[rows:1][0m SELECT * FROM "lesson_objectives" WHERE "lesson_objectives"."lesson_id" = 'b0a82b6b-78c0-4d7d-b0c6-37be764aa3aa'
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:230
+[0m[33m[0.985ms] [34;1m[rows:0][0m SELECT * FROM "media" WHERE "owner_type" = 'lesson_preparation' AND "media"."owner_id" = '296aba78-3128-4c9c-aee1-f353bed2d502'
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:230
+[0m[33m[1.509ms] [34;1m[rows:1][0m SELECT * FROM "lesson_preparations" WHERE "lesson_preparations"."lesson_id" = 'b0a82b6b-78c0-4d7d-b0c6-37be764aa3aa'
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:230
+[0m[33m[0.520ms] [34;1m[rows:0][0m SELECT * FROM "lesson_quiz_options" WHERE "lesson_quiz_options"."quiz_id" = 'e4d47215-313d-40a3-9b8c-63ed78124287'
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:230
+[0m[33m[2.190ms] [34;1m[rows:1][0m SELECT * FROM "lesson_quizzes" WHERE "lesson_quizzes"."lesson_id" = 'b0a82b6b-78c0-4d7d-b0c6-37be764aa3aa'
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:230
+[0m[33m[1.057ms] [34;1m[rows:1][0m SELECT * FROM "programs" WHERE "programs"."id" = '3a111003-1bd3-4e07-af47-d1269c796356'
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:230
+[0m[33m[2.165ms] [34;1m[rows:1][0m SELECT * FROM "subcourses" WHERE "subcourses"."id" = 'b2215c7b-c30d-45d6-8581-b8b4afa7f612'
+
+2026/01/02 15:10:11 [32mD:/CousreAI/backend/internal/handlers/lesson.go:230
+[0m[33m[22.486ms] [34;1m[rows:1][0m SELECT * FROM "lessons" WHERE id = 'b0a82b6b-78c0-4d7d-b0c6-37be764aa3aa' ORDER BY "lessons"."id" LIMIT 1
+15:10:10 | 200 |     30.8757ms | ::1 | GET | /api/admin/lessons/b0a82b6b-78c0-4d7d-b0c6-37be764aa3aa | -
+15:10:10 | 200 |       539.9µs | ::1 | GET | /uploads/lesson/2d2c7dfd-4f51-4c1a-aa19-f089be2f029a_1767341411198951400.png | -
+15:10:16 | 204 |            0s | ::1 | OPTIONS | /api/admin/teachers/history | -
+
+2026/01/02 15:10:16 [32mD:/CousreAI/backend/internal/handlers/teacher.go:316
+[0m[33m[2.598ms] [34;1m[rows:2][0m 
+		SELECT 
+			COALESCE(u.id, '00000000-0000-0000-0000-000000000000'::uuid) as teacher_id,
+			COALESCE(u.username, 'Unknown') as teacher_name,
+			l.id as lesson_id,
+			l.title as lesson_title,
+			l.slug as lesson_slug,
+			l.created_at,
+			l.updated_at,
+			l.status
+		FROM lessons l
+		LEFT JOIN users u ON l.author_id = u.id
+		WHERE l.author_id IS NOT NULL
+		ORDER BY l.updated_at DESC
+	
+15:10:16 | 200 |       3.709ms | ::1 | GET | /api/admin/teachers/history | -
+15:10:16 | 204 |            0s | ::1 | OPTIONS | /api/auth/me | -
+15:10:16 | 204 |            0s | ::1 | OPTIONS | /api/auth/me | -
+
+2026/01/02 15:10:16 [32mD:/CousreAI/backend/internal/handlers/auth.go:114
+[0m[33m[1.917ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE id = '4553db05-7484-4ea3-b015-4cb84eb5e32d' ORDER BY "users"."id" LIMIT 1
+15:10:16 | 200 |      2.4826ms | ::1 | GET | /api/auth/me | -
+
+2026/01/02 15:10:16 [32mD:/CousreAI/backend/internal/handlers/teacher.go:316
+[0m[33m[1.035ms] [34;1m[rows:2][0m 
+		SELECT 
+			COALESCE(u.id, '00000000-0000-0000-0000-000000000000'::uuid) as teacher_id,
+			COALESCE(u.username, 'Unknown') as teacher_name,
+			l.id as lesson_id,
+			l.title as lesson_title,
+			l.slug as lesson_slug,
+			l.created_at,
+			l.updated_at,
+			l.status
+		FROM lessons l
+		LEFT JOIN users u ON l.author_id = u.id
+		WHERE l.author_id IS NOT NULL
+		ORDER BY l.updated_at DESC
+	
+15:10:16 | 200 |      1.6036ms | ::1 | GET | /api/admin/teachers/history | -
+
+2026/01/02 15:10:16 [32mD:/CousreAI/backend/internal/handlers/auth.go:114
+[0m[33m[15.829ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE id = '4553db05-7484-4ea3-b015-4cb84eb5e32d' ORDER BY "users"."id" LIMIT 1
+15:10:16 | 200 |     16.4119ms | ::1 | GET | /api/auth/me | -
+
+2026/01/02 15:10:16 [32mD:/CousreAI/backend/internal/handlers/teacher.go:316
+[0m[33m[11.786ms] [34;1m[rows:2][0m 
+		SELECT 
+			COALESCE(u.id, '00000000-0000-0000-0000-000000000000'::uuid) as teacher_id,
+			COALESCE(u.username, 'Unknown') as teacher_name,
+			l.id as lesson_id,
+			l.title as lesson_title,
+			l.slug as lesson_slug,
+			l.created_at,
+			l.updated_at,
+			l.status
+		FROM lessons l
+		LEFT JOIN users u ON l.author_id = u.id
+		WHERE l.author_id IS NOT NULL
+		ORDER BY l.updated_at DESC
+	
+15:10:16 | 200 |     11.7859ms | ::1 | GET | /api/admin/teachers/history | -
+
+2026/01/02 15:10:20 [32mD:/CousreAI/backend/internal/handlers/teacher.go:316
+[0m[33m[5.056ms] [34;1m[rows:2][0m 
+		SELECT 
+			COALESCE(u.id, '00000000-0000-0000-0000-000000000000'::uuid) as teacher_id,
+			COALESCE(u.username, 'Unknown') as teacher_name,
+			l.id as lesson_id,
+			l.title as lesson_title,
+			l.slug as lesson_slug,
+			l.created_at,
+			l.updated_at,
+			l.status
+		FROM lessons l
+		LEFT JOIN users u ON l.author_id = u.id
+		WHERE l.author_id IS NOT NULL
+		ORDER BY l.updated_at DESC
+	
+15:10:20 | 200 |      5.5867ms | ::1 | GET | /api/admin/teachers/history | -
+
+2026/01/02 15:10:20 [32mD:/CousreAI/backend/internal/handlers/auth.go:114
+[0m[33m[1.647ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE id = '4553db05-7484-4ea3-b015-4cb84eb5e32d' ORDER BY "users"."id" LIMIT 1
+15:10:20 | 200 |      1.6474ms | ::1 | GET | /api/auth/me | -
+
+2026/01/02 15:10:20 [32mD:/CousreAI/backend/internal/handlers/auth.go:114
+[0m[33m[2.226ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE id = '4553db05-7484-4ea3-b015-4cb84eb5e32d' ORDER BY "users"."id" LIMIT 1
+15:10:20 | 200 |       2.762ms | ::1 | GET | /api/auth/me | -
+
+2026/01/02 15:10:20 [32mD:/CousreAI/backend/internal/handlers/teacher.go:316
+[0m[33m[1.089ms] [34;1m[rows:2][0m 
+		SELECT 
+			COALESCE(u.id, '00000000-0000-0000-0000-000000000000'::uuid) as teacher_id,
+			COALESCE(u.username, 'Unknown') as teacher_name,
+			l.id as lesson_id,
+			l.title as lesson_title,
+			l.slug as lesson_slug,
+			l.created_at,
+			l.updated_at,
+			l.status
+		FROM lessons l
+		LEFT JOIN users u ON l.author_id = u.id
+		WHERE l.author_id IS NOT NULL
+		ORDER BY l.updated_at DESC
+	
+15:10:20 | 200 |      2.1238ms | ::1 | GET | /api/admin/teachers/history | -
+
+2026/01/02 15:10:20 [32mD:/CousreAI/backend/internal/handlers/teacher.go:316
+[0m[33m[3.170ms] [34;1m[rows:2][0m 
+		SELECT 
+			COALESCE(u.id, '00000000-0000-0000-0000-000000000000'::uuid) as teacher_id,
+			COALESCE(u.username, 'Unknown') as teacher_name,
+			l.id as lesson_id,
+			l.title as lesson_title,
+			l.slug as lesson_slug,
+			l.created_at,
+			l.updated_at,
+			l.status
+		FROM lessons l
+		LEFT JOIN users u ON l.author_id = u.id
+		WHERE l.author_id IS NOT NULL
+		ORDER BY l.updated_at DESC
+	
+15:10:20 | 200 |      3.1697ms | ::1 | GET | /api/admin/teachers/history | -
+15:10:21 | 204 |            0s | ::1 | OPTIONS | /api/admin/teachers/history | -
+
+2026/01/02 15:10:22 [32mD:/CousreAI/backend/internal/handlers/teacher.go:316
+[0m[33m[2.154ms] [34;1m[rows:2][0m 
+		SELECT 
+			COALESCE(u.id, '00000000-0000-0000-0000-000000000000'::uuid) as teacher_id,
+			COALESCE(u.username, 'Unknown') as teacher_name,
+			l.id as lesson_id,
+			l.title as lesson_title,
+			l.slug as lesson_slug,
+			l.created_at,
+			l.updated_at,
+			l.status
+		FROM lessons l
+		LEFT JOIN users u ON l.author_id = u.id
+		WHERE l.author_id IS NOT NULL
+		ORDER BY l.updated_at DESC
+	
+15:10:21 | 200 |      2.9508ms | ::1 | GET | /api/admin/teachers/history | -
+15:10:21 | 204 |            0s | ::1 | OPTIONS | /api/auth/me | -
+15:10:21 | 204 |            0s | ::1 | OPTIONS | /api/auth/me | -
+
+2026/01/02 15:10:22 [32mD:/CousreAI/backend/internal/handlers/auth.go:114
+[0m[33m[1.782ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE id = '4553db05-7484-4ea3-b015-4cb84eb5e32d' ORDER BY "users"."id" LIMIT 1
+15:10:21 | 200 |      1.7824ms | ::1 | GET | /api/auth/me | -
+
+2026/01/02 15:10:22 [32mD:/CousreAI/backend/internal/handlers/auth.go:114
+[0m[33m[1.770ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE id = '4553db05-7484-4ea3-b015-4cb84eb5e32d' ORDER BY "users"."id" LIMIT 1
+15:10:21 | 200 |      2.3457ms | ::1 | GET | /api/auth/me | -
+
+2026/01/02 15:10:22 [32mD:/CousreAI/backend/internal/handlers/teacher.go:316
+[0m[33m[1.063ms] [34;1m[rows:2][0m 
+		SELECT 
+			COALESCE(u.id, '00000000-0000-0000-0000-000000000000'::uuid) as teacher_id,
+			COALESCE(u.username, 'Unknown') as teacher_name,
+			l.id as lesson_id,
+			l.title as lesson_title,
+			l.slug as lesson_slug,
+			l.created_at,
+			l.updated_at,
+			l.status
+		FROM lessons l
+		LEFT JOIN users u ON l.author_id = u.id
+		WHERE l.author_id IS NOT NULL
+		ORDER BY l.updated_at DESC
+	
+
+2026/01/02 15:10:22 [32mD:/CousreAI/backend/internal/handlers/teacher.go:316
+[0m[33m[1.063ms] [34;1m[rows:2][0m 
+		SELECT 
+			COALESCE(u.id, '00000000-0000-0000-0000-000000000000'::uuid) as teacher_id,
+			COALESCE(u.username, 'Unknown') as teacher_name,
+			l.id as lesson_id,
+			l.title as lesson_title,
+			l.slug as lesson_slug,
+			l.created_at,
+			l.updated_at,
+			l.status
+		FROM lessons l
+		LEFT JOIN users u ON l.author_id = u.id
+		WHERE l.author_id IS NOT NULL
+		ORDER BY l.updated_at DESC
+	
+15:10:21 | 200 |      1.0631ms | ::1 | GET | /api/admin/teachers/history | -
+15:10:21 | 200 |      1.5857ms | ::1 | GET | /api/admin/teachers/history | -
+15:10:25 | 204 |            0s | ::1 | OPTIONS | /api/auth/login | -
+
+2026/01/02 15:10:25 [32mD:/CousreAI/backend/internal/handlers/auth.go:50
+[0m[33m[3.905ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE username = 'ptai1' OR email = 'ptai1' ORDER BY "users"."id" LIMIT 1
+
+2026/01/02 15:10:25 [32mD:/CousreAI/backend/internal/handlers/auth.go:81
+[0m[33m[12.149ms] [34;1m[rows:1][0m SELECT * FROM "teacher_assignments" WHERE teacher_id = '05507748-0a57-4e3f-91c0-7627edf931c3' AND status = 'active'
+15:10:25 | 200 |     72.5969ms | ::1 | POST | /api/auth/login | -
+15:10:25 | 204 |            0s | ::1 | OPTIONS | /api/programs | -
+15:10:25 | 204 |            0s | ::1 | OPTIONS | /api/programs | -
+15:10:25 | 204 |            0s | ::1 | OPTIONS | /api/lessons | -
+15:10:25 | 204 |            0s | ::1 | OPTIONS | /api/lessons | -
+
+2026/01/02 15:10:25 [32mD:/CousreAI/backend/internal/middleware/auth.go:99
+[0m[33m[2.174ms] [34;1m[rows:1][0m SELECT * FROM "teacher_assignments" WHERE teacher_id = '05507748-0a57-4e3f-91c0-7627edf931c3' AND status = 'active' AND (start_at IS NULL OR start_at <= '2026-01-02 08:10:25.901') AND (end_at IS NULL OR end_at >= '2026-01-02 08:10:25.901')
+
+2026/01/02 15:10:25 [32mD:/CousreAI/backend/internal/middleware/auth.go:99
+[0m[33m[3.224ms] [34;1m[rows:1][0m SELECT * FROM "teacher_assignments" WHERE teacher_id = '05507748-0a57-4e3f-91c0-7627edf931c3' AND status = 'active' AND (start_at IS NULL OR start_at <= '2026-01-02 08:10:25.9') AND (end_at IS NULL OR end_at >= '2026-01-02 08:10:25.9')
+
+2026/01/02 15:10:25 [32mD:/CousreAI/backend/internal/middleware/auth.go:99
+[0m[33m[1.157ms] [34;1m[rows:1][0m SELECT * FROM "teacher_assignments" WHERE teacher_id = '05507748-0a57-4e3f-91c0-7627edf931c3' AND status = 'active' AND (start_at IS NULL OR start_at <= '2026-01-02 08:10:25.903') AND (end_at IS NULL OR end_at >= '2026-01-02 08:10:25.903')
+
+2026/01/02 15:10:25 [32mD:/CousreAI/backend/internal/handlers/lesson.go:106
+[0m[33m[2.769ms] [34;1m[rows:18][0m SELECT * FROM "media" WHERE "owner_type" = 'lesson' AND "media"."owner_id" IN ('b0a82b6b-78c0-4d7d-b0c6-37be764aa3aa','5186f1fb-efc2-46c7-be51-31fee2b758cd','5ec6de35-5929-4355-a99d-876da94ea1d1','a7925871-8147-4066-bd81-c3b9bc259f82','65f70d96-ed07-4441-9796-aa96dc5ce726','e0dfb6e3-55b0-47fd-8736-6702fcfdc020','e97041fb-a72e-494a-8e9a-662889a6d21b','e4dcb2a4-ebcb-4609-8aaf-8fbcd5530cc4','c1239338-0c50-4a64-93da-20fbc63e2034','0f356c66-e319-450e-ae56-022442669e37','33c9e548-604a-4814-b19b-fee54c23ba49','35c76373-cba9-4e34-aee7-971df38685fa','13ac7798-b5d6-4f41-ba4c-0fa9fa5a6229','8ad12709-41b2-44b3-a592-c8490fcdc0aa','8439001b-4f28-4317-bb2b-584f15f47862','c29c0e9b-574e-4b50-8fee-e53cbeadc026','457bc499-eb75-4b75-a6f0-dfc277790f5d','f9c93ffe-8d4b-4997-9901-78d4e5042f6c','7bea090b-ec14-49d0-b613-8123500ff57e','d5a7f6fa-e90e-4bc0-aa68-2547a152516e','14817999-af44-4bd7-b896-a20ff02a10ba','d818be67-8557-4429-8857-1b6f4c62517b','e237b309-8ab6-4f3b-8f3b-ced546205889','ddc28cf2-9ca8-4065-901b-ce8f0bab26f1','65e7be6a-c2da-41cc-83e8-71d1da013b11','c2f1fb31-5e60-4cfd-bf98-230ef12af975','618bb24f-17c4-4536-907d-ffef22989b11','4e0a3727-f278-40ad-bf1f-37e51b9e62c3','208cdfef-8b29-46fd-8962-7aa5ccc855df','6f74564b-de1d-4030-89b2-b3c2e1b659ea','8cf3c333-5b14-4620-a5b8-8ab09752b316','033a740f-4740-4755-bc57-ca65f58b075d','d821f65a-9f93-41ea-828b-571ec44ee3e5','e3013c1a-4092-4c75-9900-e178e2c79557')
+
+2026/01/02 15:10:25 [32mD:/CousreAI/backend/internal/handlers/program.go:30
+[0m[33m[2.769ms] [34;1m[rows:2][0m SELECT * FROM "media" WHERE "owner_type" = 'program' AND "media"."owner_id" IN ('0544bb5b-a025-4efc-a4ea-615fce80e502','e79e9365-fd2a-447e-ac3b-0aa0c50f8bf6','3a111003-1bd3-4e07-af47-d1269c796356','9eaed698-4431-4ee7-bdf3-0cff509678a2','01031f5f-51c7-48f9-b385-f8c5a2b333d2','c223ec7e-cf6b-4e27-a54d-819c24c45d88','1bd856ab-afe0-4048-bb15-cec98962d11c','8c6ff121-d6dc-4465-9279-f2a7feee958b')
+
+2026/01/02 15:10:25 [32mD:/CousreAI/backend/internal/handlers/program.go:30
+[0m[33m[7.215ms] [34;1m[rows:8][0m SELECT * FROM "programs" ORDER BY sort_order ASC, created_at DESC
+
+2026/01/02 15:10:25 [32mD:/CousreAI/backend/internal/handlers/program.go:39
+[0m[33m[3.222ms] [34;1m[rows:1][0m SELECT count(*) FROM "subcourses" WHERE program_id = '0544bb5b-a025-4efc-a4ea-615fce80e502'
+
+2026/01/02 15:10:25 [32mD:/CousreAI/backend/internal/handlers/program.go:39
+[0m[33m[1.100ms] [34;1m[rows:1][0m SELECT count(*) FROM "subcourses" WHERE program_id = 'e79e9365-fd2a-447e-ac3b-0aa0c50f8bf6'
+
+2026/01/02 15:10:25 [32mD:/CousreAI/backend/internal/handlers/program.go:39
+[0m[33m[0.515ms] [34;1m[rows:1][0m SELECT count(*) FROM "subcourses" WHERE program_id = '3a111003-1bd3-4e07-af47-d1269c796356'
+
+2026/01/02 15:10:25 [32mD:/CousreAI/backend/internal/handlers/lesson.go:106
+[0m[33m[2.126ms] [34;1m[rows:8][0m SELECT * FROM "programs" WHERE "programs"."id" IN ('8c6ff121-d6dc-4465-9279-f2a7feee958b','1bd856ab-afe0-4048-bb15-cec98962d11c','c223ec7e-cf6b-4e27-a54d-819c24c45d88','01031f5f-51c7-48f9-b385-f8c5a2b333d2','9eaed698-4431-4ee7-bdf3-0cff509678a2','3a111003-1bd3-4e07-af47-d1269c796356','e79e9365-fd2a-447e-ac3b-0aa0c50f8bf6','0544bb5b-a025-4efc-a4ea-615fce80e502')
+
+2026/01/02 15:10:25 [32mD:/CousreAI/backend/internal/handlers/lesson.go:106
+[0m[33m[6.393ms] [34;1m[rows:9][0m SELECT * FROM "subcourses" WHERE "subcourses"."id" IN ('b2215c7b-c30d-45d6-8581-b8b4afa7f612','ae99abc0-fae8-44d7-905d-b22d92bbb880','11294223-0110-4387-9f64-9357a7d1b3b2','1bc8e663-498f-4cfb-9a08-0233edf0f120','29c1c10f-fe60-4103-b552-4040115ae505','dff9ffca-b4f6-4994-aa23-256d5792fa84','311d5913-aa8d-470f-8622-4578e64a40ab','bad7a932-3403-4d41-83ab-17b88effa022','c7c47fba-0309-47ed-9498-dfd0913b3915')
+
+2026/01/02 15:10:25 [32mD:/CousreAI/backend/internal/handlers/lesson.go:106
+[0m[33m[13.008ms] [34;1m[rows:34][0m SELECT * FROM "lessons" ORDER BY sort_order ASC, created_at DESC
+15:10:25 | 200 |     15.2719ms | ::1 | GET | /api/lessons | -
+
+2026/01/02 15:10:25 [32mD:/CousreAI/backend/internal/handlers/program.go:39
+[0m[33m[1.574ms] [34;1m[rows:1][0m SELECT count(*) FROM "subcourses" WHERE program_id = '9eaed698-4431-4ee7-bdf3-0cff509678a2'
+
+2026/01/02 15:10:25 [32mD:/CousreAI/backend/internal/handlers/program.go:39
+[0m[33m[2.007ms] [34;1m[rows:1][0m SELECT count(*) FROM "subcourses" WHERE program_id = '01031f5f-51c7-48f9-b385-f8c5a2b333d2'
+
+2026/01/02 15:10:25 [32mD:/CousreAI/backend/internal/middleware/auth.go:99
+[0m[33m[19.392ms] [34;1m[rows:1][0m SELECT * FROM "teacher_assignments" WHERE teacher_id = '05507748-0a57-4e3f-91c0-7627edf931c3' AND status = 'active' AND (start_at IS NULL OR start_at <= '2026-01-02 08:10:25.903') AND (end_at IS NULL OR end_at >= '2026-01-02 08:10:25.903')
+
+2026/01/02 15:10:25 [32mD:/CousreAI/backend/internal/handlers/program.go:30
+[0m[33m[7.275ms] [34;1m[rows:2][0m SELECT * FROM "media" WHERE "owner_type" = 'program' AND "media"."owner_id" IN ('0544bb5b-a025-4efc-a4ea-615fce80e502','e79e9365-fd2a-447e-ac3b-0aa0c50f8bf6','3a111003-1bd3-4e07-af47-d1269c796356','9eaed698-4431-4ee7-bdf3-0cff509678a2','01031f5f-51c7-48f9-b385-f8c5a2b333d2','c223ec7e-cf6b-4e27-a54d-819c24c45d88','1bd856ab-afe0-4048-bb15-cec98962d11c','8c6ff121-d6dc-4465-9279-f2a7feee958b')
+
+2026/01/02 15:10:25 [32mD:/CousreAI/backend/internal/handlers/program.go:30
+[0m[33m[21.192ms] [34;1m[rows:8][0m SELECT * FROM "programs" ORDER BY sort_order ASC, created_at DESC
+
+2026/01/02 15:10:25 [32mD:/CousreAI/backend/internal/handlers/program.go:39
+[0m[33m[3.978ms] [34;1m[rows:1][0m SELECT count(*) FROM "subcourses" WHERE program_id = 'c223ec7e-cf6b-4e27-a54d-819c24c45d88'
+
+2026/01/02 15:10:25 [32mD:/CousreAI/backend/internal/handlers/program.go:39
+[0m[33m[1.216ms] [34;1m[rows:1][0m SELECT count(*) FROM "subcourses" WHERE program_id = '1bd856ab-afe0-4048-bb15-cec98962d11c'
+
+2026/01/02 15:10:25 [32mD:/CousreAI/backend/internal/handlers/program.go:39
+[0m[33m[1.236ms] [34;1m[rows:1][0m SELECT count(*) FROM "subcourses" WHERE program_id = '8c6ff121-d6dc-4465-9279-f2a7feee958b'
+15:10:25 | 200 |     29.6513ms | ::1 | GET | /api/programs | -
+
+2026/01/02 15:10:25 [32mD:/CousreAI/backend/internal/handlers/lesson.go:106
+[0m[33m[4.033ms] [34;1m[rows:18][0m SELECT * FROM "media" WHERE "owner_type" = 'lesson' AND "media"."owner_id" IN ('b0a82b6b-78c0-4d7d-b0c6-37be764aa3aa','5186f1fb-efc2-46c7-be51-31fee2b758cd','5ec6de35-5929-4355-a99d-876da94ea1d1','a7925871-8147-4066-bd81-c3b9bc259f82','65f70d96-ed07-4441-9796-aa96dc5ce726','e0dfb6e3-55b0-47fd-8736-6702fcfdc020','e97041fb-a72e-494a-8e9a-662889a6d21b','e4dcb2a4-ebcb-4609-8aaf-8fbcd5530cc4','c1239338-0c50-4a64-93da-20fbc63e2034','0f356c66-e319-450e-ae56-022442669e37','33c9e548-604a-4814-b19b-fee54c23ba49','35c76373-cba9-4e34-aee7-971df38685fa','13ac7798-b5d6-4f41-ba4c-0fa9fa5a6229','8ad12709-41b2-44b3-a592-c8490fcdc0aa','8439001b-4f28-4317-bb2b-584f15f47862','c29c0e9b-574e-4b50-8fee-e53cbeadc026','457bc499-eb75-4b75-a6f0-dfc277790f5d','f9c93ffe-8d4b-4997-9901-78d4e5042f6c','7bea090b-ec14-49d0-b613-8123500ff57e','d5a7f6fa-e90e-4bc0-aa68-2547a152516e','14817999-af44-4bd7-b896-a20ff02a10ba','d818be67-8557-4429-8857-1b6f4c62517b','e237b309-8ab6-4f3b-8f3b-ced546205889','ddc28cf2-9ca8-4065-901b-ce8f0bab26f1','65e7be6a-c2da-41cc-83e8-71d1da013b11','c2f1fb31-5e60-4cfd-bf98-230ef12af975','618bb24f-17c4-4536-907d-ffef22989b11','4e0a3727-f278-40ad-bf1f-37e51b9e62c3','208cdfef-8b29-46fd-8962-7aa5ccc855df','6f74564b-de1d-4030-89b2-b3c2e1b659ea','8cf3c333-5b14-4620-a5b8-8ab09752b316','033a740f-4740-4755-bc57-ca65f58b075d','d821f65a-9f93-41ea-828b-571ec44ee3e5','e3013c1a-4092-4c75-9900-e178e2c79557')
+
+2026/01/02 15:10:25 [32mD:/CousreAI/backend/internal/handlers/lesson.go:106
+[0m[33m[1.644ms] [34;1m[rows:8][0m SELECT * FROM "programs" WHERE "programs"."id" IN ('8c6ff121-d6dc-4465-9279-f2a7feee958b','1bd856ab-afe0-4048-bb15-cec98962d11c','c223ec7e-cf6b-4e27-a54d-819c24c45d88','01031f5f-51c7-48f9-b385-f8c5a2b333d2','9eaed698-4431-4ee7-bdf3-0cff509678a2','3a111003-1bd3-4e07-af47-d1269c796356','e79e9365-fd2a-447e-ac3b-0aa0c50f8bf6','0544bb5b-a025-4efc-a4ea-615fce80e502')
+
+2026/01/02 15:10:25 [32mD:/CousreAI/backend/internal/handlers/lesson.go:106
+[0m[33m[3.912ms] [34;1m[rows:9][0m SELECT * FROM "subcourses" WHERE "subcourses"."id" IN ('b2215c7b-c30d-45d6-8581-b8b4afa7f612','ae99abc0-fae8-44d7-905d-b22d92bbb880','11294223-0110-4387-9f64-9357a7d1b3b2','1bc8e663-498f-4cfb-9a08-0233edf0f120','29c1c10f-fe60-4103-b552-4040115ae505','dff9ffca-b4f6-4994-aa23-256d5792fa84','311d5913-aa8d-470f-8622-4578e64a40ab','bad7a932-3403-4d41-83ab-17b88effa022','c7c47fba-0309-47ed-9498-dfd0913b3915')
+
+2026/01/02 15:10:25 [32mD:/CousreAI/backend/internal/handlers/lesson.go:106
+[0m[33m[13.541ms] [34;1m[rows:34][0m SELECT * FROM "lessons" ORDER BY sort_order ASC, created_at DESC
+15:10:25 | 200 |     34.2306ms | ::1 | GET | /api/lessons | -
+
+2026/01/02 15:10:25 [32mD:/CousreAI/backend/internal/handlers/program.go:39
+[0m[33m[15.172ms] [34;1m[rows:1][0m SELECT count(*) FROM "subcourses" WHERE program_id = '0544bb5b-a025-4efc-a4ea-615fce80e502'
+
+2026/01/02 15:10:25 [32mD:/CousreAI/backend/internal/handlers/program.go:39
+[0m[33m[3.200ms] [34;1m[rows:1][0m SELECT count(*) FROM "subcourses" WHERE program_id = 'e79e9365-fd2a-447e-ac3b-0aa0c50f8bf6'
+15:10:25 | 200 |            0s | ::1 | GET | /uploads/lesson/2d2c7dfd-4f51-4c1a-aa19-f089be2f029a_1767341411198951400.png | -
+
+2026/01/02 15:10:25 [32mD:/CousreAI/backend/internal/handlers/program.go:39
+[0m[33m[2.213ms] [34;1m[rows:1][0m SELECT count(*) FROM "subcourses" WHERE program_id = '3a111003-1bd3-4e07-af47-d1269c796356'
+
+2026/01/02 15:10:25 [32mD:/CousreAI/backend/internal/handlers/program.go:39
+[0m[33m[1.718ms] [34;1m[rows:1][0m SELECT count(*) FROM "subcourses" WHERE program_id = '9eaed698-4431-4ee7-bdf3-0cff509678a2'
+
+2026/01/02 15:10:25 [32mD:/CousreAI/backend/internal/handlers/program.go:39
+[0m[33m[1.077ms] [34;1m[rows:1][0m SELECT count(*) FROM "subcourses" WHERE program_id = '01031f5f-51c7-48f9-b385-f8c5a2b333d2'
+
+2026/01/02 15:10:25 [32mD:/CousreAI/backend/internal/handlers/program.go:39
+[0m[33m[1.868ms] [34;1m[rows:1][0m SELECT count(*) FROM "subcourses" WHERE program_id = 'c223ec7e-cf6b-4e27-a54d-819c24c45d88'
+
+2026/01/02 15:10:25 [32mD:/CousreAI/backend/internal/handlers/program.go:39
+[0m[33m[1.075ms] [34;1m[rows:1][0m SELECT count(*) FROM "subcourses" WHERE program_id = '1bd856ab-afe0-4048-bb15-cec98962d11c'
+
+2026/01/02 15:10:25 [32mD:/CousreAI/backend/internal/handlers/program.go:39
+[0m[33m[0.545ms] [34;1m[rows:1][0m SELECT count(*) FROM "subcourses" WHERE program_id = '8c6ff121-d6dc-4465-9279-f2a7feee958b'
+15:10:25 | 200 |     54.0253ms | ::1 | GET | /api/programs | -
+15:10:35 | 204 |            0s | ::1 | OPTIONS | /api/auth/login | -
+
+2026/01/02 15:10:36 [32mD:/CousreAI/backend/internal/handlers/auth.go:50
+[0m[33m[1.933ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE username = 'admin123' OR email = 'admin123' ORDER BY "users"."id" LIMIT 1
+15:10:35 | 200 |     60.9104ms | ::1 | POST | /api/auth/login | -
+15:10:36 | 204 |            0s | ::1 | OPTIONS | /api/programs | -
+15:10:36 | 204 |            0s | ::1 | OPTIONS | /api/lessons | -
+15:10:36 | 204 |            0s | ::1 | OPTIONS | /api/lessons | -
+15:10:36 | 204 |            0s | ::1 | OPTIONS | /api/programs | -
+
+2026/01/02 15:10:36 [32mD:/CousreAI/backend/internal/handlers/program.go:30
+[0m[33m[1.716ms] [34;1m[rows:2][0m SELECT * FROM "media" WHERE "owner_type" = 'program' AND "media"."owner_id" IN ('0544bb5b-a025-4efc-a4ea-615fce80e502','e79e9365-fd2a-447e-ac3b-0aa0c50f8bf6','3a111003-1bd3-4e07-af47-d1269c796356','9eaed698-4431-4ee7-bdf3-0cff509678a2','01031f5f-51c7-48f9-b385-f8c5a2b333d2','c223ec7e-cf6b-4e27-a54d-819c24c45d88','1bd856ab-afe0-4048-bb15-cec98962d11c','8c6ff121-d6dc-4465-9279-f2a7feee958b')
+
+2026/01/02 15:10:36 [32mD:/CousreAI/backend/internal/handlers/program.go:30
+[0m[33m[4.370ms] [34;1m[rows:8][0m SELECT * FROM "programs" ORDER BY sort_order ASC, created_at DESC
+
+2026/01/02 15:10:36 [32mD:/CousreAI/backend/internal/handlers/lesson.go:106
+[0m[33m[1.657ms] [34;1m[rows:18][0m SELECT * FROM "media" WHERE "owner_type" = 'lesson' AND "media"."owner_id" IN ('b0a82b6b-78c0-4d7d-b0c6-37be764aa3aa','5186f1fb-efc2-46c7-be51-31fee2b758cd','5ec6de35-5929-4355-a99d-876da94ea1d1','a7925871-8147-4066-bd81-c3b9bc259f82','65f70d96-ed07-4441-9796-aa96dc5ce726','e0dfb6e3-55b0-47fd-8736-6702fcfdc020','e97041fb-a72e-494a-8e9a-662889a6d21b','e4dcb2a4-ebcb-4609-8aaf-8fbcd5530cc4','c1239338-0c50-4a64-93da-20fbc63e2034','0f356c66-e319-450e-ae56-022442669e37','33c9e548-604a-4814-b19b-fee54c23ba49','35c76373-cba9-4e34-aee7-971df38685fa','13ac7798-b5d6-4f41-ba4c-0fa9fa5a6229','8ad12709-41b2-44b3-a592-c8490fcdc0aa','8439001b-4f28-4317-bb2b-584f15f47862','c29c0e9b-574e-4b50-8fee-e53cbeadc026','457bc499-eb75-4b75-a6f0-dfc277790f5d','f9c93ffe-8d4b-4997-9901-78d4e5042f6c','7bea090b-ec14-49d0-b613-8123500ff57e','d5a7f6fa-e90e-4bc0-aa68-2547a152516e','14817999-af44-4bd7-b896-a20ff02a10ba','d818be67-8557-4429-8857-1b6f4c62517b','e237b309-8ab6-4f3b-8f3b-ced546205889','ddc28cf2-9ca8-4065-901b-ce8f0bab26f1','65e7be6a-c2da-41cc-83e8-71d1da013b11','c2f1fb31-5e60-4cfd-bf98-230ef12af975','618bb24f-17c4-4536-907d-ffef22989b11','4e0a3727-f278-40ad-bf1f-37e51b9e62c3','208cdfef-8b29-46fd-8962-7aa5ccc855df','6f74564b-de1d-4030-89b2-b3c2e1b659ea','8cf3c333-5b14-4620-a5b8-8ab09752b316','033a740f-4740-4755-bc57-ca65f58b075d','d821f65a-9f93-41ea-828b-571ec44ee3e5','e3013c1a-4092-4c75-9900-e178e2c79557')
+
+2026/01/02 15:10:36 [32mD:/CousreAI/backend/internal/handlers/lesson.go:106
+[0m[33m[1.687ms] [34;1m[rows:18][0m SELECT * FROM "media" WHERE "owner_type" = 'lesson' AND "media"."owner_id" IN ('b0a82b6b-78c0-4d7d-b0c6-37be764aa3aa','5186f1fb-efc2-46c7-be51-31fee2b758cd','5ec6de35-5929-4355-a99d-876da94ea1d1','a7925871-8147-4066-bd81-c3b9bc259f82','65f70d96-ed07-4441-9796-aa96dc5ce726','e0dfb6e3-55b0-47fd-8736-6702fcfdc020','e97041fb-a72e-494a-8e9a-662889a6d21b','e4dcb2a4-ebcb-4609-8aaf-8fbcd5530cc4','c1239338-0c50-4a64-93da-20fbc63e2034','0f356c66-e319-450e-ae56-022442669e37','33c9e548-604a-4814-b19b-fee54c23ba49','35c76373-cba9-4e34-aee7-971df38685fa','13ac7798-b5d6-4f41-ba4c-0fa9fa5a6229','8ad12709-41b2-44b3-a592-c8490fcdc0aa','8439001b-4f28-4317-bb2b-584f15f47862','c29c0e9b-574e-4b50-8fee-e53cbeadc026','457bc499-eb75-4b75-a6f0-dfc277790f5d','f9c93ffe-8d4b-4997-9901-78d4e5042f6c','7bea090b-ec14-49d0-b613-8123500ff57e','d5a7f6fa-e90e-4bc0-aa68-2547a152516e','14817999-af44-4bd7-b896-a20ff02a10ba','d818be67-8557-4429-8857-1b6f4c62517b','e237b309-8ab6-4f3b-8f3b-ced546205889','ddc28cf2-9ca8-4065-901b-ce8f0bab26f1','65e7be6a-c2da-41cc-83e8-71d1da013b11','c2f1fb31-5e60-4cfd-bf98-230ef12af975','618bb24f-17c4-4536-907d-ffef22989b11','4e0a3727-f278-40ad-bf1f-37e51b9e62c3','208cdfef-8b29-46fd-8962-7aa5ccc855df','6f74564b-de1d-4030-89b2-b3c2e1b659ea','8cf3c333-5b14-4620-a5b8-8ab09752b316','033a740f-4740-4755-bc57-ca65f58b075d','d821f65a-9f93-41ea-828b-571ec44ee3e5','e3013c1a-4092-4c75-9900-e178e2c79557')
+
+2026/01/02 15:10:36 [32mD:/CousreAI/backend/internal/handlers/lesson.go:106
+[0m[33m[2.216ms] [34;1m[rows:8][0m SELECT * FROM "programs" WHERE "programs"."id" IN ('8c6ff121-d6dc-4465-9279-f2a7feee958b','1bd856ab-afe0-4048-bb15-cec98962d11c','c223ec7e-cf6b-4e27-a54d-819c24c45d88','01031f5f-51c7-48f9-b385-f8c5a2b333d2','9eaed698-4431-4ee7-bdf3-0cff509678a2','3a111003-1bd3-4e07-af47-d1269c796356','e79e9365-fd2a-447e-ac3b-0aa0c50f8bf6','0544bb5b-a025-4efc-a4ea-615fce80e502')
+
+2026/01/02 15:10:36 [32mD:/CousreAI/backend/internal/handlers/lesson.go:106
+[0m[33m[3.882ms] [34;1m[rows:9][0m SELECT * FROM "subcourses" WHERE "subcourses"."id" IN ('b2215c7b-c30d-45d6-8581-b8b4afa7f612','ae99abc0-fae8-44d7-905d-b22d92bbb880','11294223-0110-4387-9f64-9357a7d1b3b2','1bc8e663-498f-4cfb-9a08-0233edf0f120','29c1c10f-fe60-4103-b552-4040115ae505','dff9ffca-b4f6-4994-aa23-256d5792fa84','311d5913-aa8d-470f-8622-4578e64a40ab','bad7a932-3403-4d41-83ab-17b88effa022','c7c47fba-0309-47ed-9498-dfd0913b3915')
+
+2026/01/02 15:10:36 [32mD:/CousreAI/backend/internal/handlers/lesson.go:106
+[0m[33m[8.331ms] [34;1m[rows:34][0m SELECT * FROM "lessons" ORDER BY sort_order ASC, created_at DESC
+
+2026/01/02 15:10:36 [32mD:/CousreAI/backend/internal/handlers/lesson.go:106
+[0m[33m[1.080ms] [34;1m[rows:8][0m SELECT * FROM "programs" WHERE "programs"."id" IN ('8c6ff121-d6dc-4465-9279-f2a7feee958b','1bd856ab-afe0-4048-bb15-cec98962d11c','c223ec7e-cf6b-4e27-a54d-819c24c45d88','01031f5f-51c7-48f9-b385-f8c5a2b333d2','9eaed698-4431-4ee7-bdf3-0cff509678a2','3a111003-1bd3-4e07-af47-d1269c796356','e79e9365-fd2a-447e-ac3b-0aa0c50f8bf6','0544bb5b-a025-4efc-a4ea-615fce80e502')
+15:10:36 | 200 |     10.0272ms | ::1 | GET | /api/lessons | -
+
+2026/01/02 15:10:36 [32mD:/CousreAI/backend/internal/handlers/lesson.go:106
+[0m[33m[4.441ms] [34;1m[rows:9][0m SELECT * FROM "subcourses" WHERE "subcourses"."id" IN ('b2215c7b-c30d-45d6-8581-b8b4afa7f612','ae99abc0-fae8-44d7-905d-b22d92bbb880','11294223-0110-4387-9f64-9357a7d1b3b2','1bc8e663-498f-4cfb-9a08-0233edf0f120','29c1c10f-fe60-4103-b552-4040115ae505','dff9ffca-b4f6-4994-aa23-256d5792fa84','311d5913-aa8d-470f-8622-4578e64a40ab','bad7a932-3403-4d41-83ab-17b88effa022','c7c47fba-0309-47ed-9498-dfd0913b3915')
+
+2026/01/02 15:10:36 [32mD:/CousreAI/backend/internal/handlers/lesson.go:106
+[0m[33m[13.413ms] [34;1m[rows:34][0m SELECT * FROM "lessons" ORDER BY sort_order ASC, created_at DESC
+15:10:36 | 200 |     14.5336ms | ::1 | GET | /api/lessons | -
+
+2026/01/02 15:10:36 [32mD:/CousreAI/backend/internal/handlers/program.go:30
+[0m[33m[1.217ms] [34;1m[rows:2][0m SELECT * FROM "media" WHERE "owner_type" = 'program' AND "media"."owner_id" IN ('0544bb5b-a025-4efc-a4ea-615fce80e502','e79e9365-fd2a-447e-ac3b-0aa0c50f8bf6','3a111003-1bd3-4e07-af47-d1269c796356','9eaed698-4431-4ee7-bdf3-0cff509678a2','01031f5f-51c7-48f9-b385-f8c5a2b333d2','c223ec7e-cf6b-4e27-a54d-819c24c45d88','1bd856ab-afe0-4048-bb15-cec98962d11c','8c6ff121-d6dc-4465-9279-f2a7feee958b')
+
+2026/01/02 15:10:36 [32mD:/CousreAI/backend/internal/handlers/program.go:30
+[0m[33m[17.163ms] [34;1m[rows:8][0m SELECT * FROM "programs" ORDER BY sort_order ASC, created_at DESC
+
+2026/01/02 15:10:36 [32mD:/CousreAI/backend/internal/handlers/program.go:39
+[0m[33m[0.598ms] [34;1m[rows:1][0m SELECT count(*) FROM "subcourses" WHERE program_id = '0544bb5b-a025-4efc-a4ea-615fce80e502'
+
+2026/01/02 15:10:36 [32mD:/CousreAI/backend/internal/handlers/program.go:39
+[0m[33m[0.536ms] [34;1m[rows:1][0m SELECT count(*) FROM "subcourses" WHERE program_id = 'e79e9365-fd2a-447e-ac3b-0aa0c50f8bf6'
+
+2026/01/02 15:10:36 [32mD:/CousreAI/backend/internal/handlers/program.go:39
+[0m[33m[21.729ms] [34;1m[rows:1][0m SELECT count(*) FROM "subcourses" WHERE program_id = '0544bb5b-a025-4efc-a4ea-615fce80e502'
+
+2026/01/02 15:10:36 [32mD:/CousreAI/backend/internal/handlers/program.go:39
+[0m[33m[1.081ms] [34;1m[rows:1][0m SELECT count(*) FROM "subcourses" WHERE program_id = '3a111003-1bd3-4e07-af47-d1269c796356'
+
+2026/01/02 15:10:36 [32mD:/CousreAI/backend/internal/handlers/program.go:39
+[0m[33m[1.075ms] [34;1m[rows:1][0m SELECT count(*) FROM "subcourses" WHERE program_id = '9eaed698-4431-4ee7-bdf3-0cff509678a2'
+
+2026/01/02 15:10:36 [32mD:/CousreAI/backend/internal/handlers/program.go:39
+[0m[33m[1.632ms] [34;1m[rows:1][0m SELECT count(*) FROM "subcourses" WHERE program_id = 'e79e9365-fd2a-447e-ac3b-0aa0c50f8bf6'
+
+2026/01/02 15:10:36 [32mD:/CousreAI/backend/internal/handlers/program.go:39
+[0m[33m[1.110ms] [34;1m[rows:1][0m SELECT count(*) FROM "subcourses" WHERE program_id = '01031f5f-51c7-48f9-b385-f8c5a2b333d2'
+
+2026/01/02 15:10:36 [32mD:/CousreAI/backend/internal/handlers/program.go:39
+[0m[33m[1.165ms] [34;1m[rows:1][0m SELECT count(*) FROM "subcourses" WHERE program_id = '3a111003-1bd3-4e07-af47-d1269c796356'
+
+2026/01/02 15:10:36 [32mD:/CousreAI/backend/internal/handlers/program.go:39
+[0m[33m[1.623ms] [34;1m[rows:1][0m SELECT count(*) FROM "subcourses" WHERE program_id = 'c223ec7e-cf6b-4e27-a54d-819c24c45d88'
+
+2026/01/02 15:10:36 [32mD:/CousreAI/backend/internal/handlers/program.go:39
+[0m[33m[1.037ms] [34;1m[rows:1][0m SELECT count(*) FROM "subcourses" WHERE program_id = '9eaed698-4431-4ee7-bdf3-0cff509678a2'
+
+2026/01/02 15:10:36 [32mD:/CousreAI/backend/internal/handlers/program.go:39
+[0m[33m[1.061ms] [34;1m[rows:1][0m SELECT count(*) FROM "subcourses" WHERE program_id = '1bd856ab-afe0-4048-bb15-cec98962d11c'
+
+2026/01/02 15:10:36 [32mD:/CousreAI/backend/internal/handlers/program.go:39
+[0m[33m[0.521ms] [34;1m[rows:1][0m SELECT count(*) FROM "subcourses" WHERE program_id = '01031f5f-51c7-48f9-b385-f8c5a2b333d2'
+
+2026/01/02 15:10:36 [32mD:/CousreAI/backend/internal/handlers/program.go:39
+[0m[33m[1.098ms] [34;1m[rows:1][0m SELECT count(*) FROM "subcourses" WHERE program_id = '8c6ff121-d6dc-4465-9279-f2a7feee958b'
+15:10:36 | 200 |     29.2953ms | ::1 | GET | /api/programs | -
+
+2026/01/02 15:10:36 [32mD:/CousreAI/backend/internal/handlers/program.go:39
+[0m[33m[1.187ms] [34;1m[rows:1][0m SELECT count(*) FROM "subcourses" WHERE program_id = 'c223ec7e-cf6b-4e27-a54d-819c24c45d88'
+
+2026/01/02 15:10:36 [32mD:/CousreAI/backend/internal/handlers/program.go:39
+[0m[33m[1.218ms] [34;1m[rows:1][0m SELECT count(*) FROM "subcourses" WHERE program_id = '1bd856ab-afe0-4048-bb15-cec98962d11c'
+
+2026/01/02 15:10:36 [32mD:/CousreAI/backend/internal/handlers/program.go:39
+[0m[33m[1.164ms] [34;1m[rows:1][0m SELECT count(*) FROM "subcourses" WHERE program_id = '8c6ff121-d6dc-4465-9279-f2a7feee958b'
+15:10:36 | 200 |     38.2871ms | ::1 | GET | /api/programs | -
+15:10:45 | 204 |       980.9µs | ::1 | OPTIONS | /api/admin/teachers/history | -
+15:10:45 | 204 |            0s | ::1 | OPTIONS | /api/admin/teachers/history | -
+
+2026/01/02 15:10:46 [32mD:/CousreAI/backend/internal/handlers/teacher.go:316
+[0m[33m[2.481ms] [34;1m[rows:2][0m 
+		SELECT 
+			COALESCE(u.id, '00000000-0000-0000-0000-000000000000'::uuid) as teacher_id,
+			COALESCE(u.username, 'Unknown') as teacher_name,
+			l.id as lesson_id,
+			l.title as lesson_title,
+			l.slug as lesson_slug,
+			l.created_at,
+			l.updated_at,
+			l.status
+		FROM lessons l
+		LEFT JOIN users u ON l.author_id = u.id
+		WHERE l.author_id IS NOT NULL
+		ORDER BY l.updated_at DESC
+	
+15:10:45 | 200 |       3.014ms | ::1 | GET | /api/admin/teachers/history | -
+
+2026/01/02 15:10:46 [32mD:/CousreAI/backend/internal/handlers/teacher.go:316
+[0m[33m[6.813ms] [34;1m[rows:2][0m 
+		SELECT 
+			COALESCE(u.id, '00000000-0000-0000-0000-000000000000'::uuid) as teacher_id,
+			COALESCE(u.username, 'Unknown') as teacher_name,
+			l.id as lesson_id,
+			l.title as lesson_title,
+			l.slug as lesson_slug,
+			l.created_at,
+			l.updated_at,
+			l.status
+		FROM lessons l
+		LEFT JOIN users u ON l.author_id = u.id
+		WHERE l.author_id IS NOT NULL
+		ORDER BY l.updated_at DESC
+	
+15:10:45 | 200 |      7.3485ms | ::1 | GET | /api/admin/teachers/history | -
+
+2026/01/02 15:10:50 [32mD:/CousreAI/backend/internal/handlers/teacher.go:316
+[0m[33m[2.030ms] [34;1m[rows:2][0m 
+		SELECT 
+			COALESCE(u.id, '00000000-0000-0000-0000-000000000000'::uuid) as teacher_id,
+			COALESCE(u.username, 'Unknown') as teacher_name,
+			l.id as lesson_id,
+			l.title as lesson_title,
+			l.slug as lesson_slug,
+			l.created_at,
+			l.updated_at,
+			l.status
+		FROM lessons l
+		LEFT JOIN users u ON l.author_id = u.id
+		WHERE l.author_id IS NOT NULL
+		ORDER BY l.updated_at DESC
+	
+
+2026/01/02 15:10:50 [32mD:/CousreAI/backend/internal/handlers/teacher.go:316
+[0m[33m[2.030ms] [34;1m[rows:2][0m 
+		SELECT 
+			COALESCE(u.id, '00000000-0000-0000-0000-000000000000'::uuid) as teacher_id,
+			COALESCE(u.username, 'Unknown') as teacher_name,
+			l.id as lesson_id,
+			l.title as lesson_title,
+			l.slug as lesson_slug,
+			l.created_at,
+			l.updated_at,
+			l.status
+		FROM lessons l
+		LEFT JOIN users u ON l.author_id = u.id
+		WHERE l.author_id IS NOT NULL
+		ORDER BY l.updated_at DESC
+	
+15:10:50 | 200 |      3.3161ms | ::1 | GET | /api/admin/teachers/history | -
+15:10:50 | 200 |      2.5806ms | ::1 | GET | /api/admin/teachers/history | -
+15:10:56 | 204 |            0s | ::1 | OPTIONS | /api/admin/teachers/history | -
+
+2026/01/02 15:10:56 [32mD:/CousreAI/backend/internal/handlers/teacher.go:316
+[0m[33m[2.936ms] [34;1m[rows:2][0m 
+		SELECT 
+			COALESCE(u.id, '00000000-0000-0000-0000-000000000000'::uuid) as teacher_id,
+			COALESCE(u.username, 'Unknown') as teacher_name,
+			l.id as lesson_id,
+			l.title as lesson_title,
+			l.slug as lesson_slug,
+			l.created_at,
+			l.updated_at,
+			l.status
+		FROM lessons l
+		LEFT JOIN users u ON l.author_id = u.id
+		WHERE l.author_id IS NOT NULL
+		ORDER BY l.updated_at DESC
+	
+15:10:56 | 200 |      3.5447ms | ::1 | GET | /api/admin/teachers/history | -
+15:10:56 | 204 |            0s | ::1 | OPTIONS | /api/auth/me | -
+15:10:56 | 204 |            0s | ::1 | OPTIONS | /api/auth/me | -
+
+2026/01/02 15:10:56 [32mD:/CousreAI/backend/internal/handlers/auth.go:114
+[0m[33m[1.936ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE id = '4553db05-7484-4ea3-b015-4cb84eb5e32d' ORDER BY "users"."id" LIMIT 1
+15:10:56 | 200 |       2.479ms | ::1 | GET | /api/auth/me | -
+
+2026/01/02 15:10:56 [32mD:/CousreAI/backend/internal/handlers/auth.go:114
+[0m[33m[5.710ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE id = '4553db05-7484-4ea3-b015-4cb84eb5e32d' ORDER BY "users"."id" LIMIT 1
+15:10:56 | 200 |      6.2859ms | ::1 | GET | /api/auth/me | -
+
+2026/01/02 15:10:56 [32mD:/CousreAI/backend/internal/handlers/teacher.go:316
+[0m[33m[2.313ms] [34;1m[rows:2][0m 
+		SELECT 
+			COALESCE(u.id, '00000000-0000-0000-0000-000000000000'::uuid) as teacher_id,
+			COALESCE(u.username, 'Unknown') as teacher_name,
+			l.id as lesson_id,
+			l.title as lesson_title,
+			l.slug as lesson_slug,
+			l.created_at,
+			l.updated_at,
+			l.status
+		FROM lessons l
+		LEFT JOIN users u ON l.author_id = u.id
+		WHERE l.author_id IS NOT NULL
+		ORDER BY l.updated_at DESC
+	
+
+2026/01/02 15:10:56 [32mD:/CousreAI/backend/internal/handlers/teacher.go:316
+[0m[33m[1.715ms] [34;1m[rows:2][0m 
+		SELECT 
+			COALESCE(u.id, '00000000-0000-0000-0000-000000000000'::uuid) as teacher_id,
+			COALESCE(u.username, 'Unknown') as teacher_name,
+			l.id as lesson_id,
+			l.title as lesson_title,
+			l.slug as lesson_slug,
+			l.created_at,
+			l.updated_at,
+			l.status
+		FROM lessons l
+		LEFT JOIN users u ON l.author_id = u.id
+		WHERE l.author_id IS NOT NULL
+		ORDER BY l.updated_at DESC
+	
+15:10:56 | 200 |      2.3134ms | ::1 | GET | /api/admin/teachers/history | -
+15:10:56 | 200 |      2.3293ms | ::1 | GET | /api/admin/teachers/history | -

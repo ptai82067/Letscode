@@ -1,0 +1,24 @@
+# Multi-stage Dockerfile template for backend (Go + Fiber)
+# Usage: rename to Dockerfile when ready to build
+
+# builder
+FROM golang:1.21-alpine AS builder
+WORKDIR /app
+
+# install git and ca-certificates for private modules if needed
+RUN apk add --no-cache git ca-certificates && update-ca-certificates
+
+COPY go.mod go.sum ./
+RUN go mod download
+
+COPY . .
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o server ./cmd/server/main.go
+
+# final image
+FROM alpine:3.18
+RUN apk add --no-cache ca-certificates
+WORKDIR /app
+COPY --from=builder /app/server ./server
+
+EXPOSE 8080
+CMD ["./server"]
