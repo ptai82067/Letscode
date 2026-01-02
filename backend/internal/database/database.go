@@ -126,9 +126,12 @@ func AutoMigrate() error {
 	}
 
 	for _, m := range modelsToMigrate {
-		if err := DB.AutoMigrate(m); err != nil {
-			// Include the model type in the error message for easier root cause analysis
-			return fmt.Errorf("migration failed for model %T: %w", m, err)
+		if err := DB.Migrator().CreateTable(m); err != nil {
+			// Try soft approach first - CreateTable without introspection
+			log.Printf("CreateTable failed for %T: %v, trying AutoMigrate...\n", m, err)
+			if err := DB.AutoMigrate(m); err != nil {
+				return fmt.Errorf("migration failed for model %T: %w", m, err)
+			}
 		}
 	}
 
