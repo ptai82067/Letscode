@@ -41,7 +41,7 @@ type TeacherAssignment struct {
 	UpdatedAt      time.Time        `json:"updated_at"`
 
 	// Relations
-	Teacher *User `gorm:"foreignKey:TeacherID" json:"teacher,omitempty"`
+	Teacher *User `gorm:"foreignKey:TeacherID;references:ID" json:"teacher,omitempty"`
 }
 
 func (ta *TeacherAssignment) BeforeCreate(tx *gorm.DB) error {
@@ -61,8 +61,8 @@ type TeacherAssignmentLog struct {
 	CreatedAt    time.Time        `json:"created_at"`
 
 	// Relations
-	Assignment *TeacherAssignment `gorm:"foreignKey:AssignmentID" json:"assignment,omitempty"`
-	Actor      *User              `gorm:"foreignKey:ActorID" json:"actor,omitempty"`
+	Assignment *TeacherAssignment `gorm:"foreignKey:AssignmentID;references:ID" json:"assignment,omitempty"`
+	Actor      *User              `gorm:"foreignKey:ActorID;references:ID" json:"actor,omitempty"`
 }
 
 func (tal *TeacherAssignmentLog) BeforeCreate(tx *gorm.DB) error {
