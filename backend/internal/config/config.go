@@ -39,11 +39,15 @@ func Load() (*Config, error) {
 	databaseURL := os.Getenv("DATABASE_URL")
 
 	// Log env var state for debugging - ABSOLUTE DIAGNOSTIC
+	log.Println("")
+	log.Println("════════════════════════════════════════════════════════════════")
+	log.Println("🚀 CourseAI Backend Configuration Loading")
 	log.Println("════════════════════════════════════════════════════════════════")
 	log.Printf("🔍 DIAGNOSTIC: DATABASE_URL exists: %v\n", databaseURL != "")
 	if databaseURL != "" {
 		log.Printf("   DATABASE_URL length: %d chars\n", len(databaseURL))
 		log.Printf("   DATABASE_URL starts with: %.30s...\n", databaseURL)
+		log.Println("✅ Using managed database connection (Neon/Render/Production)")
 	} else {
 		log.Println("   ⚠️  DATABASE_URL is EMPTY or NOT SET")
 		// No DATABASE_URL - try to load .env (local dev mode)
@@ -52,22 +56,34 @@ func Load() (*Config, error) {
 		if err != nil {
 			// .env not found - we're in production without DATABASE_URL
 			log.Println("════════════════════════════════════════════════════════════════")
-			log.Println("❌ FATAL ERROR: CONFIGURATION MISSING")
+			log.Println("❌ FATAL ERROR: PRODUCTION DEPLOYMENT - DATABASE_URL REQUIRED")
 			log.Println("════════════════════════════════════════════════════════════════")
-			log.Println("Database Configuration Error:")
-			log.Println("  • .env file not found (godotenv.Load() failed)")
-			log.Println("  • DATABASE_URL environment variable not set")
-			log.Println("  • Cannot proceed without database configuration")
+			log.Println("")
+			log.Println("Application cannot start: Missing database configuration")
+			log.Println("")
+			log.Println("This is a production environment (no .env file found)")
+			log.Println("DATABASE_URL environment variable MUST be set")
+			log.Println("")
+			log.Println("TO FIX on Render.com:")
+			log.Println("  1. Go to: https://dashboard.render.com")
+			log.Println("  2. Select your backend service")
+			log.Println("  3. Go to: Settings → Environment")
+			log.Println("  4. Add Environment Variable:")
+			log.Println("     Name:  DATABASE_URL")
+			log.Println("     Value: postgresql://user:password@host/db?sslmode=require")
+			log.Println("  5. Save and Manual Deploy")
+			log.Println("")
+			log.Println("Expected PostgreSQL connection string format:")
+			log.Println("  postgresql://username:password@hostname:port/dbname?sslmode=require")
+			log.Println("  Example: postgresql://neondb_owner:npg_xxx@ep-xxx.aws.neon.tech/neondb?sslmode=require")
+			log.Println("")
 			log.Println("════════════════════════════════════════════════════════════════")
-			log.Println("FIX: Set DATABASE_URL in your environment:")
-			log.Println("  On Render: Dashboard → Environment → Add DATABASE_URL variable")
-			log.Println("  Format: DATABASE_URL=postgresql://user:password@host/db?sslmode=require")
-			log.Println("════════════════════════════════════════════════════════════════")
-			log.Fatal("Exit due to missing database configuration")
+			log.Fatal("STOPPING: DATABASE_URL environment variable is not set")
 		}
 		log.Println("✓ .env file loaded successfully (development mode)")
 	}
 	log.Println("════════════════════════════════════════════════════════════════")
+	log.Println("")
 
 	expireHours, _ := strconv.Atoi(getEnv("JWT_EXPIRE_HOURS", "24"))
 
@@ -97,13 +113,13 @@ func parseDatabase() DatabaseConfig {
 	log.Printf("  DATABASE_URL value: %q\n", databaseURL)
 	log.Printf("  DATABASE_URL is empty: %v\n", databaseURL == "")
 	log.Printf("  DATABASE_URL length: %d\n", len(databaseURL))
-	
+
 	// Also check individual vars
 	dbHost := os.Getenv("DB_HOST")
 	dbPort := os.Getenv("DB_PORT")
 	dbName := os.Getenv("DB_NAME")
 	dbUser := os.Getenv("DB_USER")
-	
+
 	log.Printf("  DB_HOST: %q\n", dbHost)
 	log.Printf("  DB_PORT: %q\n", dbPort)
 	log.Printf("  DB_NAME: %q\n", dbName)
