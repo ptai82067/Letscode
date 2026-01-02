@@ -183,7 +183,7 @@ type LessonQuiz struct {
 	UpdatedAt   time.Time `json:"updated_at"`
 
 	// Relations
-	Options []LessonQuizOption `gorm:"foreignKey:QuizID;references:ID" json:"options,omitempty"`
+	Options []LessonQuizOption `gorm:"foreignKey:QuizID" json:"options,omitempty"`
 }
 
 func (lq *LessonQuiz) BeforeCreate(tx *gorm.DB) error {

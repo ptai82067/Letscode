@@ -31,14 +31,14 @@ type Lesson struct {
 
 	// Relations
 	Subcourse     *Subcourse           `gorm:"foreignKey:SubcourseID;references:ID" json:"subcourse,omitempty"`
-	Objectives    *LessonObjective     `gorm:"foreignKey:LessonID;references:ID" json:"objectives,omitempty"`
-	Models        []LessonModel        `gorm:"foreignKey:LessonID;references:ID" json:"models,omitempty"`
-	Preparation   *LessonPreparation   `gorm:"foreignKey:LessonID;references:ID" json:"preparation,omitempty"`
-	Builds        []LessonBuild        `gorm:"foreignKey:LessonID;references:ID" json:"builds,omitempty"`
-	ContentBlocks []LessonContentBlock `gorm:"foreignKey:LessonID;references:ID" json:"content_blocks,omitempty"`
-	Attachments   []LessonAttachment   `gorm:"foreignKey:LessonID;references:ID" json:"attachments,omitempty"`
-	Challenges    []LessonChallenge    `gorm:"foreignKey:LessonID;references:ID" json:"challenges,omitempty"`
-	Quizzes       []LessonQuiz         `gorm:"foreignKey:LessonID;references:ID" json:"quizzes,omitempty"`
+	Objectives    *LessonObjective     `gorm:"foreignKey:LessonID" json:"objectives,omitempty"`
+	Models        []LessonModel        `gorm:"foreignKey:LessonID" json:"models,omitempty"`
+	Preparation   *LessonPreparation   `gorm:"foreignKey:LessonID" json:"preparation,omitempty"`
+	Builds        []LessonBuild        `gorm:"foreignKey:LessonID" json:"builds,omitempty"`
+	ContentBlocks []LessonContentBlock `gorm:"foreignKey:LessonID" json:"content_blocks,omitempty"`
+	Attachments   []LessonAttachment   `gorm:"foreignKey:LessonID" json:"attachments,omitempty"`
+	Challenges    []LessonChallenge    `gorm:"foreignKey:LessonID" json:"challenges,omitempty"`
+	Quizzes       []LessonQuiz         `gorm:"foreignKey:LessonID" json:"quizzes,omitempty"`
 	Media         []Media              `gorm:"polymorphic:Owner;polymorphicValue:lesson" json:"media,omitempty"`
 }
 
