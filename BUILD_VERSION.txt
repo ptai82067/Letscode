@@ -1,0 +1,4 @@
+Build Version: 2024-01-production-fix-v1
+Database URL Required: YES
+Force Rebuild: YES
+Timestamp: 2024-production-deployment
