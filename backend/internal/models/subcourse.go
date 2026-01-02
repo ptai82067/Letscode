@@ -24,8 +24,8 @@ type Subcourse struct {
 	UpdatedAt          time.Time      `json:"updated_at"`
 
 	// Relations
-	Program *Program `gorm:"foreignKey:ProgramID" json:"program,omitempty"`
-	Lessons []Lesson `gorm:"foreignKey:SubcourseID" json:"lessons,omitempty"`
+	Program *Program `gorm:"foreignKey:ProgramID;references:ID" json:"program,omitempty"`
+	Lessons []Lesson `gorm:"foreignKey:SubcourseID;references:ID" json:"lessons,omitempty"`
 	Media   []Media  `gorm:"polymorphic:Owner;polymorphicValue:subcourse" json:"media,omitempty"`
 }
 

@@ -29,7 +29,7 @@ type Program struct {
 	UpdatedAt        time.Time      `json:"updated_at"`
 
 	// Relations
-	Subcourses []Subcourse `gorm:"foreignKey:ProgramID" json:"subcourses,omitempty"`
+	Subcourses []Subcourse `gorm:"foreignKey:ProgramID;references:ID" json:"subcourses,omitempty"`
 	Media      []Media     `gorm:"polymorphic:Owner;polymorphicValue:program" json:"media,omitempty"`
 	// Transient field populated by handlers
 	SubcourseCount int `gorm:"-" json:"subcourse_count,omitempty"`
