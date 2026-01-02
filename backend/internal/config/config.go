@@ -35,9 +35,14 @@ type ServerConfig struct {
 }
 
 func Load() (*Config, error) {
-	// Load .env file
-	if err := godotenv.Load(); err != nil {
-		log.Println("Warning: .env file not found, using environment variables")
+	// Load .env file ONLY in development (not in Render/production)
+	// Render uses environment variables directly, not .env files
+	if os.Getenv("RENDER") != "true" && os.Getenv("ENV") != "production" {
+		if err := godotenv.Load(); err != nil {
+			log.Println("⚠️  .env file not found (expected in development)")
+		}
+	} else {
+		log.Println("✓ Skipping .env file (production environment detected)")
 	}
 
 	expireHours, _ := strconv.Atoi(getEnv("JWT_EXPIRE_HOURS", "24"))
@@ -61,6 +66,17 @@ func Load() (*Config, error) {
 
 func parseDatabase() DatabaseConfig {
 	databaseURL := os.Getenv("DATABASE_URL")
+	
+	// Log current environment for debugging
+	isRender := os.Getenv("RENDER") == "true"
+	isProduction := os.Getenv("ENV") == "production"
+	log.Printf("🔍 Config Debug: RENDER=%v, ENV=%s, DATABASE_URL=%s\n", isRender, os.Getenv("ENV"), 
+		func() string {
+			if databaseURL != "" {
+				return "***SET***"
+			}
+			return "NOT_SET"
+		}())
 
 	// If DATABASE_URL is set, parse it (for Neon, Render, and other managed services)
 	if databaseURL != "" {
@@ -71,18 +87,15 @@ func parseDatabase() DatabaseConfig {
 		}
 	}
 
-	// Check if running on Render (based on common environment variables)
-	isRender := os.Getenv("RENDER") == "true" || os.Getenv("RENDER_GIT_REPO") != ""
-	isProduction := os.Getenv("ENV") == "production" || isRender
-
-	if isProduction {
-		log.Fatal("❌ FATAL: DATABASE_URL environment variable is required in production. " +
+	// On Render or production, DATABASE_URL is REQUIRED
+	if isRender || isProduction {
+		log.Fatal("❌ FATAL: DATABASE_URL environment variable is REQUIRED in production/Render. " +
 			"Please configure DATABASE_URL in your Render environment variables. " +
-			"Example: postgresql://user:password@host:port/dbname")
+			"Example: postgresql://user:password@host:port/dbname?sslmode=require")
 	}
 
-	// Fall back to individual environment variables (development/local setup)
-	log.Println("⚠️  DATABASE_URL not set - falling back to individual DB_* variables (development mode)")
+	// Fall back to individual environment variables (development/local setup ONLY)
+	log.Println("⚠️  Development mode: using individual DB_* environment variables")
 	return DatabaseConfig{
 		Host:     getEnv("DB_HOST", "localhost"),
 		Port:     getEnv("DB_PORT", "5432"),
