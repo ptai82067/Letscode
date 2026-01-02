@@ -52,12 +52,30 @@ func extractHostFromDSN(dsn string) string {
 func AutoMigrate() error {
 	log.Println("Running auto migrations...")
 
-	// Run AutoMigrate per-model so failures are isolated and easier to debug.
-	// Handle `users` table explicitly to avoid migration SQL that may rely
-	// on database-side functions or extensions in environments where
-	// privileges/extensions differ. We create the table idempotently with
-	// a safe SQL CREATE TABLE IF NOT EXISTS and then allow GORM to migrate
-	// the remaining models.
+	// Clean up old tables with schema issues to ensure fresh migration
+	// This is necessary when model definitions change and old schema conflicts
+	tablesToClean := []interface{}{
+		&models.Subcourse{},
+		&models.Lesson{},
+		&models.LessonObjective{},
+		&models.LessonModel{},
+		&models.LessonPreparation{},
+		&models.LessonBuild{},
+		&models.LessonContentBlock{},
+		&models.LessonAttachment{},
+		&models.LessonChallenge{},
+		&models.LessonQuiz{},
+		&models.LessonQuizOption{},
+	}
+
+	for _, m := range tablesToClean {
+		if DB.Migrator().HasTable(m) {
+			log.Printf("Dropping table %T to ensure clean migration...\n", m)
+			if err := DB.Migrator().DropTable(m); err != nil {
+				log.Printf("Warning: could not drop table %T: %v\n", m, err)
+			}
+		}
+	}
 
 	// Ensure users table exists with a schema that is safe and idempotent.
 	if !DB.Migrator().HasTable(&models.User{}) {
@@ -104,23 +122,6 @@ func AutoMigrate() error {
 	}
 
 	for _, m := range modelsToMigrate {
-		// Special handling for Subcourse: if it exists but has issues, drop and recreate
-		// This handles cases where old schema conflicts with new field definitions
-		if m == &models.Subcourse{} || m == (*models.Subcourse)(nil) {
-			if DB.Migrator().HasTable(m) {
-				// Try to drop and recreate to avoid migration conflicts
-				log.Println("Dropping Subcourse table to ensure clean migration...")
-				if err := DB.Migrator().DropTable(m); err != nil {
-					log.Printf("Warning: could not drop Subcourse table: %v\n", err)
-				}
-			}
-		}
-		
-		// Skip AutoMigrate for existing tables to avoid GORM introspection issues
-		if DB.Migrator().HasTable(m) {
-			log.Printf("Skipping AutoMigrate for existing table %T", m)
-			continue
-		}
 		if err := DB.AutoMigrate(m); err != nil {
 			// Include the model type in the error message for easier root cause analysis
 			return fmt.Errorf("migration failed for model %T: %w", m, err)
