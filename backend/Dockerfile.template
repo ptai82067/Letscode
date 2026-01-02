@@ -20,5 +20,13 @@ RUN apk add --no-cache ca-certificates
 WORKDIR /app
 COPY --from=builder /app/server ./server
 
+# Declare environment variables that will be injected at runtime
+# These are required for production deployment on Render/cloud platforms
+ENV DATABASE_URL=""
+ENV ENV="production"
+ENV PORT="8080"
+ENV JWT_SECRET=""
+ENV FRONTEND_URL=""
+
 EXPOSE 8080
 CMD ["./server"]
