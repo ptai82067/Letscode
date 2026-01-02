@@ -35,25 +35,27 @@ type ServerConfig struct {
 }
 
 func Load() (*Config, error) {
-	// Detect if running on managed platform (Render, Railway, etc)
-	// Render doesn't set explicit RENDER env var, so check if .env fails to load
-	dotenvLoaded := true
-	if os.Getenv("RENDER") != "true" && os.Getenv("ENV") != "production" {
-		if err := godotenv.Load(); err != nil {
-			dotenvLoaded = false
-			log.Println("⚠️  .env file not found (expected in development)")
+	// CRITICAL: Check DATABASE_URL FIRST, before loading anything else
+	// This prevents .env from overriding production config
+	if os.Getenv("DATABASE_URL") == "" {
+		// No DATABASE_URL set - check if we're in production
+		// Production indicators: missing .env, PORT env var set, or running in container
+		hostPortSet := os.Getenv("PORT") != ""
+		
+		if hostPortSet || os.Getenv("ENV") == "production" {
+			// We're in production/Render but no DATABASE_URL
+			log.Fatal("❌ FATAL ERROR: DATABASE_URL is not set!\n" +
+				"On Render, you MUST set DATABASE_URL in Environment Variables.\n" +
+				"Example: postgresql://user:password@host:port/dbname?sslmode=require")
 		}
-	} else {
-		log.Println("✓ Skipping .env file (production environment detected)")
-		dotenvLoaded = true
 	}
 
-	// Force DATABASE_URL on non-development environments
-	// If .env didn't load AND DATABASE_URL is empty, we're likely on Render without DATABASE_URL set
-	if !dotenvLoaded && os.Getenv("DATABASE_URL") == "" {
-		log.Fatal("FATAL: DATABASE_URL is required. " +
-			"On Render/Railway, set DATABASE_URL in Environment Variables. " +
-			"Example: postgresql://user:password@host:port/db?sslmode=require")
+	// Load .env file only in local development
+	// Skip if DATABASE_URL is already set (prefer env vars over .env)
+	if os.Getenv("DATABASE_URL") == "" {
+		if err := godotenv.Load(); err != nil {
+			log.Println("⚠️  .env file not found")
+		}
 	}
 
 	expireHours, _ := strconv.Atoi(getEnv("JWT_EXPIRE_HOURS", "24"))
@@ -77,7 +79,7 @@ func Load() (*Config, error) {
 
 func parseDatabase() DatabaseConfig {
 	databaseURL := os.Getenv("DATABASE_URL")
-	
+
 	log.Printf("Using DATABASE_URL: %v\n", databaseURL != "")
 
 	// If DATABASE_URL is set, use it directly
