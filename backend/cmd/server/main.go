@@ -81,10 +81,10 @@ func main() {
 	app.Use(cors.New(cors.Config{
 		AllowOrigins: cfg.Server.FrontendURL,
 		// Include all headers that axios uses by default
-		AllowHeaders: "Origin, Content-Type, Accept, Authorization, Cache-Control, Pragma, X-Requested-With",
-		AllowMethods: "GET, POST, PUT, DELETE, OPTIONS",
+		AllowHeaders:     "Origin, Content-Type, Accept, Authorization, Cache-Control, Pragma, X-Requested-With",
+		AllowMethods:     "GET, POST, PUT, DELETE, OPTIONS",
 		AllowCredentials: true,
-		ExposeHeaders:   "Authorization",
+		ExposeHeaders:    "Authorization",
 	}))
 
 	// Initialize handlers
