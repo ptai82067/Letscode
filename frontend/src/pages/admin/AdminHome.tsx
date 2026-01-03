@@ -42,34 +42,34 @@ export default function AdminHome() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6 md:p-10">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-4 sm:p-6 md:p-10">
       {/* Header Section */}
-      <div className="mb-12">
-        <h1 className="text-4xl md:text-5xl font-black text-gray-900 mb-2">Admin Dashboard</h1>
-        <p className="text-lg text-gray-600">Quick access to management tools</p>
+      <div className="mb-8 sm:mb-12">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 mb-2">Admin Dashboard</h1>
+        <p className="text-base sm:text-lg text-gray-600">Quick access to management tools</p>
       </div>
 
       {/* Widgets Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         {widgets.map((widget, idx) =>
           widget.show && (
             <Link
               key={idx}
               to={widget.to}
-              className="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+              className="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 touch-highlight"
             >
               {/* Gradient Background */}
               <div className={`absolute inset-0 bg-gradient-to-br ${widget.color}`}></div>
 
               {/* Content */}
-              <div className="relative p-6 flex flex-col justify-between min-h-[200px]">
+              <div className="relative p-6 flex flex-col justify-between min-h-[160px] sm:min-h-[200px]">
                 {/* Icon */}
-                <div className="text-5xl mb-4">{widget.icon}</div>
+                <div className="text-4xl sm:text-5xl mb-4">{widget.icon}</div>
 
                 {/* Text Content */}
                 <div>
-                  <h3 className="text-2xl font-bold text-white mb-2">{widget.title}</h3>
-                  <p className="text-white/80 text-sm">{widget.description}</p>
+                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">{widget.title}</h3>
+                  <p className="text-white/80 text-xs sm:text-sm">{widget.description}</p>
                 </div>
 
                 {/* Arrow Indicator */}

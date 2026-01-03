@@ -80,19 +80,19 @@ export default function Teachers() {
   }
 
   return (
-    <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-6 md:p-10 min-h-screen">
+    <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-4 sm:p-6 md:p-10 min-h-screen">
       {/* Header Section */}
-      <div className="mb-12">
-        <h1 className="text-4xl md:text-5xl font-black text-gray-900">👨‍🏫 Quản lý giảng viên</h1>
-        <p className="text-lg text-gray-600 mt-2">
+      <div className="mb-8 sm:mb-12">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-gray-900">👨‍🏫 Quản lý giảng viên</h1>
+        <p className="text-base sm:text-lg text-gray-600 mt-2">
           Tạo giảng viên và phân quyền chương trình / khóa học
         </p>
       </div>
 
       {/* Create Teacher Form - MOVED TO TOP */}
-      <div className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-3xl shadow-lg p-10 mb-12 border border-indigo-100">
-        <h2 className="text-3xl font-black text-gray-900 mb-8 flex items-center gap-3">
-          <span className="text-4xl">✨</span>
+      <div className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-3xl shadow-lg p-6 sm:p-8 md:p-10 mb-12 border border-indigo-100">
+        <h2 className="text-2xl sm:text-3xl font-black text-gray-900 mb-8 flex items-center gap-3">
+          <span className="text-3xl sm:text-4xl">✨</span>
           Tạo giảng viên mới
         </h2>
 
@@ -118,7 +118,7 @@ export default function Teachers() {
               showError(err?.response?.data?.error || err?.message || 'Lỗi khi tạo giảng viên');
             }
           }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
         >
           <div>
             <label className="block text-sm font-bold text-gray-900 mb-2">Tên đăng nhập</label>
@@ -155,7 +155,7 @@ export default function Teachers() {
           <div className="flex flex-col justify-end gap-3">
             <button
               type="submit"
-              className="px-6 py-4 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-bold rounded-xl hover:shadow-lg transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2"
+              className="px-6 py-4 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-bold rounded-xl hover:shadow-lg transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2 text-sm sm:text-base"
             >
               ✅ Tạo giảng viên
             </button>
@@ -165,44 +165,44 @@ export default function Teachers() {
 
       {/* Teachers List */}
       <div className="mb-8">
-        <h3 className="text-2xl font-bold text-gray-900 mb-6">Danh sách giảng viên</h3>
+        <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">Danh sách giảng viên</h3>
         {teachers.length === 0 ? (
-          <div className="bg-white rounded-2xl shadow-lg p-12 text-center">
-            <div className="text-6xl mb-4">📚</div>
-            <p className="text-gray-600 text-lg font-medium">Chưa có giảng viên nào</p>
+          <div className="bg-white rounded-2xl shadow-lg p-8 sm:p-12 text-center">
+            <div className="text-5xl sm:text-6xl mb-4">📚</div>
+            <p className="text-gray-600 text-base sm:text-lg font-medium">Chưa có giảng viên nào</p>
             <p className="text-gray-500 mt-2">Hãy tạo giảng viên mới ở phía trên để bắt đầu</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {teachers.map(t => (
               <div
                 key={t.id}
-                className="bg-white rounded-2xl shadow-lg p-6 hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-indigo-200"
+                className="bg-white rounded-2xl shadow-lg p-6 hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-indigo-200 flex flex-col"
               >
                 {/* Teacher Info */}
-                <div className="mb-6">
+                <div className="mb-6 flex-1">
                   <div className="flex items-center gap-3 mb-3">
-                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white text-lg font-bold">
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white text-lg font-bold flex-shrink-0">
                       {t.username.charAt(0).toUpperCase()}
                     </div>
-                    <div className="flex-1">
-                      <h3 className="text-lg font-bold text-gray-900">{t.username}</h3>
-                      <p className="text-sm text-gray-600">{t.email || 'Chưa có email'}</p>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base sm:text-lg font-bold text-gray-900 truncate">{t.username}</h3>
+                      <p className="text-sm text-gray-600 truncate">{t.email || 'Chưa có email'}</p>
                     </div>
                   </div>
                 </div>
 
                 {/* Action Buttons */}
-                <div className="flex gap-2">
+                <div className="flex flex-col sm:flex-row gap-2">
                   <button
-                    className="flex-1 px-3 py-2 text-sm bg-gradient-to-r from-indigo-500 to-indigo-600 text-white rounded-lg font-semibold hover:shadow-md transition-all duration-300 hover:scale-105"
+                    className="flex-1 px-3 py-3 text-sm bg-gradient-to-r from-indigo-500 to-indigo-600 text-white rounded-lg font-semibold hover:shadow-md transition-all duration-300 hover:scale-105"
                     onClick={() => openAssignmentModal('program', t)}
                   >
                     📚 Chương trình
                   </button>
 
                   <button
-                    className="flex-1 px-3 py-2 text-sm bg-gradient-to-r from-yellow-500 to-yellow-600 text-white rounded-lg font-semibold hover:shadow-md transition-all duration-300 hover:scale-105"
+                    className="flex-1 px-3 py-3 text-sm bg-gradient-to-r from-yellow-500 to-yellow-600 text-white rounded-lg font-semibold hover:shadow-md transition-all duration-300 hover:scale-105"
                     onClick={() => openAssignmentModal('subcourse', t)}
                   >
                     📖 Khóa học
@@ -215,14 +215,14 @@ export default function Teachers() {
       </div>  
       {/* Assignment Modal */}
       {modalOpen && selectedTeacher && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl p-8 max-h-[90vh] overflow-y-auto border border-gray-200">
-            <h3 className="text-2xl font-bold text-gray-900 mb-6">
-              {modalType === 'program' ? '📚 Cấp quyền chương trình' : '📖 Cấp quyền khóa học'} cho <span className="text-indigo-600">{selectedTeacher.username}</span>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 sm:p-6">
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl p-6 sm:p-8 max-h-[90vh] overflow-y-auto border border-gray-200">
+            <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">
+              {modalType === 'program' ? '📚 Cấp quyền chương trình' : '📖 Cấp quyền khóa học'} cho <span className="text-indigo-600 break-words">{selectedTeacher.username}</span>
             </h3>
 
             {/* Items Grid */}
-            <div className="mb-6 grid grid-cols-1 md:grid-cols-2 gap-3 max-h-64 overflow-y-auto">
+            <div className="mb-6 grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-64 overflow-y-auto">
               {items.length === 0 ? (
                 <div className="col-span-full text-center py-8 text-gray-500">
                   <p className="text-lg">Không có mục nào</p>
@@ -237,11 +237,11 @@ export default function Teachers() {
                       type="checkbox"
                       checked={!!checked[it.id]}
                       onChange={(e) => setChecked(prev => ({ ...prev, [it.id]: e.target.checked }))}
-                      className="w-5 h-5 mt-1 accent-indigo-600"
+                      className="w-5 h-5 mt-1 accent-indigo-600 flex-shrink-0"
                     />
-                    <div className="flex-1">
-                      <div className="font-bold text-gray-900">{it.name || it.title || it.slug}</div>
-                      <div className="text-sm text-gray-600 mt-1">{it.short_description || it.program?.name || ''}</div>
+                    <div className="flex-1 min-w-0">
+                      <div className="font-bold text-gray-900 truncate">{it.name || it.title || it.slug}</div>
+                      <div className="text-sm text-gray-600 mt-1 truncate">{it.short_description || it.program?.name || ''}</div>
                     </div>
                   </label>
                 ))
@@ -257,19 +257,19 @@ export default function Teachers() {
                   onChange={(e) => setShowDates(e.target.checked)}
                   className="w-5 h-5 accent-indigo-600"
                 />
-                <span className="font-semibold text-gray-900">Thêm ngày bắt đầu/kết thúc (tùy chọn)</span>
+                <span className="font-semibold text-gray-900 text-sm sm:text-base">Thêm ngày bắt đầu/kết thúc (tùy chọn)</span>
               </label>
               {showDates && (
-                <div className="flex flex-col md:flex-row gap-3 mt-4">
+                <div className="flex flex-col gap-3 mt-4">
                   <input
                     type="datetime-local"
-                    className="flex-1 bg-white border-2 border-indigo-300 p-4 rounded-xl focus:border-indigo-600 focus:outline-none text-gray-900 text-base font-semibold placeholder:text-gray-400 hover:border-indigo-400 transition-all duration-200 shadow-sm"
+                    className="w-full bg-white border-2 border-indigo-300 p-4 rounded-xl focus:border-indigo-600 focus:outline-none text-gray-900 text-sm sm:text-base font-semibold placeholder:text-gray-400 hover:border-indigo-400 transition-all duration-200 shadow-sm"
                     onChange={e => setStartAt(e.target.value || null)}
                     placeholder="Ngày bắt đầu"
                   />
                   <input
                     type="datetime-local"
-                    className="flex-1 bg-white border-2 border-indigo-300 p-4 rounded-xl focus:border-indigo-600 focus:outline-none text-gray-900 text-base font-semibold placeholder:text-gray-400 hover:border-indigo-400 transition-all duration-200 shadow-sm"
+                    className="w-full bg-white border-2 border-indigo-300 p-4 rounded-xl focus:border-indigo-600 focus:outline-none text-gray-900 text-sm sm:text-base font-semibold placeholder:text-gray-400 hover:border-indigo-400 transition-all duration-200 shadow-sm"
                     onChange={e => setEndAt(e.target.value || null)}
                     placeholder="Ngày kết thúc"
                   />
@@ -278,15 +278,15 @@ export default function Teachers() {
             </div>
 
             {/* Action Buttons */}
-            <div className="flex justify-end gap-3">
+            <div className="flex flex-col-reverse sm:flex-row justify-end gap-3">
               <button
-                className="px-6 py-3 border-2 border-gray-300 text-gray-700 font-bold rounded-lg hover:bg-gray-50 transition-all duration-300"
+                className="px-6 py-3 border-2 border-gray-300 text-gray-700 font-bold rounded-lg hover:bg-gray-50 transition-all duration-300 text-sm sm:text-base"
                 onClick={() => setModalOpen(false)}
               >
                 ❌ Hủy
               </button>
               <button
-                className="px-6 py-3 bg-gradient-to-r from-indigo-500 to-indigo-600 text-white font-bold rounded-lg hover:shadow-lg transition-all duration-300 hover:scale-105"
+                className="px-6 py-3 bg-gradient-to-r from-indigo-500 to-indigo-600 text-white font-bold rounded-lg hover:shadow-lg transition-all duration-300 hover:scale-105 text-sm sm:text-base"
                 onClick={async () => {
                   if (!modalType || !selectedTeacher) return;
                   setSaving(true);

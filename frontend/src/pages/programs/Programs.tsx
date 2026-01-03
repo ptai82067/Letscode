@@ -142,11 +142,11 @@ export default function Programs() {
   // );
 
   return (
-  <div className="space-y-8">
+  <div className="space-y-6 sm:space-y-8">
     {/* HEADER */}
-    <div className="flex items-center justify-between">
+    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
       <div>
-        <h2 className="text-3xl font-bold text-gray-900">Programs</h2>
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">📚 Programs</h2>
         <p className="text-sm text-gray-500 mt-1">
           Manage learning programs and their curriculum structure
         </p>
@@ -154,7 +154,7 @@ export default function Programs() {
 
       {user?.role === 'admin' && (
         <button
-          className="px-5 py-2.5 rounded-xl bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 shadow-md"
+          className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 shadow-md transition"
           onClick={handleCreate}
         >
           + Create Program
@@ -193,27 +193,27 @@ export default function Programs() {
             {programs.map((p) => (
               <div
                 key={p.id}
-                className="flex items-center justify-between gap-6 p-6 hover:bg-gray-50 transition"
+                className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 sm:p-6 hover:bg-gray-50 transition"
               >
                 {/* LEFT */}
-                <div className="flex items-center gap-4">
+                <div className="flex items-start sm:items-center gap-3 sm:gap-4 w-full sm:flex-1">
                   {p.media && p.media[0] ? (
                     <img
                       src={p.media[0].url}
                       alt={p.name}
-                      className="h-16 w-16 rounded-2xl object-cover"
+                      className="h-12 w-12 sm:h-16 sm:w-16 rounded-2xl object-cover flex-shrink-0"
                     />
                   ) : (
-                    <div className="h-16 w-16 rounded-2xl bg-indigo-50 flex items-center justify-center text-indigo-600 text-2xl">
+                    <div className="h-12 w-12 sm:h-16 sm:w-16 rounded-2xl bg-indigo-50 flex items-center justify-center text-indigo-600 text-xl sm:text-2xl flex-shrink-0">
                       🎓
                     </div>
                   )}
 
-                  <div>
-                    <h3 className="font-semibold text-gray-900 text-lg">
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-semibold text-gray-900 text-base sm:text-lg truncate">
                       {p.name}
                     </h3>
-                    <p className="text-sm text-gray-500">
+                    <p className="text-xs sm:text-sm text-gray-500 truncate">
                       {p.slug}
                     </p>
 
@@ -230,23 +230,23 @@ export default function Programs() {
                 </div>
 
                 {/* ACTIONS */}
-                <div className="flex items-center gap-2">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto">
                   <button
-                    className="px-4 py-2 text-sm rounded-lg border text-gray-800 hover:bg-gray-100"
+                    className="px-3 sm:px-4 py-2 text-xs sm:text-sm rounded-lg border text-gray-800 hover:bg-gray-100 transition whitespace-nowrap"
                     onClick={() => navigate(routes.admin.programSubcourses(p.id as string))}
                   >
                     View Subcourses
                   </button>
 
                   <button
-                    className="px-4 py-2 text-sm rounded-lg border border-blue-300 text-blue-700 hover:bg-blue-50"
+                    className="px-3 sm:px-4 py-2 text-xs sm:text-sm rounded-lg border border-blue-300 text-blue-700 hover:bg-blue-50 transition whitespace-nowrap"
                     onClick={() => handleEdit(p)}
                   >
                     Edit
                   </button>
 
                   <button
-                    className="px-4 py-2 text-sm rounded-lg border border-red-200 text-red-600 hover:bg-red-50"
+                    className="px-3 sm:px-4 py-2 text-xs sm:text-sm rounded-lg border border-red-200 text-red-600 hover:bg-red-50 transition whitespace-nowrap"
                     onClick={() => handleDelete(p.id)}
                   >
                     Delete

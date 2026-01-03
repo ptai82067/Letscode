@@ -106,64 +106,184 @@ export default function SubcourseForm({ initial, onCancel, onSuccess }: Props) {
   }, []);
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-4 rounded shadow mb-4">
-      <div className="flex items-center justify-between mb-3">
-        <h3 className="text-lg font-medium">{initial?.id ? 'Sửa tiểu khóa' : 'Tạo tiểu khóa'}</h3>
+    <form onSubmit={handleSubmit} className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-2xl shadow-lg mb-6 overflow-hidden border border-slate-200">
+      {/* Header */}
+      <div className="bg-gradient-to-r from-purple-600 to-pink-600 px-6 sm:px-8 py-6 border-b border-purple-700">
+        <h3 className="text-xl sm:text-2xl font-bold text-white">
+          {initial?.id ? '✏️ Sửa tiểu khóa' : '➕ Tạo tiểu khóa'}
+        </h3>
       </div>
-      {serverError && <div className="text-red-600 mb-2">{serverError}</div>}
-      <div className="grid grid-cols-1 gap-3">
-        <div>
-          <label className="block text-sm font-medium">Chương trình</label>
-          <select className="mt-1 p-2 border rounded w-full max-w-xs" value={programId} onChange={(e) => setProgramId(e.target.value)}>
-            <option value="">-- Chọn chương trình --</option>
-            {programs.map((p) => (<option key={p.id} value={p.id}>{p.name}</option>))}
-          </select>
-          {errors.program_id && <div className="text-red-600 text-sm">{errors.program_id}</div>}
-        </div>
-        <div>
-          <label className="block text-sm font-medium">Tên</label>
-          <input className="mt-1 p-2 border rounded w-full" value={name} onChange={(e) => setName(e.target.value)} />
-          {errors.name && <div className="text-red-600 text-sm">{errors.name}</div>}
-        </div>
-        <div>
-          <label className="block text-sm font-medium">Slug</label>
-          <input className="mt-1 p-2 border rounded w-full" value={slug} onChange={(e) => setSlug(e.target.value)} />
-          {errors.slug && <div className="text-red-600 text-sm">{errors.slug}</div>}
-        </div>
-        <div>
-          <label className="block text-sm font-medium">Độ tuổi</label>
-          <input className="mt-1 p-2 border rounded w-full max-w-xs" value={ageRange} onChange={(e) => setAgeRange(e.target.value)} />
-        </div>
-        <div>
-          <label className="block text-sm font-medium">Ảnh bìa / Phương tiện</label>
-          <input type="file" accept="image/*,video/*" onChange={onFileChange} aria-label="Choose cover image or video" />
-          {preview && (
-            <div className="mt-2">
-              {file && file.type.startsWith('video/') ? (
-                <video src={preview} controls className="max-h-40 w-auto" />
-              ) : (!file && /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(preview) ? (
-                <video src={preview} controls className="max-h-40 w-auto" />
-              ) : (
-                <img src={preview} alt="preview" className="max-h-40" />
-              ))}
+
+      {/* Content */}
+      <div className="p-6 sm:p-8">
+        {/* Server Error Alert */}
+        {serverError && (
+          <div className="mb-6 p-4 bg-red-50 border-l-4 border-red-500 rounded-lg flex items-start gap-3">
+            <span className="text-2xl">❌</span>
+            <div>
+              <p className="font-semibold text-red-800">Lỗi</p>
+              <p className="text-red-700 text-sm">{serverError}</p>
             </div>
-          )}
-        </div>
-        <div className="flex gap-3">
+          </div>
+        )}
+
+        <div className="grid grid-cols-1 gap-6">
+          {/* Program Selection */}
           <div>
-            <label className="block text-sm font-medium">Trạng thái</label>
-            <select className="mt-1 p-2 border rounded" value={status} onChange={(e) => setStatus(e.target.value as any)}>
-              <option value="draft">Nháp</option>
-              <option value="published">Đã xuất bản</option>
-              <option value="archived">Lưu trữ</option>
+            <label className="block text-sm font-semibold text-slate-700 mb-2">
+              📚 Chương trình <span className="text-red-500">*</span>
+            </label>
+            <select 
+              className="w-full px-4 py-3 border-2 border-slate-300 rounded-lg focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition bg-white text-slate-900 font-medium"
+              value={programId} 
+              onChange={(e) => setProgramId(e.target.value)}
+            >
+              <option value="">-- Chọn chương trình --</option>
+              {programs.map((p) => (<option key={p.id} value={p.id}>{p.name}</option>))}
+            </select>
+            {errors.program_id && (
+              <div className="mt-2 text-sm text-red-600 font-medium flex items-center gap-2">
+                <span>⚠️</span>{errors.program_id}
+              </div>
+            )}
+          </div>
+
+          {/* Tên */}
+          <div>
+            <label className="block text-sm font-semibold text-slate-700 mb-2">
+              📛 Tên tiểu khóa <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              className="w-full px-4 py-3 border-2 border-slate-300 rounded-lg focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition bg-white text-slate-900 placeholder-slate-500"
+              placeholder="Nhập tên tiểu khóa"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            {errors.name && (
+              <div className="mt-2 text-sm text-red-600 font-medium flex items-center gap-2">
+                <span>⚠️</span>{errors.name}
+              </div>
+            )}
+          </div>
+
+          {/* Slug */}
+          <div>
+            <label className="block text-sm font-semibold text-slate-700 mb-2">
+              🔗 Slug <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              className="w-full px-4 py-3 border-2 border-slate-300 rounded-lg focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition bg-white text-slate-900 placeholder-slate-500"
+              placeholder="subcourse-slug"
+              value={slug}
+              onChange={(e) => setSlug(e.target.value)}
+            />
+            {errors.slug && (
+              <div className="mt-2 text-sm text-red-600 font-medium flex items-center gap-2">
+                <span>⚠️</span>{errors.slug}
+              </div>
+            )}
+          </div>
+
+          {/* Độ tuổi */}
+          <div>
+            <label className="block text-sm font-semibold text-slate-700 mb-2">
+              👶 Độ tuổi
+            </label>
+            <input
+              type="text"
+              className="w-full px-4 py-3 border-2 border-slate-300 rounded-lg focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition bg-white text-slate-900 placeholder-slate-500"
+              placeholder="ví dụ: 6-12"
+              value={ageRange}
+              onChange={(e) => setAgeRange(e.target.value)}
+            />
+          </div>
+
+          {/* Media Upload */}
+          <div>
+            <label className="block text-sm font-semibold text-slate-700 mb-2">
+              🖼️ Ảnh bìa / Phương tiện
+            </label>
+            <div className="relative">
+              <input
+                type="file"
+                accept="image/*,video/*"
+                onChange={onFileChange}
+                aria-label="Chọn ảnh bìa hoặc video"
+                className="hidden"
+                id="file-input-subcourse"
+              />
+              <label
+                htmlFor="file-input-subcourse"
+                className="block w-full px-4 py-8 border-2 border-dashed border-slate-300 rounded-lg hover:border-purple-500 hover:bg-purple-50 transition cursor-pointer text-center bg-white"
+              >
+                <div className="text-4xl mb-2">📤</div>
+                <p className="text-sm font-medium text-slate-700">Nhấp để chọn ảnh hoặc video</p>
+                <p className="text-xs text-slate-500 mt-1">Tối đa 8MB</p>
+              </label>
+            </div>
+
+            {/* File Error */}
+            {fileError && (
+              <div className="mt-3 p-3 bg-red-50 border-l-4 border-red-500 rounded flex items-start gap-2">
+                <span className="text-lg">❌</span>
+                <p className="text-sm text-red-700 font-medium">{fileError}</p>
+              </div>
+            )}
+
+            {/* Preview */}
+            {preview && (
+              <div className="mt-4">
+                <p className="text-xs font-semibold text-slate-600 mb-2">✅ Xem trước</p>
+                <div className="bg-slate-900 rounded-lg p-2 inline-block">
+                  {file && file.type.startsWith('video/') ? (
+                    <video src={preview} controls className="max-h-48 rounded" />
+                  ) : (!file && /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(preview) ? (
+                    <video src={preview} controls className="max-h-48 rounded" />
+                  ) : (
+                    <img src={preview} alt="preview" className="max-h-48 rounded" />
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Status */}
+          <div>
+            <label className="block text-sm font-semibold text-slate-700 mb-2">
+              📊 Trạng thái
+            </label>
+            <select 
+              className="w-full px-4 py-3 border-2 border-slate-300 rounded-lg focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition bg-white text-slate-900 font-medium"
+              value={status} 
+              onChange={(e) => setStatus(e.target.value as any)}
+            >
+              <option value="draft">📝 Nháp</option>
+              <option value="published">✅ Đã xuất bản</option>
+              <option value="archived">📦 Lưu trữ</option>
             </select>
           </div>
         </div>
-        <div className="flex gap-2 justify-end">
-          <button type="button" className="px-3 py-2 text-sm rounded-md bg-gray-200 text-gray-800 hover:bg-gray-300" onClick={onCancel} disabled={submitting}>Hủy</button>
-          <button type="submit" className="px-3 py-2 text-sm rounded-md bg-gray-800 text-white hover:bg-gray-900 disabled:opacity-50 disabled:cursor-not-allowed" disabled={submitting || !!fileError}>{submitting ? 'Đang lưu...' : 'Lưu'}</button>
-        </div>
-        {fileError && <div className="text-red-600 text-sm mt-2">{fileError}</div>}
+      </div>
+
+      {/* Footer with Actions */}
+      <div className="bg-slate-100 px-6 sm:px-8 py-4 border-t border-slate-200 flex flex-col-reverse sm:flex-row gap-3 justify-end">
+        <button
+          type="button"
+          className="px-6 py-2.5 text-sm font-semibold rounded-lg bg-slate-300 text-slate-800 hover:bg-slate-400 transition disabled:opacity-50 disabled:cursor-not-allowed"
+          onClick={onCancel}
+          disabled={submitting}
+        >
+          ❌ Hủy
+        </button>
+        <button
+          type="submit"
+          className="px-6 py-2.5 text-sm font-semibold rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700 shadow-md hover:shadow-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
+          disabled={submitting || !!fileError}
+        >
+          {submitting ? '⏳ Đang lưu...' : '💾 Lưu'}
+        </button>
       </div>
     </form>
   );
