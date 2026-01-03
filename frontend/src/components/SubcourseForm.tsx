@@ -239,7 +239,7 @@ export default function SubcourseForm({ initial, onCancel, onSuccess }: Props) {
                 <div className="bg-slate-900 rounded-lg p-2 inline-block">
                   {file && file.type.startsWith('video/') ? (
                     <video src={preview} controls className="max-h-48 rounded" />
-                  ) : (!file && /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(preview) ? (
+                  ) : (!file && /\.(mp4|webm|ogg|mov)(\?.*)?/i.test(preview) ? (
                     <video src={preview} controls className="max-h-48 rounded" />
                   ) : (
                     <img src={preview} alt="preview" className="max-h-48 rounded" />
