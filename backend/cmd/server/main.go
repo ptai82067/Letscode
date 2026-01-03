@@ -79,8 +79,7 @@ func main() {
 
 	// Configure CORS - allow frontend to call this backend
 	app.Use(cors.New(cors.Config{
-		AllowOrigins: cfg.Server.FrontendURL,
-		// Include all headers that axios uses by default
+		AllowOrigins:     "https://letscode-tau.vercel.app",
 		AllowHeaders:     "Origin, Content-Type, Accept, Authorization, Cache-Control, Pragma, X-Requested-With",
 		AllowMethods:     "GET, POST, PUT, DELETE, OPTIONS",
 		AllowCredentials: true,
