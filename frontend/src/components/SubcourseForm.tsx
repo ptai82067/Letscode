@@ -237,13 +237,14 @@ export default function SubcourseForm({ initial, onCancel, onSuccess }: Props) {
               <div className="mt-4">
                 <p className="text-xs font-semibold text-slate-600 mb-2">✅ Xem trước</p>
                 <div className="bg-slate-900 rounded-lg p-2 inline-block">
-                  {file && file.type.startsWith('video/') ? (
-                    <video src={preview} controls className="max-h-48 rounded" />
-                  ) : (!file && /\.(mp4|webm|ogg|mov)(\?.*)?/i.test(preview) ? (
-                    <video src={preview} controls className="max-h-48 rounded" />
-                  ) : (
-                    <img src={preview} alt="preview" className="max-h-48 rounded" />
-                  )}
+                  {(() => {
+                    const isVideo = file && file.type.startsWith('video/');
+                    const isVideoUrl = !file && /\.(mp4|webm|ogg|mov)/i.test(preview);
+                    if (isVideo || isVideoUrl) {
+                      return <video src={preview} controls className="max-h-48 rounded" />;
+                    }
+                    return <img src={preview} alt="preview" className="max-h-48 rounded" />;
+                  })()}
                 </div>
               </div>
             )}
