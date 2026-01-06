@@ -1,25 +1,54 @@
-2026/01/02 15:09:19 Database connected successfully
-2026/01/02 15:09:19 pgcrypto extension ensured
-2026/01/02 15:09:19 Running auto migrations...
-2026/01/02 15:09:19 Skipping AutoMigrate for existing table *models.Program
-2026/01/02 15:09:19 Skipping AutoMigrate for existing table *models.Subcourse
-2026/01/02 15:09:19 Skipping AutoMigrate for existing table *models.Lesson
-2026/01/02 15:09:19 Skipping AutoMigrate for existing table *models.LessonObjective
-2026/01/02 15:09:19 Skipping AutoMigrate for existing table *models.LessonModel
-2026/01/02 15:09:19 Skipping AutoMigrate for existing table *models.LessonPreparation
-2026/01/02 15:09:19 Skipping AutoMigrate for existing table *models.LessonBuild
-2026/01/02 15:09:19 Skipping AutoMigrate for existing table *models.LessonContentBlock
-2026/01/02 15:09:19 Skipping AutoMigrate for existing table *models.LessonAttachment
-2026/01/02 15:09:19 Skipping AutoMigrate for existing table *models.LessonChallenge
-2026/01/02 15:09:19 Skipping AutoMigrate for existing table *models.LessonQuiz
-2026/01/02 15:09:19 Skipping AutoMigrate for existing table *models.LessonQuizOption
-2026/01/02 15:09:19 Skipping AutoMigrate for existing table *models.Media
-2026/01/02 15:09:19 Skipping AutoMigrate for existing table *models.TeacherAssignment
-2026/01/02 15:09:19 Skipping AutoMigrate for existing table *models.TeacherAssignmentLog
-2026/01/02 15:09:19 Migrations completed successfully
-2026/01/02 15:09:19 Starting data seeding...
-2026/01/02 15:09:19 Admin user already exists, skipping seed
-2026/01/02 15:09:19 🚀 Server starting on http://localhost:8080
-2026/01/02 15:09:19 📚 Admin credentials: admin123 / admin123
-2026/01/02 15:10:11 Incoming lesson payload: {ID:00000000-0000-0000-0000-000000000000 SubcourseID:b2215c7b-c30d-45d6-8581-b8b4afa7f612 Title:,xcfef; Subtitle: Overview:sdklfje BlockTypes: Status:archived SortOrder:0 DurationMinutes:0 Difficulty: EstimatedTime: CoverMediaID:<nil> AuthorID:<nil> IsFeatured:false PublishedAt:<nil> Slug:ssdkdlj CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC Subcourse:<nil> Objectives:0xc000279560 Models:[{ID:00000000-0000-0000-0000-000000000000 LessonID:00000000-0000-0000-0000-000000000000 Title:Auto model 1 Description: CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC Media:[]}] Preparation:0xc00033b400 Builds:[{ID:00000000-0000-0000-0000-000000000000 LessonID:00000000-0000-0000-0000-000000000000 BuildType:pdf Title:Auto build 1 Description: CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC Media:[]}] ContentBlocks:[{ID:00000000-0000-0000-0000-000000000000 LessonID:00000000-0000-0000-0000-000000000000 Title:Auto content 1 Subtitle: Description: UsageText: ExampleText: SortOrder:0 CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC Media:[]}] Attachments:[{ID:00000000-0000-0000-0000-000000000000 LessonID:00000000-0000-0000-0000-000000000000 Title:Auto attachment 1 Description: FileType: SortOrder:0 CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC Media:[]}] Challenges:[{ID:00000000-0000-0000-0000-000000000000 LessonID:00000000-0000-0000-0000-000000000000 Title:Auto challenge 1 Subtitle: Description: Instructions: SortOrder:0 CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC Media:[]}] Quizzes:[{ID:00000000-0000-0000-0000-000000000000 LessonID:00000000-0000-0000-0000-000000000000 Title:Auto quiz 1 Description: QuizType:single CreatedAt:0001-01-01 00:00:00 +0000 UTC UpdatedAt:0001-01-01 00:00:00 +0000 UTC Options:[]}] Media:[]}
+2026/01/07 00:55:13 ═══════════════════════════════════════════════════════════════
+2026/01/07 00:55:13 🚀 CourseAI Backend Starting
+2026/01/07 00:55:13 ═══════════════════════════════════════════════════════════════
+2026/01/07 00:55:13 DATABASE_URL set: false
+2026/01/07 00:55:13 ═══════════════════════════════════════════════════════════════
+2026/01/07 00:55:13 
+2026/01/07 00:55:13 ════════════════════════════════════════════════════════════════
+2026/01/07 00:55:13 🚀 CourseAI Backend Configuration Loading
+2026/01/07 00:55:13 ════════════════════════════════════════════════════════════════
+2026/01/07 00:55:13 🔍 DIAGNOSTIC: DATABASE_URL exists: false
+2026/01/07 00:55:13    ⚠️  DATABASE_URL is EMPTY or NOT SET
+2026/01/07 00:55:13 
+⚠️  DATABASE_URL not found - attempting godotenv.Load()...
+2026/01/07 00:55:13 ✓ .env file loaded successfully (development mode)
+2026/01/07 00:55:13 ════════════════════════════════════════════════════════════════
+2026/01/07 00:55:13 
+2026/01/07 00:55:13 
+════════════════════════════════════════════════════════════════
+2026/01/07 00:55:13 🔍 DATABASE CONFIGURATION ANALYSIS
+2026/01/07 00:55:13 ════════════════════════════════════════════════════════════════
+2026/01/07 00:55:13   DATABASE_URL value: ""
+2026/01/07 00:55:13   DATABASE_URL is empty: true
+2026/01/07 00:55:13   DATABASE_URL length: 0
+2026/01/07 00:55:13   DB_HOST: "localhost"
+2026/01/07 00:55:13   DB_PORT: "5433"
+2026/01/07 00:55:13   DB_NAME: "courseai_db"
+2026/01/07 00:55:13   DB_USER: "postgres"
+2026/01/07 00:55:13 ════════════════════════════════════════════════════════════════
+2026/01/07 00:55:13 ⚠️  Using individual DB_* variables (development mode)
+2026/01/07 00:55:13 Connecting to PostgreSQL database: host=host=localhost port=5433 user=postgres password=po...
+2026/01/07 00:55:13 ✓ Database connected successfully
+2026/01/07 00:55:13 ✓ pgcrypto extension ensured
+2026/01/07 00:55:13 Running auto migrations...
+2026/01/07 00:55:13 Dropping table *models.Program to ensure clean migration...
+2026/01/07 00:55:13 Dropping table *models.Subcourse to ensure clean migration...
+2026/01/07 00:55:13 Dropping table *models.Lesson to ensure clean migration...
+2026/01/07 00:55:13 Dropping table *models.LessonObjective to ensure clean migration...
+2026/01/07 00:55:13 Dropping table *models.LessonModel to ensure clean migration...
+2026/01/07 00:55:13 Dropping table *models.LessonPreparation to ensure clean migration...
+2026/01/07 00:55:13 Dropping table *models.LessonBuild to ensure clean migration...
+2026/01/07 00:55:13 Dropping table *models.LessonContentBlock to ensure clean migration...
+2026/01/07 00:55:13 Dropping table *models.LessonAttachment to ensure clean migration...
+2026/01/07 00:55:13 Dropping table *models.LessonChallenge to ensure clean migration...
+2026/01/07 00:55:13 Dropping table *models.LessonQuiz to ensure clean migration...
+2026/01/07 00:55:13 Dropping table *models.LessonQuizOption to ensure clean migration...
+2026/01/07 00:55:13 Dropping table *models.Media to ensure clean migration...
+2026/01/07 00:55:13 Dropping table *models.TeacherAssignment to ensure clean migration...
+2026/01/07 00:55:14 Dropping table *models.TeacherAssignmentLog to ensure clean migration...
+2026/01/07 00:55:14 Migrations completed successfully
+2026/01/07 00:55:14 Starting data seeding...
+2026/01/07 00:55:14 Admin user already exists, skipping seed
+2026/01/07 00:55:14 🚀 Server starting on http://localhost:8080
+2026/01/07 00:55:14 📚 Admin credentials: admin123 / admin123
 exit status 1

@@ -16,18 +16,31 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -tags netgo -ldflags "-s -w" 
 
 # final image
 FROM alpine:3.18
-RUN apk add --no-cache ca-certificates
+RUN apk add --no-cache ca-certificates wget
+
 WORKDIR /app
 COPY --from=builder /app/server ./server
 
-# Declare environment variables that will be injected at runtime
-# These are required for production deployment on Render/cloud platforms
-# Render will override these with actual values from Environment Variables
+# Health check for Docker
+HEALTHCHECK --interval=10s --timeout=5s --retries=5 \
+    CMD wget --quiet --tries=1 --spider http://localhost:${PORT:-8080}/api/auth/me || exit 1
+
+# Default environment variables for local Docker development
+# These will be overridden by:
+# 1. docker-compose.yml environment section (local dev)
+# 2. Render.com environment variables (production)
 ENV DATABASE_URL=""
-ENV ENV="production"
+ENV DB_HOST="postgres"
+ENV DB_PORT="5432"
+ENV DB_USER="postgres"
+ENV DB_PASSWORD="postgres"
+ENV DB_NAME="courseai_db"
+ENV DB_SSLMODE="disable"
+ENV ENV="development"
 ENV PORT="8080"
-ENV JWT_SECRET=""
-ENV FRONTEND_URL=""
+ENV JWT_SECRET="dev_secret_change_in_production"
+ENV JWT_EXPIRE_HOURS="24"
+ENV FRONTEND_URL="http://localhost:5173"
 
 EXPOSE 8080
 CMD ["./server"]

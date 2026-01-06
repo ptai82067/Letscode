@@ -36,36 +36,44 @@ services:
       ADMINER_DEFAULT_USERNAME: postgres
       ADMINER_DEFAULT_PASSWORD: postgres
 
-# Uncomment the backend/frontend services below and adjust build/context
-# when you are ready to containerize the full stack.
-#
-# backend:
-#   build:
-#     context: ./backend
-#     dockerfile: Dockerfile
-#   container_name: courseai_backend
-#   environment:
-#     - DB_HOST=postgres
-#     - DB_PORT=5432
-#     - DB_USER=postgres
-#     - DB_PASSWORD=postgres
-#     - DB_NAME=courseai_db
-#   ports:
-#     - "8080:8080"
-#   depends_on:
-#     - postgres
-#
-# frontend:
-#   build:
-#     context: ./frontend
-#     dockerfile: Dockerfile
-#   container_name: courseai_frontend
-#   environment:
-#     - VITE_API_BASE_URL=http://localhost:8080/api
-#   ports:
-#     - "5173:5173"
-#   depends_on:
-#     - backend
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: courseai_backend
+    restart: always
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_NAME=courseai_db
+      - PORT=8080
+      - FRONTEND_URL=http://localhost:5173
+      - JWT_SECRET=dev_secret_change_in_production
+      - ENV=development
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    profiles:
+      - full-stack
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: courseai_frontend
+    restart: always
+    environment:
+      - VITE_API_BASE_URL=http://localhost:8080/api
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    profiles:
+      - full-stack
 
 volumes:
   postgres_data:

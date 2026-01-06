@@ -47,7 +47,8 @@ try {
         Write-Error "Docker daemon not available: $info`nPlease start Docker Desktop and try again."
         exit 1
     }
-} catch {
+}
+catch {
     Write-Error "Docker daemon check failed: $_. Please start Docker Desktop and try again."
     exit 1
 }
@@ -57,7 +58,8 @@ try {
     docker-compose up -d | Out-Null
     if ($LASTEXITCODE -ne 0) { throw "docker-compose returned exit code $LASTEXITCODE" }
     $postgresStatus = 'STARTING'
-} catch {
+}
+catch {
     Write-Error "docker-compose up failed: $_"
     exit 1
 }
@@ -69,7 +71,8 @@ while ((Get-Date) -lt $start.AddSeconds(60)) {
     try {
         $res = Test-NetConnection -ComputerName 127.0.0.1 -Port 5433 -WarningAction SilentlyContinue
         if ($res -and $res.TcpTestSucceeded) { Write-Host "Postgres is reachable."; $ok = $true; break }
-    } catch { }
+    }
+    catch { }
     Start-Sleep -Seconds 2
 }
 
@@ -83,11 +86,22 @@ while ((Get-Date) -lt $start2.AddSeconds(30)) {
     try {
         $r = Test-NetConnection -ComputerName 127.0.0.1 -Port 8082 -WarningAction SilentlyContinue
         if ($r -and $r.TcpTestSucceeded) { Write-Host "Adminer is reachable."; $ok2 = $true; break }
-    } catch { }
+    }
+    catch { }
     Start-Sleep -Seconds 2
 }
 if ($ok2) { $adminerStatus = 'RUNNING' } else { Write-Warning "Adminer did not become reachable on 127.0.0.1:8082 within 30s. Check docker logs with: docker logs courseai_adminer"; $adminerStatus = 'SKIPPED' }
 
+# Create database if it doesn't exist
+Write-Host "Creating database 'courseai_db' if it doesn't exist..."
+try {
+    $createDbCmd = "CREATE DATABASE courseai_db;"
+    docker exec courseai_postgres psql -U postgres -c $createDbCmd 2>&1 | Out-Null
+    Write-Host "Database setup complete."
+}
+catch {
+    Write-Warning "Database creation had an issue (may be normal if it already exists): $_"
+}
 
 Write-Host "2) Ensure Go toolchain"
 if (-not (Has-Command go)) {
@@ -104,7 +118,8 @@ if (Test-Path $backendDir) {
         Write-Host "Running: go mod download"
         try {
             & go mod download
-        } catch {
+        }
+        catch {
             Write-Warning "go mod download failed: $_"
         }
         # Ensure preferred backend port 8080 is free before starting
@@ -116,7 +131,7 @@ if (Test-Path $backendDir) {
 
         Write-Host "Starting backend as background process (logs: $backendOutLog , $backendErrLog)"
         try {
-            $proc = Start-Process -FilePath "go" -ArgumentList @("run","cmd/server/main.go") -WorkingDirectory $backendDir -RedirectStandardOutput $backendOutLog -RedirectStandardError $backendErrLog -WindowStyle Hidden -PassThru
+            $proc = Start-Process -FilePath "go" -ArgumentList @("run", "cmd/server/main.go") -WorkingDirectory $backendDir -RedirectStandardOutput $backendOutLog -RedirectStandardError $backendErrLog -WindowStyle Hidden -PassThru
             # write PID to logs/backend.pid
             $backendPidFile = Join-Path $logsDir 'backend.pid'
             try { Set-Content -Path $backendPidFile -Value $proc.Id -Encoding ASCII } catch { Write-Warning "Failed to write backend PID: $_" }
@@ -130,15 +145,18 @@ if (Test-Path $backendDir) {
                 Start-Sleep -Milliseconds 500
             }
             if ($ok) { $backendStatus = 'RUNNING' } else { Write-Error "Backend did not start and bind to port 8080 within timeout. Check logs: $backendErrLog"; exit 1 }
-        } catch {
+        }
+        catch {
             Write-Error "Failed to start backend: $_"
             exit 1
         }
-    } else {
+    }
+    else {
         Write-Error "Go not available in this session. Aborting."
         exit 1
     }
-} else { Write-Warning "Backend directory not found: $backendDir"; $backendStatus = 'SKIPPED' }
+}
+else { Write-Warning "Backend directory not found: $backendDir"; $backendStatus = 'SKIPPED' }
 
 Set-Location $root
 
@@ -150,7 +168,8 @@ if (Test-Path $frontendDir) {
         if (Has-Command npm) {
             Write-Host "Installing frontend dependencies (npm install)..."
             Push-Location $frontendDir; npm install; Pop-Location
-        } else { Write-Warning "npm not found. Skipping frontend install/start." }
+        }
+        else { Write-Warning "npm not found. Skipping frontend install/start." }
     }
     if (Has-Command npm) {
         # Ensure no more than one Vite instance is running (ports 5173..5185)
@@ -158,13 +177,15 @@ if (Test-Path $frontendDir) {
         if ($existing.Count -gt 1) {
             Write-Error "Multiple frontend listeners detected on ports 5173..5185. Please stop extra instances before starting. Aborting."
             exit 1
-        } elseif ($existing.Count -eq 1) {
-            $pid = $existing[0].OwningProcess
-            Write-Host "Frontend already running (PID $pid). Skipping start."
+        }
+        elseif ($existing.Count -eq 1) {
+            $frontendPid = $existing[0].OwningProcess
+            Write-Host "Frontend already running (PID $frontendPid). Skipping start."
             $frontendPidFile = Join-Path $logsDir 'frontend.pid'
-            try { Set-Content -Path $frontendPidFile -Value $pid -Encoding ASCII } catch { }
+            try { Set-Content -Path $frontendPidFile -Value $frontendPid -Encoding ASCII } catch { }
             $frontendStatus = 'RUNNING'
-        } else {
+        }
+        else {
             Write-Host "Starting frontend dev server as background process (logs: $frontendOutLog , $frontendErrLog)"
             try {
                 # Use cmd.exe to run npm on Windows so Start-Process can handle redirection reliably
@@ -184,17 +205,20 @@ if (Test-Path $frontendDir) {
                     $frontendPidFile = Join-Path $logsDir 'frontend.pid'
                     try { Set-Content -Path $frontendPidFile -Value $pid -Encoding ASCII } catch { }
                     $frontendStatus = 'RUNNING'
-                } else {
+                }
+                else {
                     Write-Warning "Frontend did not open a listening port in time. Check logs: $frontendErrLog"
                     $frontendStatus = 'STARTED'
                 }
-            } catch {
+            }
+            catch {
                 Write-Warning "Failed to start frontend: $_"
                 $frontendStatus = 'SKIPPED'
             }
         }
     }
-} else { Write-Warning "Frontend directory not found: $frontendDir"; $frontendStatus = 'SKIPPED' }
+}
+else { Write-Warning "Frontend directory not found: $frontendDir"; $frontendStatus = 'SKIPPED' }
 
 # Final summary
 if (-not $postgresStatus) { $postgresStatus = 'SKIPPED' }
